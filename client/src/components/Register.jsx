@@ -1,6 +1,27 @@
-import React from 'react'
-
+import React, { useState } from 'react'
+import { Card, Form, Button } from 'react-bootstrap'
 const Register = () => {
+    // const navigate = useNavigate();
+    const [formData, setFormData] = useState({
+        email: '',
+        password: '',
+        role: 'user'
+    });
+    
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        console.log("register");
+        fetchData();
+    }
+
+
+    const handleChange = (e) => {
+        setFormData({
+            ...formData,
+            [e.target.name]: e.target.value,
+        });
+    };
+
     return (
         <div className='d-flex flex-column justify-content-center align-items-center'>
             <h1 className='my-3'>REGISTER</h1>
@@ -15,7 +36,7 @@ const Register = () => {
                         <Form.Control type="password" placeholder="Password" name="password" value={formData.password || ''} onChange={handleChange} />
                     </Form.Group>
                     <div className="d-flex justify-content-center w-100">
-                        <Button variant="secondary" type="submit" className="w-25">
+                        <Button variant="secondary" type="submit" className="w-50">
                             Register
                         </Button>
                     </div>
