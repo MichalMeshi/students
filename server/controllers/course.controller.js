@@ -11,3 +11,14 @@ exports.addNewCourse=(req,res,next)=>{
         res.send(err)
     }
 }
+exports.getCourses=async(req,res,next)=>{
+    try {
+        
+        const courses = await Course.find({})
+        res.json(courses);
+    }
+    catch (error) {
+        next(error);
+    }
+
+}
