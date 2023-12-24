@@ -1,18 +1,27 @@
 import React, { useState } from 'react'
 import { Card, Form, Button } from 'react-bootstrap'
+import  {fetchUser}  from '../service/httpService';
+
 const Register = () => {
     // const navigate = useNavigate();
     const [formData, setFormData] = useState({
+        name: '',
         email: '',
         password: '',
-        role: 'user'
     });
-    
+
     const handleSubmit = (e) => {
         e.preventDefault();
         console.log("register");
-        fetchData();
+        fetchUser('register',{
+            method: 'POST',
+            body: JSON.stringify(formData),
+            headers: {
+                'Content-type': 'application/json'
+            }
+        })
     }
+
 
 
     const handleChange = (e) => {
@@ -27,6 +36,10 @@ const Register = () => {
             <h1 className='my-3'>REGISTER</h1>
             <Card style={{ width: "24em", background: 'black', color: 'white' }} className="d-flex flex-column justify-content-center align-items-center">
                 <Form onSubmit={handleSubmit} className="w-100">
+                    <Form.Group className="mb-3" controlId="formBasicName">
+                        <Form.Label>Name</Form.Label>
+                        <Form.Control type="text" name="name" value={formData.name || ''} onChange={handleChange} placeholder="Enter Name" />
+                    </Form.Group>
                     <Form.Group className="mb-3" controlId="formBasicEmail">
                         <Form.Label>Email address</Form.Label>
                         <Form.Control type="email" name="email" value={formData.email || ''} onChange={handleChange} placeholder="Enter email" />

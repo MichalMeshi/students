@@ -5,15 +5,16 @@ import './App.css'
 import CourseCard from './components/CourseCard'
 import { CourseContextProvider } from './context/CourseContext'
 import CourseCardList from './components/CourseCardList'
+import Home from './pages/index'
 function App() {
   const [count, setCount] = useState(0)
 
   return (
     <CourseContextProvider>
-    
-    
-     <CourseCardList/>
-    
+
+      <Home />
+      <CourseCardList />
+
     </CourseContextProvider>
   )
 }
