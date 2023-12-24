@@ -2,7 +2,7 @@ const express = require('express');
 const cors = require('cors');
 const cookieParser = require('cookie-parser');
 const app = express();
-const userRouter = require('./');
+const userRouter = require('./routes/user.routes');
 const path = require('path');
 const globalErrorHandler = require('./utils/errorHandler');
 const AppError = require('./utils/AppError');
@@ -13,7 +13,6 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, "public")));
 
 app.use('/users', userRouter);
-app.use('/domain/toys', toyRouter);
 
 
 
