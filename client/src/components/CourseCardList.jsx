@@ -3,18 +3,19 @@ import CourseContext from '../context/CourseContext';
 import CourseCard from './CourseCard';
 
 export default function CourseCardList() {
-    const {courses,getCourses}=useContext(CourseContext);
+  const { courses, getCourses } = useContext(CourseContext);
 
-    useEffect(()=>{
-     getCourses();
-      
-    },[])
+  useEffect(() => {
+    getCourses();
+
+  }, [])
   return (
     <div>
-{console.log(courses)}
-        {courses?.map((course,index)=>{
-           return <CourseCard course={course} key={index}/>
-        })}
+      <h1>Courses List</h1>
+      {console.log(courses)}
+      {courses?.map((course, index) => {
+        return <CourseCard course={course} key={index} />
+      })}
     </div>
   )
 }

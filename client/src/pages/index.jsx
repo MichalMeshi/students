@@ -1,11 +1,11 @@
 import React from 'react'
-import Register from '../components/Register'
-import Login from '../components/Login'
+import CourseCardList from '../components/CourseCardList';
+
 
 const Home = () => {
     return (
         <div>
-            Homeeeeeeeeeeeee
+            <CourseCardList />
         </div>
     )
 }
