@@ -1,7 +1,8 @@
-import React, { useState } from 'react'
+import React, { useContext, useState } from 'react'
 import { Card, Form, Button } from 'react-bootstrap'
 import { fetchUser } from '../service/httpService';
 import { useNavigate } from 'react-router-dom';
+import ProfileContext from '../context/ProfileContext';
 
 const Login = () => {
     const navigate = useNavigate();
@@ -9,21 +10,20 @@ const Login = () => {
         email: '',
         password: '',
     });
+    const { login } = useContext(ProfileContext);
 
     const handleSubmit = async (e) => {
         e.preventDefault();
         console.log("Login");
-        const response = await fetchUser('login', {
-            method: 'POST',
-            body: JSON.stringify(formData),
-            headers: {
-                'Content-type': 'application/json'
-            }
-        });
-        if (response.status === 'fail')
-            alert(response.message)
-        else
-            navigate('/');
+        try {
+            const res = await login(formData);
+            if (res)
+                navigate('/');
+            else
+                alert(res.message);
+        } catch (error) {
+            console.log(error.message);
+        }
     }
 
     const handleChange = (e) => {

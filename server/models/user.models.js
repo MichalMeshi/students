@@ -21,8 +21,8 @@ const userSchema = new mongoose.Schema({
     address: {
         type: String
     },
-    college:{
-        type:String
+    college: {
+        type: String
     },
     role: {
         type: String,
@@ -40,7 +40,10 @@ const userSchema = new mongoose.Schema({
     ],
     rate: {
         type: Number,
-        default: 0
+        default: 2
+    },
+    image: {
+        type: String
     }
 },
     { versionKey: false },
