@@ -1,20 +1,20 @@
 import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
 import './App.css'
-import CourseCard from './components/CourseCard'
 import { CourseContextProvider } from './context/CourseContext'
 import CourseCardList from './components/CourseCardList'
-import Home from './pages/index'
+import Navbar from './components/Navbar'
+import { BrowserRouter } from 'react-router-dom';
+import AppRoutes from './components/AppRoutes'
+
 function App() {
-  const [count, setCount] = useState(0)
 
   return (
     <CourseContextProvider>
-
-      <Home />
-      <CourseCardList />
-
+      <BrowserRouter>
+        <Navbar />
+        <AppRoutes/>
+        <CourseCardList />
+      </BrowserRouter>
     </CourseContextProvider>
   )
 }

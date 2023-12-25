@@ -1,25 +1,27 @@
 import React, { useState } from 'react'
 import { Card, Form, Button } from 'react-bootstrap'
-import  {fetchUser}  from '../service/httpService';
+import { fetchUser } from '../service/httpService';
+import { useNavigate } from 'react-router-dom';
 
 const Register = () => {
-    // const navigate = useNavigate();
+    const navigate = useNavigate();
     const [formData, setFormData] = useState({
         name: '',
         email: '',
         password: '',
     });
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
         console.log("register");
-        fetchUser('register',{
+        await fetchUser('register', {
             method: 'POST',
             body: JSON.stringify(formData),
             headers: {
                 'Content-type': 'application/json'
             }
         })
+        navigate('/login')
     }
 
 
