@@ -1,14 +1,14 @@
 const Joi = require('joi');
 const { Course } = require('../models/Course.models');
-exports.addNewCourse=(req,res,next)=>{
+exports.addNewCourse=async(req,res,next)=>{
     const {body}=req;
     const newCourse=new Course(body);
     try{
-    newCourse.save();
+    await newCourse.save();
     res.send("saved")
     }
     catch(err){
-        res.send(err)
+        res.send(err.message)
     }
 }
 exports.getCourses=async(req,res,next)=>{
