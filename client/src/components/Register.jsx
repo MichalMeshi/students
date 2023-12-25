@@ -4,7 +4,6 @@ import { fetchUser } from '../service/httpService';
 import { useNavigate } from 'react-router-dom';
 
 const Register = () => {
-    const navigate = useNavigate();
     const [formData, setFormData] = useState({
         name: '',
         email: '',
@@ -14,14 +13,22 @@ const Register = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         console.log("register");
-        await fetchUser('register', {
-            method: 'POST',
-            body: JSON.stringify(formData),
-            headers: {
-                'Content-type': 'application/json'
-            }
-        })
-        navigate('/login')
+        try {
+
+            const response = await fetchUser('register', {
+                method: 'POST',
+                body: JSON.stringify(formData),
+                headers: {
+                    'Content-type': 'application/json'
+                }
+            });
+            if (response.status === 'fail')
+                alert(response.message)
+            else
+                navigate('/login')
+        } catch (error) {
+            console.log(error.message);
+        }
     }
 
 

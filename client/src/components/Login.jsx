@@ -13,14 +13,17 @@ const Login = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         console.log("Login");
-        await fetchUser('login', {
+        const response = await fetchUser('login', {
             method: 'POST',
             body: JSON.stringify(formData),
             headers: {
                 'Content-type': 'application/json'
             }
         });
-        navigate('/');
+        if (response.status === 'fail')
+            alert(response.message)
+        else
+            navigate('/');
     }
 
     const handleChange = (e) => {
