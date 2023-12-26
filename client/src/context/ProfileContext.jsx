@@ -15,7 +15,6 @@ const ProfileContextProvider = ({ children }) => {
                 }
             });
             const profile = await res.json();
-            console.log("profile:", profile);
             if (profile)
                 setProfileData(profile);
         } catch (error) {
@@ -36,9 +35,6 @@ const ProfileContextProvider = ({ children }) => {
         console.log("response from login in context:", response);
         setProfileData(response.user);
         localStorage.setItem("token", response.token)
-
-        //save token in local storage
-
         return true;
     }
 

@@ -63,20 +63,18 @@ exports.login = asyncWrap(async (req, res, next) => {
         // secure: true,
         maxAge: 1000 * 60 * 10 * 100,
     });
-    console.log("after cookie", res.cookie);
     res.status(200).json({ message: "Login successful", user, token });
 })
 
 exports.getUser = asyncWrap(async (req, res, next) => {
     const token = req.headers["authorization"]; // Assuming you're using a library like cookie-parser to parse cookies
-    console.log({ token });
     if (!token) return next(new AppError(401, "Please login"));
     const payload = decodeToken(token);
     const id = payload._doc.id;
 
     const user = await User.findById(id);
     if (!user) return next(new AppError(400, "User not exist"));
-    console.log("in get user in server", user);
+    // console.log("in get user in server", user);
 
     res.status(200).json(user);
 });

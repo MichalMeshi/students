@@ -5,6 +5,7 @@ import NoPage from './NoPage'
 import Register from './Register';
 import Login from './Login';
 import CourseDatialPage from '../pages/CourseDatialPage';
+import CourseCardList from './CourseCardList';
 
 const AppRoutes = () => {
 
@@ -13,7 +14,8 @@ const AppRoutes = () => {
             <Route path='/' element={<Home />} />
             <Route path='/register' element={<Register />} />
             <Route path='/login' element={<Login />} />
-            <Route path='/courses/course_details' element={<CourseDatialPage/>}></Route> 
+            <Route path='/courses/course_details' element={<CourseDatialPage />} />
+            <Route path='/courses-list' element={<CourseCardList />} />
 
             <Route path='*' element={<NoPage />} />
         </Routes>
