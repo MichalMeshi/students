@@ -14,7 +14,7 @@ const Tutoring = () => {
     })
     useEffect(() => {
         getTutoringPosts();
-    }, [tutoringPosts])
+    }, [isClicked])
 
     const getTutoringPosts = async () => {
         const res = await fetch('http://localhost:3000/tutoring/tutoring-posts', {
@@ -22,8 +22,10 @@ const Tutoring = () => {
                 "authorization": localStorage.getItem("token")
             }
         })
-        const temp = await res.json()
-        setTutoringPosts([...temp]);
+        const temp = await res.json();
+        //sort
+        
+        setTutoringPosts([...temp.reverse()]);
     }
 
     const handleChange = (e) => {
@@ -45,19 +47,15 @@ const Tutoring = () => {
                 "authorization": localStorage.getItem("token")
             }
         });
-        if (!response)
-            alert("failed");
-        else
-            alert("success")
+        const data = await response.json();
+        if (data)
+            console.log(data.msg);
     };
 
-    const addTutoring = async () => {
-        setIsClicked(true);
-    }
 
     return (
         <div>
-            <Button onClick={addTutoring}>Add</Button>
+            <Button onClick={()=>setIsClicked(true)}>Add</Button>
             <h1>Tutoring List</h1>
             {/* {console.log(courses)} */}
             {tutoringPosts?.map((post, index) => {

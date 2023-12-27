@@ -31,6 +31,9 @@ exports.register = asyncWrap(async (req, res, next) => {
 
     const newUser = new User({ password, email, name, address, college });
     await newUser.save();
+    //token
+    const token = generateToken(user);
+
     res.status(201).json({ newUser, token });
 });
 
@@ -50,7 +53,8 @@ exports.login = asyncWrap(async (req, res, next) => {
     const passwordMatch = await bcrypt.compare(body.password.trim(), user.password);
     if (!passwordMatch) return next(new AppError(400, 'Oops, Incorrect password'));
 
-
+    //token
+    const token = generateToken(user);
     res.status(200).json({ message: "Login successful", user, token });
 })
 
