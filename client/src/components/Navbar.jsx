@@ -13,6 +13,7 @@ const Navbar = () => {
             <Link to="/login">Login </Link>
             {/* {userLoggedIn && <Link to='/logout'>Logout </Link>} */}
             <Link to='/courses-list'>Courses </Link>
+            <Link to='/tutoring'>Tutoring </Link>
         </nav>
     )
 }

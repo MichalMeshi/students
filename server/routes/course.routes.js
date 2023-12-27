@@ -2,7 +2,7 @@ const express = require('express');
 const router = express.Router();
 const authMiddlware = require('../middlewares/auth')
 
-const { addNewCourse, getCourses, getMyCourses, addFavoriteCourse, removeFavoriteCourse } = require('../controllers/course.controller');
+const { addNewCourse, getCourses, getMyCourses, addFavoriteCourse,removeFavoriteCourse } = require('../controllers/course.controller');
 
 // router.get('/', authMiddlware.auth, authMiddlware.restrictTo("admin"), userController.getUsers);
 router.get('/my-courses', authMiddlware.auth, getMyCourses);
