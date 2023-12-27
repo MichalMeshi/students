@@ -6,6 +6,7 @@ import Register from './Register';
 import Login from './Login';
 import CourseDatialPage from '../pages/CourseDatialPage';
 import CourseCardList from './CourseCardList';
+import Logout from './Logout';
 
 const AppRoutes = () => {
 
@@ -14,6 +15,7 @@ const AppRoutes = () => {
             <Route path='/' element={<Home />} />
             <Route path='/register' element={<Register />} />
             <Route path='/login' element={<Login />} />
+            <Route path='/logout' element={<Logout />} />
             <Route path='/courses/course_details' element={<CourseDatialPage />} />
             <Route path='/courses-list' element={<CourseCardList />} />
 

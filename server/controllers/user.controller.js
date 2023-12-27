@@ -16,19 +16,20 @@ const userJoiSchema = {
         email: Joi.string().email({ tlds: { allow: ['com'] } }).error(() => Error('Email is not valid')),
         name: Joi.string().required(),
         address: Joi.string(),
-        college: Joi.string()
+        college: Joi.string(),
+        // image: Joi.string()
     })
 }
 
 exports.register = asyncWrap(async (req, res, next) => {
-    const body = req.body;
-    const validate = userJoiSchema.register.validate(body);
+    const { password, email, name, address, college } = req.body;
+    const validate = userJoiSchema.register.validate({ password, email, name, address, college });
     if (validate.error) return next(new AppError(400, validate.error));
 
-    const user = await checkIfUserExist(body.email);
+    const user = await checkIfUserExist(email);
     if (user) return next(new AppError(401, 'User already exist'));
 
-    const newUser = new User(body);
+    const newUser = new User({ password, email, name, address, college });
     await newUser.save();
     //token
     const token = generateToken(user);
@@ -37,7 +38,7 @@ exports.register = asyncWrap(async (req, res, next) => {
         secure: true,
         maxAge: 1000 * 60 * 10,
     });
-    res.status(201).json({newUser,token});
+    res.status(201).json({ newUser, token });
 });
 
 const checkIfUserExist = async (email) => {
@@ -78,4 +79,19 @@ exports.getUser = asyncWrap(async (req, res, next) => {
 
     res.status(200).json(user);
 });
+
+exports.updateUser = asyncWrap(async (req, res, next) => {
+    const userId = req.user.id;
+    const body = req.body;
+
+    const user = await User.findByIdAndUpdate(userId, body, { new: true });
+    if (!user) {
+        return res.status(401).send("User noe exist");
+    }
+    if (user)
+        res.status(200).json({ msg: "User updates successfully", user });
+    else {
+        res.status(500).json({ msg: "Failed to update user" });
+    }
+})
 

@@ -1,9 +1,9 @@
 import React, { useContext, useEffect, useState } from 'react'
 import { Link } from 'react-router-dom';
 import CourseDatialPage from '../pages/CourseDatialPage';
-import { FaRegStar, FaStar } from "react-icons/fa";
 import { Button } from 'react-bootstrap'
 import CourseContext from '../context/CourseContext';
+import { IoIosHeartEmpty, IoMdHeart } from "react-icons/io";
 
 export default function CourseCard(props) {
   const { course } = props;
@@ -33,9 +33,9 @@ export default function CourseCard(props) {
         <p className="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
         <Link className="card-link" to='/courses/course_details'>read more</Link>
         {favorite ? (
-          <FaStar onClick={onUnFavorite} style={{ cursor: "pointer" }} />
+          <IoMdHeart onClick={onUnFavorite} style={{ cursor: "pointer" }} />
         ) : (
-          <FaRegStar onClick={onFavorite} style={{ cursor: "pointer" }} />
+          <IoIosHeartEmpty onClick={onFavorite} style={{ cursor: "pointer" }} />
         )}
       </div>
     </div>

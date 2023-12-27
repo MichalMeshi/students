@@ -7,15 +7,20 @@ export default function CourseCardList() {
 
   useEffect(() => {
     getCourses();
-
   }, [])
+
   return (
     <div>
       <h1>Courses List</h1>
-      {console.log(courses)}
+      {/* {console.log(courses)} */}
       {courses?.map((course, index) => {
         return <CourseCard course={course} key={index} />
       })}
     </div>
   )
 }
+
+
+
+
+

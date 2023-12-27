@@ -43,7 +43,8 @@ const userSchema = new mongoose.Schema({
         default: 2
     },
     image: {
-        type: String
+        type: String,
+        default: ''
     }
 },
     { versionKey: false },

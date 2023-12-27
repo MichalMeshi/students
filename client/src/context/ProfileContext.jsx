@@ -5,6 +5,7 @@ const ProfileContext = createContext({});
 
 const ProfileContextProvider = ({ children }) => {
     const [profileData, setProfileData] = useState({});
+    // const [userLoggedIn, setUserLoggedIn] = useState(false);
 
     const getProfileData = async () => {
         try {
@@ -32,11 +33,21 @@ const ProfileContextProvider = ({ children }) => {
         });
         if (response.status === 'fail')
             return false;
-        console.log("response from login in context:", response);
         setProfileData(response.user);
+        // setUserLoggedIn(true);
         localStorage.setItem("token", response.token)
         return true;
     }
+    // const logout = () => {
+    //     // Remove token from localStorage
+    //     localStorage.removeItem("token");
+
+    //     // Reset profile data (assuming you have a function to do this)
+    //     setProfileData({});
+
+    //     // Set user as not logged in
+    //     setUserLoggedIn(false);
+    // }
 
     const register = async (body) => {
         const response = await fetchUser('register', {
@@ -44,15 +55,34 @@ const ProfileContextProvider = ({ children }) => {
             body: JSON.stringify(body),
             headers: {
                 'Content-type': 'application/json',
-
             }
         });
         if (response.status === 'fail')
             return false;
         setProfileData(response.user);
+        // setUserLoggedIn(true);
         localStorage.setItem("token", response.token)
 
         return true;
+    }
+    const updateUserProfile = async (updatedData) => {
+        try {
+            const url = `http://localhost:3000/users/update-user`;
+            const res = await fetch(url, {
+                method: 'PATCH',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': localStorage.getItem("token")
+                },
+                body: JSON.stringify(updatedData)
+            });
+            const data = await res.json();
+            if (data) {
+                setProfileData(data.user); // Update the profileData in context with the updated data
+            }
+        } catch (error) {
+            console.log(error.message);
+        }
     }
 
     useEffect(() => {
@@ -60,7 +90,7 @@ const ProfileContextProvider = ({ children }) => {
     }, [])
 
 
-    const shared = { profileData, setProfileData, login, register }
+    const shared = { profileData, setProfileData, login, register, updateUserProfile, /*userLoggedIn,logout*/ }
     return (
         <ProfileContext.Provider value={shared}>
             {children}

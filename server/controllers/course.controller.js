@@ -59,20 +59,10 @@ exports.addFavoriteCourse = asyncWrap(async (req, res, next) => {
 exports.removeFavoriteCourse = asyncWrap(async (req, res, next) => {
     const userId = req.user.id;
     const courseId = req.params.courseId;
-
-    // const user = await User.findById(userId);
     const user = await User.findByIdAndUpdate(userId, { $pull: { myCourses: { $in: [courseId] } } }, { new: true });
     console.log("in remove tje update user", user);
     if (!user) {
         return res.status(401).send("No user");
     }
-
-    // if (user.myCourses.includes(courseId)) {
-    //     user.myCourses = user.myCourses.filter(id => id !== courseId);
-    //     await user.save();
-    //     console.log({ "my Courses": user.myCourses });
-    // }
     return res.status(200).json({ msg: "Course removed from user successfully"});
-
-    // res.status(200).json({ msg: "Course is not a favorite" });
 });

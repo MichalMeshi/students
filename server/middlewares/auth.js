@@ -14,7 +14,6 @@ exports.auth = asyncWrap(async (req, res, next) => {
     if (!token) return next(new AppError(401, "Please login, no token"));
 
 
-    // try {
     const payload = decodeToken(token);
     const id = payload._doc.id;
 
@@ -27,10 +26,6 @@ exports.auth = asyncWrap(async (req, res, next) => {
     console.log("id:::::::::", req.user.id);
     // Call next only after all the processing is done.
     next();
-    // } catch (error) {
-    //     // Handle any errors that might occur during token decoding or user retrieval.
-    //     return next(new AppError(500, "Internal Server Error"));
-    // }
 })
 
 exports.restrictTo = (...roles) => {
