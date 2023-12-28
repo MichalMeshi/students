@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { Button, Form, Modal } from 'react-bootstrap'
+import { Button, Col, Container, Form, Modal, Row } from 'react-bootstrap'
 import TutoringPost from './TutoringPost';
 
 const Tutoring = () => {
@@ -17,15 +17,24 @@ const Tutoring = () => {
     }, [isClicked])
 
     const getTutoringPosts = async () => {
-        const res = await fetch('http://localhost:3000/tutoring/tutoring-posts', {
-            headers: {
-                "authorization": localStorage.getItem("token")
+        try {
+            const token = localStorage.getItem("token");
+            if (token) {
+                const res = await fetch('http://localhost:3000/tutoring/tutoring-posts', {
+                    headers: {
+                        "authorization": localStorage.getItem("token")
+                    }
+                })
+                const temp = await res.json();
+                if (Array.isArray(temp))
+                    //sort
+                    setTutoringPosts([...temp.reverse()]);
             }
-        })
-        const temp = await res.json();
-        //sort
-        
-        setTutoringPosts([...temp.reverse()]);
+            else
+                console.log("Please Login (from Tutoring)");
+        } catch (error) {
+            console.log(error.message);
+        }
     }
 
     const handleChange = (e) => {
@@ -50,17 +59,21 @@ const Tutoring = () => {
         const data = await response.json();
         if (data)
             console.log(data.msg);
+
     };
 
 
     return (
         <div>
-            <Button onClick={()=>setIsClicked(true)}>Add</Button>
+            <Container>
             <h1>Tutoring List</h1>
-            {/* {console.log(courses)} */}
-            {tutoringPosts?.map((post, index) => {
-                return <TutoringPost post={post} key={index} />
-            })}
+            <Button onClick={() => setIsClicked(true)}>Add Post</Button>
+                <Row>
+                    {tutoringPosts?.map((post, index) => {
+                        return <Col md={6} key={index}><TutoringPost post={post} /></Col>
+                    })}
+                </Row>
+            </Container>
             <Modal show={isClicked} onHide={() => setIsClicked(false)}>
                 <Modal.Header closeButton>
                     <Modal.Title>Tutoring Post</Modal.Title>

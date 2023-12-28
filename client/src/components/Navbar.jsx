@@ -14,6 +14,7 @@ const Navbar = () => {
             {/* {userLoggedIn && <Link to='/logout'>Logout </Link>} */}
             <Link to='/courses-list'>Courses </Link>
             <Link to='/tutoring'>Tutoring </Link>
+            <Link to='/logout'>Logout </Link>
         </nav>
     )
 }

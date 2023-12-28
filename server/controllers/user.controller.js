@@ -66,8 +66,6 @@ exports.getUser = asyncWrap(async (req, res, next) => {
 
     const user = await User.findById(id);
     if (!user) return next(new AppError(400, "User not exist"));
-    // console.log("in get user in server", user);
-
     res.status(200).json(user);
 });
 

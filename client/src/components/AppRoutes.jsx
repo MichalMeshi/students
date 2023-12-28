@@ -8,7 +8,6 @@ import CourseDatialPage from '../pages/CourseDatialPage';
 import CourseCardList from './CourseCardList';
 import Logout from './Logout';
 import Tutoring from './Tutoring';
-import PostList from './PostList';
 
 const AppRoutes = () => {
 
@@ -17,11 +16,12 @@ const AppRoutes = () => {
             <Route path='/' element={<Home />} />
             <Route path='/register' element={<Register />} />
             <Route path='/login' element={<Login />} />
-            {/* <Route path='/logout' element={<Logout />} /> */}
+            <Route path='/logout' element={<Logout />} />
+            <Route path='/reset-password/:resetToken' element={<ResetPassword />} />
             <Route path='/courses/course_details' element={<CourseDatialPage />} />
             <Route path='/courses-list' element={<CourseCardList />} />
             <Route path='/tutoring' element={<Tutoring />} />
-            <Route path='/forum'  element={<PostList/>}/>
+
             <Route path='*' element={<NoPage />} />
         </Routes>
     )

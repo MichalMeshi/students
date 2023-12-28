@@ -7,9 +7,10 @@ router.post('/register', userController.register)
 router.get('/get-user', authMiddlware.auth, userController.getUser)
 router.patch('/update-user', authMiddlware.auth, userController.updateUser)
 
-// router.get('/', authMiddlware.auth, authMiddlware.restrictTo("admin"), userController.getUsers);
-// router.get('/getUserInfo', authMiddlware.auth, userController.getUser);
-// router.post('/', userController.register);
-// router.post('/login', userController.login);
+
+router.post("/forgot-password", authMiddlware.forgotPassword);
+router.post("/verify/:resetToken", authMiddlware.verifyToken);
+router.post("/reset-password/:resetToken", authMiddlware.resetPassword);
+
 
 module.exports = router;

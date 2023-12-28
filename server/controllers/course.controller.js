@@ -7,7 +7,7 @@ exports.addNewCourse = async (req, res, next) => {
     const newCourse = new Course(body);
     try {
         await newCourse.save();
-        res.send("saved")
+        res.status(201).json({ msg: "saved" })
     }
     catch (err) {
         res.send(err.message)
@@ -64,5 +64,5 @@ exports.removeFavoriteCourse = asyncWrap(async (req, res, next) => {
     if (!user) {
         return res.status(401).send("No user");
     }
-    return res.status(200).json({ msg: "Course removed from user successfully"});
+    return res.status(200).json({ msg: "Course removed from user successfully" });
 });
