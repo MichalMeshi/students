@@ -8,6 +8,8 @@ import CourseDatialPage from '../pages/CourseDatialPage';
 import CourseCardList from './CourseCardList';
 import Logout from './Logout';
 import Tutoring from './Tutoring';
+import ResetPassword from './ResetPassword';
+import PostList from './PostList';
 
 const AppRoutes = () => {
 
@@ -21,7 +23,7 @@ const AppRoutes = () => {
             <Route path='/courses/course_details' element={<CourseDatialPage />} />
             <Route path='/courses-list' element={<CourseCardList />} />
             <Route path='/tutoring' element={<Tutoring />} />
-
+            <Route path='/forum' element={<PostList />} />
             <Route path='*' element={<NoPage />} />
         </Routes>
     )

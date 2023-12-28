@@ -5,8 +5,9 @@ const ForumContextProvider = ({ children }) => {
     const [posts, setposts] = useState([]);
 
     const getPosts = async () => {
-        const data = await fetch('http://localhost:2000/forums/posts')
+        const data = await fetch('http://localhost:3000/forums/posts')
         const res = await data.json();
+        console.log({res});
         setposts(res);
     }
     const addCommentToPostArray=async(postId,commentId)=>{
@@ -15,7 +16,7 @@ const ForumContextProvider = ({ children }) => {
             _id: commentId,
         }
         //add comment to db
-        const response = await fetch('http://localhost:2000/forums/posts/comments/'+postId, {
+        const response = await fetch('http://localhost:3000/forums/posts/comments/'+postId, {
             method: "POST", // *GET, POST, PUT, DELETE, etc.
             mode: "cors", // no-cors, *cors, same-origin
             cache: "no-cache", // *default, no-cache, reload, force-cache, only-if-cached
@@ -35,7 +36,7 @@ const ForumContextProvider = ({ children }) => {
         const data = {
             content: content
         }
-        const response = await fetch('http://localhost:2000/forums/comments', {
+        const response = await fetch('http://localhost:3000/forums/comments', {
             method: "POST", // *GET, POST, PUT, DELETE, etc.
             mode: "cors", // no-cors, *cors, same-origin
             cache: "no-cache", // *default, no-cache, reload, force-cache, only-if-cached
@@ -60,12 +61,12 @@ const ForumContextProvider = ({ children }) => {
       
     }
     const getCommentsOfPost = async (postId) => {
-        const data = await fetch('http://localhost:2000/forums/posts/comments/' + postId)
+        const data = await fetch('http://localhost:3000/forums/posts/comments/' + postId)
         const res = await data.json();
         // console.log({res});
         const commentIds = res.myComments.filter(commentId => commentId !== null);
         const postComments= commentIds.map(async(comment)=>{
-            const temp= await fetch('http://localhost:2000/forums/comments/'+comment);
+            const temp= await fetch('http://localhost:3000/forums/comments/'+comment);
             return temp.json();
         })
         const comments=Promise.all(postComments);
@@ -74,12 +75,12 @@ const ForumContextProvider = ({ children }) => {
         // console.log(res);
     }
     const getCommentsOfComment = async (commentId) => {
-        const data = await fetch('http://localhost:2000/forums//comments/' + commentId)
+        const data = await fetch('http://localhost:3000/forums//comments/' + commentId)
         const res = await data.json();
         // console.log({res});
         const commentIds = res.myComments?.filter(commentId => commentId !== null);
         const commentComments= commentIds.map(async(comment)=>{
-            const temp= await fetch('http://localhost:2000/forums/comments/'+comment);
+            const temp= await fetch('http://localhost:3000/forums/comments/'+comment);
             return temp.json();
         })
         const comments=Promise.all(commentComments);
@@ -101,7 +102,7 @@ const ForumContextProvider = ({ children }) => {
         const data = {
             _id: newcommentId,
         }
-        const response = await fetch('http://localhost:2000/forums/comments/comments/'+commentId, {
+        const response = await fetch('http://localhost:3000/forums/comments/comments/'+commentId, {
             method: "POST", // *GET, POST, PUT, DELETE, etc.
             mode: "cors", // no-cors, *cors, same-origin
             cache: "no-cache", // *default, no-cache, reload, force-cache, only-if-cached

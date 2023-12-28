@@ -5,7 +5,6 @@ import Navbar from './components/Navbar'
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import AppRoutes from './components/AppRoutes'
 import CourseDatialPage from './pages/CourseDatialPage';
-import { ProfileContextProvider } from './context/ProfileContext';
 
 function App() {
 

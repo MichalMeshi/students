@@ -6,6 +6,7 @@ export default function PostList() {
     const {posts,getPosts}=useContext(ForumContext);
     useEffect(()=>{
         getPosts();
+        console.log({posts});
     },[])
   return (
     <div >
