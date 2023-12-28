@@ -17,9 +17,11 @@ const CourseContextProvider = ({ children }) => {
             const temp = await res.json();
 
             if (temp) {
-                setMyCourses([...myCourses,course])
+                setMyCourses([...myCourses, course])
                 console.log(temp.msg);
             }
+
+
         } catch (error) {
             console.log(error.message);
         }

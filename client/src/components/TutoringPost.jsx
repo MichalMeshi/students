@@ -4,7 +4,7 @@ import { Card } from 'react-bootstrap'
 const TutoringPost = ({ post }) => {
     return (
         <div>
-            <Card className='my-2' style={{width:'18em'}}>
+            <Card className='my-2' >
                 <h3>{post.subject}</h3>
                 <h3>{post.field}</h3>
                 <h3>{post.message}</h3>

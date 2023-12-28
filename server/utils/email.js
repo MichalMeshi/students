@@ -1,0 +1,23 @@
+const nodemailer = require("nodemailer");
+
+const sendEmail = async (options, senderEmail) => {
+  const transporter = nodemailer.createTransport({
+    host: process.env.EMAIL_HOST,
+    port: process.env.EMAIL_PORT || 2525,
+    auth: {
+      user: process.env.EMAIL_USER,
+      pass: process.env.EMAIL_PASSWORD,
+    },
+  });
+
+  const mailOptions = {
+    from: `"Students" <${senderEmail}>`, // Use the sender's email as the "from" address
+    to: options.email,
+    subject: options.subject,
+    text: options.text,
+  };
+
+  await transporter.sendMail(mailOptions);
+};
+
+module.exports = sendEmail;
