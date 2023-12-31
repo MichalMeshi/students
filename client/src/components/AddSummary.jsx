@@ -1,15 +1,34 @@
-import React, { useRef, useState } from 'react'
+import React, { useContext, useRef, useState } from 'react'
+import SummariesList from './SummariesList';
+import SummaryContext from '../context/SummaryContext';
 
 
 export default function AddSummary() {
     const [file, setFile] = useState(null);
     const [uploadStatus, setUploadStatus] = useState(null);
-
+    const { summaries, setsummaries } = useContext(SummaryContext);
     const handleFileChange = (event) => {
         setFile(event.target.files[0]);
         setUploadStatus(null);
     };
     const inputRef = useRef(null);
+
+    const addUrlToDb = async (url) => {
+        try {
+            const response = await fetch('http://localhost:3000/upload/url', {
+                method: 'POST',
+                body: JSON.stringify({ url: url }),
+                headers: {
+                    "Content-Type": "application/json",
+                    // 'Content-Type': 'application/x-www-form-urlencoded',
+                },
+            })
+            const res= await response.json();
+            return res;
+        } catch (error) {
+            console.error('Error during url upload:', error);
+        }
+    }
     const handleUpload = async () => {
         const formData = new FormData();
         formData.append('file', file);
@@ -19,12 +38,17 @@ export default function AddSummary() {
                 body: formData,
             });
             const a = await response.json();
+            console.log({ a });
             if (response.ok) {
                 setUploadStatus('File uploaded successfully!');
             } else {
                 setUploadStatus('Error uploading file. Please try again.');
             }
-            console.log("response",a.data.secure_url);
+            console.log(a.secure_url);
+            const mySummary = await addUrlToDb(a.secure_url);
+            console.log(mySummary);
+            setsummaries([...summaries, mySummary]);
+
         } catch (error) {
             console.error('Error during file upload:', error);
         }
@@ -44,7 +68,6 @@ export default function AddSummary() {
                     </button>
                 </form>
                 {uploadStatus && <p className={uploadStatus.includes('Error') ? 'text-danger' : 'text-success'}>{uploadStatus}</p>}
-
             </div>
         </div>
     )
