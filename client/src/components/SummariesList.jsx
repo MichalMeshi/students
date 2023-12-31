@@ -1,31 +1,28 @@
-import React from 'react'
+import React, { useContext, useEffect, useState } from 'react'
+import SummaryContext from '../context/SummaryContext'
+import SummaaryCard from './SummaryCard'
 
 export default function SummariesList() {
-  return (
-    <div>
-        <div className="card p-3 container">
-        <h2>Summaries List:</h2>
+  const {summaries,getSummaries} = useContext(SummaryContext);
+  // const [summaries,setsummaries] = useState([]);
+//   const getMySummaries= async()=>{
+// const newSummary = await getSummaries();
+// setsummaries(newSummary)
 
-        </div>
-       </div>
+//   }
+  useEffect(() => {
+    getSummaries();
+
+  }, [])
+  return (
+    <div className='container'>
+      <h1>Summary List</h1>
+      {console.log("summaries",summaries)}
+      <div className='row'>
+      {summaries?.map((summary, index) => {
+        return <SummaaryCard summary={summary} key={index} />
+      })}
+      </div>
+    </div>
   )
 }
-
-
-// export default function CourseCardList() {
-//   const { courses, getCourses } = useContext(CourseContext);
-
-//   useEffect(() => {
-//     getCourses();
-
-//   }, [])
-//   return (
-//     <div>
-//       <h1>Courses List</h1>
-//       {console.log(courses)}
-//       {courses?.map((course, index) => {
-//         return <CourseCard course={course} key={index} />
-//       })}
-//     </div>
-//   )
-// }
