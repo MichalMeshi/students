@@ -12,22 +12,26 @@ export default function CourseCardList() {
     name: '',
     field: '',
   })
-  // const [search, setSearch] = useState('');
+  const [search, setSearch] = useState('');
 
-  // const serachByField = async (e) => {
-  //   console.log("search");
-  //   e.preventDefault();
-  //   try {
-  //     const res = await fetch(`http://localhost:3000/courses/search-by-field/${search}`);
-  //     const courses = await res.json();
-  //     if (courses)
-  //       setcourses([...courses]);
-  //     else
-  //       console.log("worst");
-  //   } catch (error) {
-  //     console.log(error.message);
-  //   }
-  // }
+  const searchByField = async () => {
+    try {
+      console.log({ search });
+      const res = await fetch(`http://localhost:3000/courses/search-course/${search}`, {
+        headers: {
+          "authorization": localStorage.getItem("token")
+        }
+      });
+      const courses = await res.json();
+      if (courses && Array.isArray(courses)) {
+        setcourses([...courses]);
+      }
+      else
+        console.log("No results found");
+    } catch (error) {
+      console.log(error.message);
+    }
+  }
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -56,23 +60,27 @@ export default function CourseCardList() {
   useEffect(() => {
     getCourses();
   }, [isClicked])
+  useEffect(() => {
+    if (search.length > 0)
+      searchByField();
+  }, [search])
 
 
   return (
     <div>
       <h1>Courses List</h1>
-      {/* <Form className="d-flex" onSubmit={serachByField}>
+      <Form className="d-flex" onSubmit={searchByField}>
         <Form.Control
           type="search"
           placeholder="Search"
           className="me-2"
           aria-label="Search"
-          value={search}
           name="search"
+          value={search}
           onChange={(e) => setSearch(e.target.value)}
         />
-        <Button variant="outline-success">Search</Button>
-      </Form> */}
+        <Button variant="outline-success" type='submit'>Search</Button>
+      </Form>
 
       {profileData.role === 'admin' && <Button onClick={() => setIsClicked(true)}>Add Course</Button>}
       {

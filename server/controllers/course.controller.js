@@ -25,12 +25,17 @@ exports.getCourses = async (req, res, next) => {
     }
 
 }
-// exports.searchCoursesByField = asyncWrap(async (req, res, next) => {
-//     const { field } = req.params;
-//     const courses = await Course.find({ field })
-//     if (!courses) return next(new AppError(404, "Courses not exist"));
-//     res.status(200).json(courses);
-// })
+exports.searchCourse = asyncWrap(async (req, res, next) => {
+    const { searchInput } = req.params;
+    const courses = await Course.find({
+        $or: [
+            { field: { $regex: searchInput, $options: 'i' } },
+            { name: { $regex: searchInput, $options: 'i' } }
+        ]
+    })
+    res.status(200).json(courses);
+})
+
 exports.getMyCourses = asyncWrap(async (req, res, next) => {
     const userId = req.user.id;
 
