@@ -4,8 +4,8 @@ const ForumContext = createContext({});
 const ForumContextProvider = ({ children }) => {
     const [posts, setposts] = useState([]);
 
-    const getPosts = async () => {
-        const data = await fetch('http://localhost:3000/forums/posts')
+    const getPosts = async (courseId) => {
+        const data = await fetch('http://localhost:3000/forums/posts/'+courseId)
         const res = await data.json();
         console.log({res});
         setposts(res);

@@ -20,7 +20,7 @@ const AppRoutes = () => {
             <Route path='/login' element={<Login />} />
             <Route path='/logout' element={<Logout />} />
             <Route path='/reset-password/:resetToken' element={<ResetPassword />} />
-            <Route path='/courses/course_details' element={<CourseDatialPage />} />
+            <Route path='/courses/course_details/:courseId' element={<CourseDatialPage />} />
             <Route path='/courses-list' element={<CourseCardList />} />
             <Route path='/tutoring' element={<Tutoring />} />
             <Route path='/forum' element={<PostList />} />
