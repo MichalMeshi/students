@@ -14,7 +14,6 @@ router.post('/url',(req,res,next)=>{
     res.send(err);
   }
 })
-const {cloudinary} = require("../utils/cloudinary");
 
 
 router.post('/', upload.single('file'), function (req, res) {
