@@ -12,8 +12,8 @@ const SummarySchema = new mongoose.Schema({
         required: true,
     },
         courseId: {
-        type: String,
-        required: true,
+            type: mongoose.Schema.Types.ObjectId,
+            ref: "Course"
     }
 
     },

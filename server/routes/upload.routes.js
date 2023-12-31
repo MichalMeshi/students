@@ -4,7 +4,7 @@ const upload = require("../middlewares/multer");
 const { cloudinary } = require("../utils/cloudinary");
 const { Summary } = require('../models/summary.models')
 router.post('/url',(req,res,next)=>{
-  try{
+    try{
   const{body}=req;
   const newSummary = new Summary({ url: body.url, userId: 0, courseId: 1 });
   newSummary.save();

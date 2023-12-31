@@ -5,8 +5,9 @@ const SummaryContextProvider = ({ children }) => {
     const [summaries, setsummaries] = useState([])
 
 
-    const getSummaries = async () => {
-        const res = await fetch('http://localhost:3000/upload')
+    const getSummaries = async (courseId) => {
+        console.log({courseId});
+        const res = await fetch('http://localhost:3000/upload/'+courseId)
         const temp = await res.json()
         console.log({temp});
         setsummaries([...temp]);

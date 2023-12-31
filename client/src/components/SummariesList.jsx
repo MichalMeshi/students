@@ -2,16 +2,12 @@ import React, { useContext, useEffect, useState } from 'react'
 import SummaryContext from '../context/SummaryContext'
 import SummaaryCard from './SummaryCard'
 
-export default function SummariesList() {
+export default function SummariesList(props) {
   const {summaries,getSummaries} = useContext(SummaryContext);
-  // const [summaries,setsummaries] = useState([]);
-//   const getMySummaries= async()=>{
-// const newSummary = await getSummaries();
-// setsummaries(newSummary)
-
-//   }
+const {courseId}=props;
   useEffect(() => {
-    getSummaries();
+    console.log(summaries);
+    getSummaries(courseId);
 
   }, [])
   return (

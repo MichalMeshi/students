@@ -3,7 +3,7 @@ import SummariesList from './SummariesList';
 import SummaryContext from '../context/SummaryContext';
 
 
-export default function AddSummary() {
+export default function AddSummary(props) {
     const [file, setFile] = useState(null);
     const [uploadStatus, setUploadStatus] = useState(null);
     const { summaries, setsummaries } = useContext(SummaryContext);
@@ -12,10 +12,11 @@ export default function AddSummary() {
         setUploadStatus(null);
     };
     const inputRef = useRef(null);
-
-    const addUrlToDb = async (url) => {
+const {courseId}=props;
+console.log({courseId});
+    const addUrlToDb = async (url,courseId) => {
         try {
-            const response = await fetch('http://localhost:3000/upload/url', {
+            const response = await fetch('http://localhost:3000/upload/url/'+courseId, {
                 method: 'POST',
                 body: JSON.stringify({ url: url }),
                 headers: {
@@ -24,6 +25,7 @@ export default function AddSummary() {
                 },
             })
             const res= await response.json();
+            console.log({res});
             return res;
         } catch (error) {
             console.error('Error during url upload:', error);
@@ -45,7 +47,7 @@ export default function AddSummary() {
                 setUploadStatus('Error uploading file. Please try again.');
             }
             console.log(a.secure_url);
-            const mySummary = await addUrlToDb(a.secure_url);
+            const mySummary = await addUrlToDb(a.secure_url,courseId);
             console.log(mySummary);
             setsummaries([...summaries, mySummary]);
 
