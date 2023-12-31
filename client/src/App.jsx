@@ -7,19 +7,23 @@ import AppRoutes from './components/AppRoutes'
 import CourseDatialPage from './pages/CourseDatialPage';
 import { ProfileContextProvider } from './context/ProfileContext';
 import { ForumContextProvider } from './context/ForumContext';
+import SummaryContext, { SummaryContextProvider } from './context/SummaryContext';
 
 function App() {
 
   return (
     <ForumContextProvider>
-      <ProfileContextProvider>
-        <CourseContextProvider>
-          <BrowserRouter>
-            <Navbar />
-            <AppRoutes />
-          </BrowserRouter>
-        </CourseContextProvider>
-      </ProfileContextProvider>
+      <SummaryContextProvider>
+        <ProfileContextProvider>
+          <CourseContextProvider>
+            <BrowserRouter>
+              <Navbar />
+              <AppRoutes />
+            </BrowserRouter>
+          </CourseContextProvider>
+        </ProfileContextProvider>
+      </SummaryContextProvider>
+
     </ForumContextProvider>
   )
 }
