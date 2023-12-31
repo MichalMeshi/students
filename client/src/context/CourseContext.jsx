@@ -15,11 +15,14 @@ const CourseContextProvider = ({ children }) => {
                 }
             })
             const temp = await res.json();
+            console.log(temp);
 
             if (temp) {
-                setMyCourses([...myCourses,course])
+                setMyCourses([...myCourses, course])
                 console.log(temp.msg);
             }
+
+
         } catch (error) {
             console.log(error.message);
         }
@@ -51,7 +54,7 @@ const CourseContextProvider = ({ children }) => {
     }
 
 
-    const shared = { courses, getCourses, setMyCourses, myCourses, handleFavoriteCourse, handleUnFavoriteCourse }
+    const shared = { courses, setcourses,getCourses, setMyCourses, myCourses, handleFavoriteCourse, handleUnFavoriteCourse }
     return (
         <CourseContext.Provider value={shared}>
             {children}

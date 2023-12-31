@@ -1,5 +1,6 @@
 const mongoose = require('mongoose');
 const bcrypt = require('bcryptjs');
+const crypto = require("crypto");
 const userSchema = new mongoose.Schema({
     id: {
         type: String,
@@ -45,7 +46,10 @@ const userSchema = new mongoose.Schema({
     image: {
         type: String,
         default: ''
-    }
+    },
+    passwordChangedAt: Date,
+    passwordResetToken: String,
+    passwordResetExpires: Date,
 },
     { versionKey: false },
     {
@@ -67,5 +71,19 @@ userSchema.pre('save', async function (next) {
     next();
 });
 
+userSchema.methods.createPasswordResetToken = function () {
+    // Generate a random 5-digit number between 10000 and 99999
+    const resetToken = Math.floor(Math.random() * 90000) + 10000;
+
+    // Hash the 5-digit number
+    this.passwordResetToken = crypto
+        .createHash("sha256")
+        .update(resetToken.toString())
+        .digest("hex");
+
+    this.passwordResetExpires = Date.now() + 10 * 1000 * 60; // 10 minutes in milliseconds
+
+    return resetToken.toString();
+};
 const User = mongoose.model('User', userSchema);
 module.exports.User = User;

@@ -33,11 +33,7 @@ exports.register = asyncWrap(async (req, res, next) => {
     await newUser.save();
     //token
     const token = generateToken(user);
-    res.cookie("jwt", token, {
-        httpOnly: true,
-        secure: true,
-        maxAge: 1000 * 60 * 10,
-    });
+
     res.status(201).json({ newUser, token });
 });
 
@@ -59,11 +55,6 @@ exports.login = asyncWrap(async (req, res, next) => {
 
     //token
     const token = generateToken(user);
-    res.cookie("jwt", token, {
-        httpOnly: false,
-        // secure: true,
-        maxAge: 1000 * 60 * 10 * 100,
-    });
     res.status(200).json({ message: "Login successful", user, token });
 })
 
@@ -75,8 +66,6 @@ exports.getUser = asyncWrap(async (req, res, next) => {
 
     const user = await User.findById(id);
     if (!user) return next(new AppError(400, "User not exist"));
-    // console.log("in get user in server", user);
-
     res.status(200).json(user);
 });
 

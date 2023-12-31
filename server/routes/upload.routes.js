@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const upload = require("../middlewares/multer");
+<<<<<<< HEAD
 const { cloudinary } = require("../utils/cloudinary");
 const { Summary } = require('../models/summary.models')
 router.post('/url',(req,res,next)=>{
@@ -14,6 +15,11 @@ router.post('/url',(req,res,next)=>{
     res.send(err);
   }
 })
+=======
+const {cloudinary} = require("../utils/cloudinary");
+
+
+>>>>>>> a0a6a200a06b18b7ee80d7d997ef0bb2e643e7aa
 router.post('/', upload.single('file'), function (req, res) {
   try{
   cloudinary.uploader.upload(req.file.path, async (err, result) => {

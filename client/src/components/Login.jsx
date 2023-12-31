@@ -1,7 +1,7 @@
 import React, { useContext, useState } from 'react'
-import { Card, Form, Button } from 'react-bootstrap'
+import { Card, Form, Button, Modal } from 'react-bootstrap'
 import { fetchUser } from '../service/httpService';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import ProfileContext from '../context/ProfileContext';
 
 const Login = () => {
@@ -10,6 +10,9 @@ const Login = () => {
         email: '',
         password: '',
     });
+    const [isClicked, setIsClicked] = useState(false);
+    const [email, setEmail] = useState('');
+
     const { login } = useContext(ProfileContext);
 
     const handleSubmit = async (e) => {
@@ -33,6 +36,29 @@ const Login = () => {
         });
     };
 
+    const forgotPassword = async (e) => {
+        e.preventDefault();
+        console.log("send email in forgot password");
+        setIsClicked(false);
+        try {
+            const response = await fetch('http://localhost:3000/users/forgot-password', {
+                method: 'POST',
+                body: JSON.stringify({ email }),
+                headers: {
+                    'Content-type': 'application/json',
+                }
+            });
+            const data = await response.json();
+            if (data.status === 'success') {
+                console.log(data.msg);
+                navigate('/verify');
+            }
+        } catch (error) {
+            console.log(error.message);
+        }
+    }
+
+
     return (
         <div className='d-flex flex-column justify-content-center align-items-center'>
             <h1 className='my-3'>Login</h1>
@@ -52,6 +78,29 @@ const Login = () => {
                         </Button>
                     </div>
                 </Form>
+                <p><Link onClick={() => setIsClicked(true)}>Forgot Password?</Link></p>
+                <Modal show={isClicked} onHide={() => setIsClicked(false)}>
+                    <Modal.Header closeButton>
+                        <Modal.Title>Forgot Password</Modal.Title>
+                    </Modal.Header>
+                    <Modal.Body>
+                        <Form onSubmit={forgotPassword}>
+                            <Form.Group controlId="email">
+                                <Form.Label>Email</Form.Label>
+                                <Form.Control
+                                    type="email"
+                                    name="email"
+                                    value={email}
+                                    onChange={(e) => setEmail(e.target.value)}
+                                />
+                            </Form.Group>
+                            <Button variant="primary" type="submit">
+                                Get link to reset password
+                            </Button>
+                        </Form>
+                    </Modal.Body>
+                </Modal>
+                <h6>Not User? Need to <Link to='/register'>Register</Link></h6>
             </Card>
         </div>
     )

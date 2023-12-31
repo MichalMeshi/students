@@ -4,20 +4,26 @@ import { fetchUser } from "../service/httpService";
 const ProfileContext = createContext({});
 
 const ProfileContextProvider = ({ children }) => {
-    const [profileData, setProfileData] = useState({});
+    const [profileData, setProfileData] = useState({ image: '' });
     // const [userLoggedIn, setUserLoggedIn] = useState(false);
 
     const getProfileData = async () => {
         try {
             const url = `http://localhost:3000/users/get-user`
-            const res = await fetch(url, {
-                headers: {
-                    "authorization": localStorage.getItem("token")
-                }
-            });
-            const profile = await res.json();
-            if (profile)
-                setProfileData(profile);
+            const token = localStorage.getItem("token");
+            if (token) {
+                const res = await fetch(url, {
+                    headers: {
+                        "authorization": token
+                    }
+                });
+                const profile = await res.json();
+                if (profile)
+                    setProfileData(profile);
+            }
+            else {
+                console.log("Please Login (from client)");
+            }
         } catch (error) {
             console.log(error.message);
         }
@@ -38,16 +44,16 @@ const ProfileContextProvider = ({ children }) => {
         localStorage.setItem("token", response.token)
         return true;
     }
-    // const logout = () => {
-    //     // Remove token from localStorage
-    //     localStorage.removeItem("token");
+    const logout = () => {
+        // Remove token from localStorage
+        localStorage.removeItem("token");
 
-    //     // Reset profile data (assuming you have a function to do this)
-    //     setProfileData({});
+        // Reset profile data (assuming you have a function to do this)
+        setProfileData({});
 
-    //     // Set user as not logged in
-    //     setUserLoggedIn(false);
-    // }
+        // Set user as not logged in
+        // setUserLoggedIn(false);
+    }
 
     const register = async (body) => {
         const response = await fetchUser('register', {
@@ -90,7 +96,7 @@ const ProfileContextProvider = ({ children }) => {
     }, [])
 
 
-    const shared = { profileData, setProfileData, login, register, updateUserProfile, /*userLoggedIn,logout*/ }
+    const shared = { profileData, setProfileData, login, register, updateUserProfile, logout /*userLoggedIn,*/ }
     return (
         <ProfileContext.Provider value={shared}>
             {children}

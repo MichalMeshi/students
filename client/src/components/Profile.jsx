@@ -1,5 +1,5 @@
 import React, { useContext, useState } from 'react';
-import { Col, Container, Row } from 'react-bootstrap';
+import { Card, Col, Container, Row } from 'react-bootstrap';
 import ProfileContext from '../context/ProfileContext';
 import { CiEdit } from "react-icons/ci";
 import EditProfile from '../components/EditProfile';
@@ -37,23 +37,25 @@ const Profile = () => {
 
     return (
         <Container>
-            <Row>
-                <Col md={4}>
-                    {profileData.image !== '' ? (
-                        <img src={profileData.image} alt="profileImg" width={50}/>
-                    ) : (
-                        <img width={50} src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png" alt="Empty Profile" />
-                    )}                    
-                    <h2>{renderStars(profileData.rate)}</h2>
-                </Col>
-                <Col md={8}>
-                    <h3>{profileData.name}</h3>
-                    <h3>{profileData.college}</h3>
-                    <h3>{profileData.address}</h3>
-                </Col>
-                <CiEdit onClick={() => setEdit(true)} style={{ cursor: "pointer" }}></CiEdit>
-                {edit ? (<EditProfile setEdit={setEdit} />) : null}
-            </Row>
+            <Card>
+                <Row>
+                    <Col md={4}>
+                        {profileData.image !== '' ? (
+                            <img src={profileData.image} alt="profileImg" width={50} />
+                        ) : (
+                            <img width={50} src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png" alt="Empty Profile" />
+                        )}
+                        <h2>{renderStars(profileData.rate)}</h2>
+                    </Col>
+                    <Col md={8}>
+                        <h3>{profileData.name}</h3>
+                        <h3>{profileData.college}</h3>
+                        <h3>{profileData.address}</h3>
+                    </Col>
+                    <CiEdit onClick={() => setEdit(true)} style={{ cursor: "pointer" }}></CiEdit>
+                    {edit ? (<EditProfile setEdit={setEdit} />) : null}
+                </Row>
+            </Card>
         </Container>
     );
 }
