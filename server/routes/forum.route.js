@@ -6,6 +6,7 @@ const router = express.Router();
 router.post('/posts',async(req,res,next)=>{
     //add new post
     const body = req.body;
+    
     try {
         const newPost=new Post(body)
         await newPost.save();

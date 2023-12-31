@@ -3,10 +3,11 @@ const router = express.Router();
 const upload = require("../middlewares/multer");
 const { cloudinary } = require("../utils/cloudinary");
 const { Summary } = require('../models/summary.models')
-router.post('/url',(req,res,next)=>{
+router.post('/url/:courseId',(req,res,next)=>{
+  const {courseId}=req.params;
     try{
   const{body}=req;
-  const newSummary = new Summary({ url: body.url, userId: 0, courseId: 1 });
+  const newSummary = new Summary({ url: body.url, userId: 0, courseId: courseId });
   newSummary.save();
   res.json(newSummary);
   }
@@ -36,10 +37,10 @@ res.send(err);
 }
 });
 
-router.get('/', async (req, res, next) => {
-
+router.get('/:courseId', async (req, res, next) => {
+const {courseId}=req.params;
   try {
-    const summaies = await Summary.find({})
+    const summaies = await Summary.find({courseId})
     res.json(summaies);
   }
   catch (error) {
