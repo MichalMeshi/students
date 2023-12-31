@@ -1,36 +1,51 @@
 const express = require('express');
 const router = express.Router();
 const upload = require("../middlewares/multer");
+const { cloudinary } = require("../utils/cloudinary");
+const { Summary } = require('../models/summary.models')
+router.post('/url',(req,res,next)=>{
+  try{
+  const{body}=req;
+  const newSummary = new Summary({ url: body.url, userId: 0, courseId: 1 });
+  newSummary.save();
+  res.json(newSummary);
+  }
+  catch(err){
+    res.send(err);
+  }
+})
 const {cloudinary} = require("../utils/cloudinary");
 
 
 router.post('/', upload.single('file'), function (req, res) {
-  cloudinary.uploader.upload(req.file.path, function (err, result){
-
-    if(err) {
+  try{
+  cloudinary.uploader.upload(req.file.path, async (err, result) => {
+    console.log();
+    if (err) {
       console.log(err);
       return res.status(500).json({
         success: false,
         message: "Error"
       })
     }
-
-    res.status(200).json({
-      success: true,
-      message:"Uploaded!",
-      data: result
-    })
+    res.json(result);
+  
   })
+  
+}catch(err){
+res.send(err);
+}
 });
 
+router.get('/', async (req, res, next) => {
 
-router.get('/', function (req, res) {
-  // Your logic for handling GET requests goes here
-  res.status(200).json({
-    success: true,
-    message: "GET request received successfully",
-    data: {}  // You can include additional data if needed
-  });
+  try {
+    const summaies = await Summary.find({})
+    res.json(summaies);
+  }
+  catch (error) {
+    next(error);
+  }
 });
 
 module.exports = router;

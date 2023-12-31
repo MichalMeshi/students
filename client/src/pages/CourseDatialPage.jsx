@@ -1,7 +1,9 @@
 import { useParams } from "react-router-dom";
 import AddSummary from "../components/AddSummary";
 import PostList from "../components/PostList";
+import Position from "../components/Position";
 import SummariesList from "../components/SummariesList";
+
 
 export default function CourseDatialPage() {
   const {courseId} = useParams();

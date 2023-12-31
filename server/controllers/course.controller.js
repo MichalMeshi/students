@@ -2,6 +2,7 @@ const Joi = require('joi');
 const { Course } = require('../models/Course.models');
 const { User } = require('../models/user.models');
 const asyncWrap = require('../utils/asyncWrapper');
+const AppError = require('../utils/AppError');
 exports.addNewCourse = async (req, res, next) => {
     const { body } = req;
     const newCourse = new Course(body);
@@ -24,6 +25,16 @@ exports.getCourses = async (req, res, next) => {
     }
 
 }
+exports.searchCourse = asyncWrap(async (req, res, next) => {
+    const { searchInput } = req.params;
+    const courses = await Course.find({
+        $or: [
+            { field: { $regex: searchInput, $options: 'i' } },
+            { name: { $regex: searchInput, $options: 'i' } }
+        ]
+    })
+    res.status(200).json(courses);
+})
 
 exports.getMyCourses = asyncWrap(async (req, res, next) => {
     const userId = req.user.id;

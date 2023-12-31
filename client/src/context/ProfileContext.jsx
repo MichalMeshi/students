@@ -4,7 +4,7 @@ import { fetchUser } from "../service/httpService";
 const ProfileContext = createContext({});
 
 const ProfileContextProvider = ({ children }) => {
-    const [profileData, setProfileData] = useState({});
+    const [profileData, setProfileData] = useState({ image: '' });
     // const [userLoggedIn, setUserLoggedIn] = useState(false);
 
     const getProfileData = async () => {

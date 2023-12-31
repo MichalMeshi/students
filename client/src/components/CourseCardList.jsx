@@ -5,13 +5,33 @@ import { Button, Form, Modal } from 'react-bootstrap';
 import ProfileContext from '../context/ProfileContext';
 
 export default function CourseCardList() {
-  const { courses, getCourses } = useContext(CourseContext);
+  const { courses, getCourses, setcourses } = useContext(CourseContext);
   const { profileData } = useContext(ProfileContext);
   const [isClicked, setIsClicked] = useState(false);
   const [courseData, setCourseData] = useState({
     name: '',
     field: '',
   })
+  const [search, setSearch] = useState('');
+
+  const searchByField = async () => {
+    try {
+      console.log({ search });
+      const res = await fetch(`http://localhost:3000/courses/search-course/${search}`, {
+        headers: {
+          "authorization": localStorage.getItem("token")
+        }
+      });
+      const courses = await res.json();
+      if (courses && Array.isArray(courses)) {
+        setcourses([...courses]);
+      }
+      else
+        console.log("No results found");
+    } catch (error) {
+      console.log(error.message);
+    }
+  }
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -40,11 +60,28 @@ export default function CourseCardList() {
   useEffect(() => {
     getCourses();
   }, [isClicked])
+  useEffect(() => {
+    if (search.length > 0)
+      searchByField();
+  }, [search])
 
 
   return (
     <div>
       <h1>Courses List</h1>
+      <Form className="d-flex" onSubmit={searchByField}>
+        <Form.Control
+          type="search"
+          placeholder="Search"
+          className="me-2"
+          aria-label="Search"
+          name="search"
+          value={search}
+          onChange={(e) => setSearch(e.target.value)}
+        />
+        <Button variant="outline-success" type='submit'>Search</Button>
+      </Form>
+
       {profileData.role === 'admin' && <Button onClick={() => setIsClicked(true)}>Add Course</Button>}
       {
         courses?.map((course, index) => {

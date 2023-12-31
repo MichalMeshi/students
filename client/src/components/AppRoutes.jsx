@@ -10,7 +10,7 @@ import Logout from './Logout';
 import Tutoring from './Tutoring';
 import ResetPassword from './ResetPassword';
 import PostList from './PostList';
-
+import CodeVerification from './CodeVerification'
 const AppRoutes = () => {
 
     return (
