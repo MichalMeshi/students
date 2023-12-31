@@ -15,10 +15,11 @@ router.post('/posts',async(req,res,next)=>{
     }
 
 })
-router.get('/posts',async(req,res,next)=>{
-    //get all posts
+router.get('/posts/:courseId',async(req,res,next)=>{
+    //get all posts by courseid
+    const {courseId}=req.params;
     try {
-        const posts = await Post.find({});
+        const posts = await Post.find({courseId});
         res.json(posts);
     }
     catch (error) {
