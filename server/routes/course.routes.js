@@ -8,6 +8,8 @@ const { addNewCourse, getCourses, getMyCourses, addFavoriteCourse, removeFavorit
 router.get('/my-courses', authMiddlware.auth, getMyCourses);
 router.post('/add-favorite-course/:courseId', authMiddlware.auth, addFavoriteCourse);
 router.delete('/remove-favorite-course/:courseId', authMiddlware.auth, removeFavoriteCourse);
-router.get('/', getCourses)
-router.post('/', authMiddlware.auth, authMiddlware.restrictTo("admin"), addNewCourse)
+router.get('/', getCourses);
+router.post('/', authMiddlware.auth, authMiddlware.restrictTo("admin"), addNewCourse);
+// router.get('/search-by-field/:field', authMiddlware.auth, searchCoursesByField);
+
 module.exports = router;

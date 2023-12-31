@@ -5,13 +5,29 @@ import { Button, Form, Modal } from 'react-bootstrap';
 import ProfileContext from '../context/ProfileContext';
 
 export default function CourseCardList() {
-  const { courses, getCourses } = useContext(CourseContext);
+  const { courses, getCourses, setcourses } = useContext(CourseContext);
   const { profileData } = useContext(ProfileContext);
   const [isClicked, setIsClicked] = useState(false);
   const [courseData, setCourseData] = useState({
     name: '',
     field: '',
   })
+  // const [search, setSearch] = useState('');
+
+  // const serachByField = async (e) => {
+  //   console.log("search");
+  //   e.preventDefault();
+  //   try {
+  //     const res = await fetch(`http://localhost:3000/courses/search-by-field/${search}`);
+  //     const courses = await res.json();
+  //     if (courses)
+  //       setcourses([...courses]);
+  //     else
+  //       console.log("worst");
+  //   } catch (error) {
+  //     console.log(error.message);
+  //   }
+  // }
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -45,6 +61,19 @@ export default function CourseCardList() {
   return (
     <div>
       <h1>Courses List</h1>
+      {/* <Form className="d-flex" onSubmit={serachByField}>
+        <Form.Control
+          type="search"
+          placeholder="Search"
+          className="me-2"
+          aria-label="Search"
+          value={search}
+          name="search"
+          onChange={(e) => setSearch(e.target.value)}
+        />
+        <Button variant="outline-success">Search</Button>
+      </Form> */}
+
       {profileData.role === 'admin' && <Button onClick={() => setIsClicked(true)}>Add Course</Button>}
       {
         courses?.map((course, index) => {

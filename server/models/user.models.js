@@ -19,16 +19,6 @@ const userSchema = new mongoose.Schema({
         type: String,
         required: true
     },
-    passwordConfirm: {
-        type: String,
-        required: [true, "Please retype the password"],
-        /*   validate: {
-        validator: function (el) {
-          return el === this.password;
-        },
-        message: "The passwords not match",
-      }, */
-    },
     address: {
         type: String
     },
@@ -82,21 +72,18 @@ userSchema.pre('save', async function (next) {
 });
 
 userSchema.methods.createPasswordResetToken = function () {
-    console.log("in create passwordddddddd");
-    const resetToken = crypto
-        .randomBytes(32) /*32 number of characters */
-        .toString("hex"); /* convert it to the hexadecimal string */
+    // Generate a random 5-digit number between 10000 and 99999
+    const resetToken = Math.floor(Math.random() * 90000) + 10000;
 
-    this.passwordResetToken = crypto //saving the encrypted reset token into db
+    // Hash the 5-digit number
+    this.passwordResetToken = crypto
         .createHash("sha256")
-        .update(resetToken)
+        .update(resetToken.toString())
         .digest("hex");
 
-    this.passwordResetExpires = Date.now() + 10 * 1000 * 60; //milliseconds 10 min
-    
+    this.passwordResetExpires = Date.now() + 10 * 1000 * 60; // 10 minutes in milliseconds
 
-    return resetToken; //returning the plain hex string token to be sent by email
+    return resetToken.toString();
 };
-
 const User = mongoose.model('User', userSchema);
 module.exports.User = User;

@@ -3,6 +3,8 @@ const AppError = require('../utils/AppError');
 const { User } = require('../models/user.models');
 const asyncWrap = require('../utils/asyncWrapper');
 const sendEmail = require('../utils/email');
+const getEmailTemplate = require('../utils/emailTemplate');
+
 const crypto = require('crypto');
 exports.auth = asyncWrap(async (req, res, next) => {
     console.log({
@@ -36,9 +38,8 @@ exports.restrictTo = (...roles) => {
 
 
 
+
 exports.forgotPassword = asyncWrap(async (req, res, next) => {
-    console.log("in server------------------------");
-    //get user based on the posted email
     const { email } = req.body;
     console.log({ email });
     const user = await User.findOne({ email });
@@ -47,26 +48,26 @@ exports.forgotPassword = asyncWrap(async (req, res, next) => {
 
     ///generate reset token
     const resetToken = user.createPasswordResetToken();
+    const emailTemplate = getEmailTemplate(); // Get the HTML content from email.html
+    if (!emailTemplate) {
+        console.error('Failed to load email template.');
+        return;
+      }
     console.log({ resetToken });
     await user.save({ validateBeforeSave: false });
     console.log("after create password reset token");
+    const formattedEmail = emailTemplate.replace('{{RESET_TOKEN}}', resetToken);
 
-    ///send to users email
-    // const resetURL = `${req.protocol}://${req.get(
-    //     "host"
-    // )}/users/reset-password/${resetToken}`;
-    // const message = `Forgot your password? 
-    // Submit a patch request with a new password and
-    //  password confirm to :${resetURL}  
-    //   \n if you havent forgotten your password ignore this email`;
-    const message = `Token: ${resetToken}`;
+    const message = `<h1>Code: ${resetToken}</h1>`;
+
     try {
-        //here we use the try  n catch because need do more then just sending the error to the user
         await sendEmail({
             email: user.email,
             subject: "Your password reset link valid for 10 min",
             text: message,
-        });
+            htmlContent: formattedEmail
+        }, "students@stud.com", formattedEmail);  // Provide the HTML content here
+    
     } catch (err) {
         user.passwordResetToken = undefined;
         user.passwordResetExpires = undefined;
@@ -80,42 +81,49 @@ exports.forgotPassword = asyncWrap(async (req, res, next) => {
     });
 });
 exports.verifyToken = asyncWrap(async (req, res, next) => {
-    console.log("in verifyyyyyyyyy");
-    ///1 get user based on the token
     const { resetToken } = req.params;
     console.log({ "reset token in verify: ": resetToken });
+
     const encryptedResetToken = crypto
         .createHash("sha256")
         .update(resetToken)
         .digest("hex");
-    console.log({ "the encrypted token: ": encryptedResetToken });
+
     const user = await User.findOne({
         passwordResetToken: encryptedResetToken,
         passwordResetExpires: { $gt: Date.now() },
     });
-    ///2 if token not expired and there is user set the new password
-    // next(new AppError(400, "Token is expired or wrong"));
-    if (!user)
+
+    if (!user) {
         return res.status(404).json({ status: 'failed' });
+    }
+
     return res.status(202).json({ status: 'success' });
-})
+});
+
 exports.resetPassword = asyncWrap(async (req, res, next) => {
     const { resetToken } = req.params;
-    console.log({"reset token in the resetToken":resetToken});
+    console.log({ "reset token in the resetToken": resetToken });
+
     const encryptedResetToken = crypto
-    .createHash("sha256")
-    .update(resetToken)
-    .digest("hex");
-    console.log({"encrypt token in the resetToken":encryptedResetToken});
+        .createHash("sha256")
+        .update(resetToken)
+        .digest("hex");
 
     const { confirmPassword, password } = req.body;
-    const user = await User.findOne({ passwordResetToken: encryptedResetToken })
-    console.log({user});
+
+    const user = await User.findOne({ passwordResetToken: encryptedResetToken });
+
+    if (!user) {
+        return next(new AppError(404, 'User not found or token expired'));
+    }
+
     user.password = password;
-    user.passwordConfirm = confirmPassword;
+    user.confirmPassword = confirmPassword;
     user.passwordResetToken = undefined;
     user.passwordResetExpires = undefined;
     user.passwordChangedAt = Date.now();
+
     await user.save();
 
     const token = generateToken(user);

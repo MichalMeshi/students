@@ -15,6 +15,7 @@ const CourseContextProvider = ({ children }) => {
                 }
             })
             const temp = await res.json();
+            console.log(temp);
 
             if (temp) {
                 setMyCourses([...myCourses, course])
@@ -53,7 +54,7 @@ const CourseContextProvider = ({ children }) => {
     }
 
 
-    const shared = { courses, getCourses, setMyCourses, myCourses, handleFavoriteCourse, handleUnFavoriteCourse }
+    const shared = { courses, setcourses,getCourses, setMyCourses, myCourses, handleFavoriteCourse, handleUnFavoriteCourse }
     return (
         <CourseContext.Provider value={shared}>
             {children}
