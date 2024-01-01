@@ -17,22 +17,22 @@ const userJoiSchema = {
         name: Joi.string().required(),
         address: Joi.string(),
         college: Joi.string(),
-        // image: Joi.string()
+        image: Joi.string().min(0)
     })
 }
 
 exports.register = asyncWrap(async (req, res, next) => {
-    const { password, email, name, address, college } = req.body;
-    const validate = userJoiSchema.register.validate({ password, email, name, address, college });
+    const { password, email, name, address, college, image } = req.body;
+    const validate = userJoiSchema.register.validate({ password, email, name, address, college, image });
     if (validate.error) return next(new AppError(400, validate.error));
 
     const user = await checkIfUserExist(email);
     if (user) return next(new AppError(401, 'User already exist'));
 
-    const newUser = new User({ password, email, name, address, college });
+    const newUser = new User({ password, email, name, address, college, image });
     await newUser.save();
     //token
-    const token = generateToken(user);
+    const token = generateToken(newUser);
 
     res.status(201).json({ newUser, token });
 });
