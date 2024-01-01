@@ -1,10 +1,9 @@
 import React, { useContext, useRef, useState } from 'react'
-import SummariesList from './SummariesList';
 import SummaryContext from '../context/SummaryContext';
-
-
 export default function AddSummary(props) {
     const [file, setFile] = useState(null);
+    const [title, setTitle] = useState('');
+    const [description, setDescription] = useState('');
     const [uploadStatus, setUploadStatus] = useState(null);
     const { summaries, setsummaries } = useContext(SummaryContext);
     const handleFileChange = (event) => {
@@ -12,31 +11,40 @@ export default function AddSummary(props) {
         setUploadStatus(null);
     };
     const inputRef = useRef(null);
-const {courseId}=props;
-console.log({courseId});
-    const addUrlToDb = async (url,courseId) => {
+    const { courseId } = props;
+    const addUrlToDb = async (url, courseId) => {
         try {
-            const response = await fetch('http://localhost:3000/upload/url/'+courseId, {
+            const response = await fetch('http://localhost:3000/upload/url/' + courseId, {
                 method: 'POST',
-                body: JSON.stringify({ url: url }),
+                body: JSON.stringify({ url: url, title: title, description: description }),
                 headers: {
+                    "authorization":localStorage.getItem("token"),
                     "Content-Type": "application/json",
-                    // 'Content-Type': 'application/x-www-form-urlencoded',
                 },
             })
-            const res= await response.json();
-            console.log({res});
+            const res = await response.json();
+            console.log({ res });
             return res;
         } catch (error) {
             console.error('Error during url upload:', error);
         }
     }
+    const handleTitle = (e) => {
+        setTitle(e.target.value);
+    }
+    const handleDescription = (e) => {
+        setDescription(e.target.value);
+    }
+
     const handleUpload = async () => {
         const formData = new FormData();
         formData.append('file', file);
         try {
             const response = await fetch('http://localhost:3000/upload', {
-                method: 'POST',
+               headers:{
+                "authorization":localStorage.getItem("token")
+               },
+            method: 'POST',
                 body: formData,
             });
             const a = await response.json();
@@ -47,7 +55,7 @@ console.log({courseId});
                 setUploadStatus('Error uploading file. Please try again.');
             }
             console.log(a.secure_url);
-            const mySummary = await addUrlToDb(a.secure_url,courseId);
+            const mySummary = await addUrlToDb(a.secure_url, courseId);
             console.log(mySummary);
             setsummaries([...summaries, mySummary]);
 
@@ -63,9 +71,15 @@ console.log({courseId});
                 <h2> Add Summary:</h2>
 
                 <form>
-                    <label htmlFor="file">Choose an image:</label>
-                    <input type="file" lang="en-GB" id="file" onChange={handleFileChange} ref={inputRef} />
-                    <button type="button" className='btn btn-primary btn-block btn-outlined' onClick={handleUpload}>
+                    <label htmlFor="file">Choose a file:</label>
+                    <input type="file" className='form-control' lang="en-GB" id="file" onChange={handleFileChange} ref={inputRef} />
+                    <label>title:</label>
+                    <input type="text" className='form-control' name="title" onChange={handleTitle} />
+                    <label>description:</label>
+                    <input type="text" className='form-control' name="description" onChange={handleDescription} />
+                    <button type="button" className='btn btn-primary btn-block btn-outlined m-2'
+                        disabled={!file || !title || !description}
+                        onClick={handleUpload}>
                         Upload
                     </button>
                 </form>
