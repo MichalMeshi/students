@@ -11,6 +11,7 @@ const Register = () => {
         password: '',
         college: '',
         address: '',
+        image: ''
     })
     const { register } = useContext(ProfileContext);
     const navigate = useNavigate();

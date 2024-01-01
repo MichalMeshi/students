@@ -4,7 +4,7 @@ import { fetchUser } from "../service/httpService";
 const ProfileContext = createContext({});
 
 const ProfileContextProvider = ({ children }) => {
-    const [profileData, setProfileData] = useState({ image: '' });
+    const [profileData, setProfileData] = useState({});
     // const [userLoggedIn, setUserLoggedIn] = useState(false);
 
     const getProfileData = async () => {
@@ -18,6 +18,7 @@ const ProfileContextProvider = ({ children }) => {
                     }
                 });
                 const profile = await res.json();
+                console.log({profile});
                 if (profile)
                     setProfileData(profile);
             }
@@ -65,10 +66,9 @@ const ProfileContextProvider = ({ children }) => {
         });
         if (response.status === 'fail')
             return false;
-        setProfileData(response.user);
+        setProfileData(response.newUser);
         // setUserLoggedIn(true);
         localStorage.setItem("token", response.token)
-
         return true;
     }
     const updateUserProfile = async (updatedData) => {
