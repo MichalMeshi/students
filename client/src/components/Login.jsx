@@ -20,10 +20,11 @@ const Login = () => {
         console.log("Login");
         try {
             const res = await login(formData);
+            console.log("res", res);
             if (res)
                 navigate('/');
             else
-                setError(res.message);
+                setError("Wrong email or password");
         } catch (error) {
             setError(error.message);
         }
