@@ -5,6 +5,7 @@ import { MdDeleteOutline  } from "react-icons/md";
 import { FaEye } from "react-icons/fa";
 
 import { Link } from 'react-router-dom';
+import MiniProfile from './MiniProfile';
 
 
 export default function SummaaryCard(props) {
@@ -84,7 +85,7 @@ export default function SummaaryCard(props) {
 
         {/* <p className="card-text">{summary.description}</p> */}
 
-        <p className="card-text">created by: {summary.userId} </p>
+        <p className="card-text">created by:<MiniProfile userId = {summary.userId}/> </p>
 
         <div className='d-flex align-items-center justify-content-around'>
         {/* <p className="card-text">{downloads} downloads </p> */}
