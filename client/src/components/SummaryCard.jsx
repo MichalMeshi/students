@@ -1,16 +1,19 @@
-import React, { useEffect, useState,useContext } from 'react'
+import React, { useEffect, useState, useContext } from 'react'
 import SummaryContext from '../context/SummaryContext';
 import { GoDownload } from "react-icons/go";
-import { MdDeleteOutline  } from "react-icons/md";
+import { MdDeleteOutline } from "react-icons/md";
 import { FaEye } from "react-icons/fa";
 
 import { Link } from 'react-router-dom';
 import MiniProfile from './MiniProfile';
+import { Alert } from 'react-bootstrap';
 
 
 export default function SummaaryCard(props) {
   const [downloads, setdownloads] = useState(0);
-  const { summaries, setsummaries ,userConnectedId} = useContext(SummaryContext);
+  const { summaries, setsummaries, userConnectedId } = useContext(SummaryContext);
+
+  const [error, setError] = useState("");
 
   const { summary } = props;
 
@@ -29,11 +32,11 @@ export default function SummaaryCard(props) {
       const res = await response.json();
       return res;
     } catch (error) {
-      console.error('Error during url put:', error);
+      setError('Error during url put:', error);
     }
 
   }
-  const onButtonClickDelete = async(url)=>{
+  const onButtonClickDelete = async (url) => {
     try {
       const response = await fetch('http://localhost:3000/upload/' + summary._id, {
         method: 'DELETE',
@@ -48,7 +51,7 @@ export default function SummaaryCard(props) {
       return res;
 
     } catch (error) {
-      console.error('Error during delete:', error);
+      setError('Error during delete:', error);
     }
     console.log('delete ', url);
   }
@@ -74,45 +77,46 @@ export default function SummaaryCard(props) {
 
 
   return (
-    <div className="card col-sm-12 col-md-4 d-flex align-items-center justify-content-center m-3 shadow p-3 mb-5 bg-white rounded" style={{ width: "18rem" }}>
-      <embed src={summary.url} type="application/pdf" className='card-top w-100' />
-      <div className="card-body">
-      <hr className="border border-danger m-0"/>
+    <>
+      <div className="card col-sm-12 col-md-4 d-flex align-items-center justify-content-center m-3 shadow p-3 mb-5 bg-white rounded" style={{ width: "18rem" }}>
+<MiniProfile userId={summary.userId}/>
+        <embed src={summary.url} type="application/pdf" className='card-top w-100' />
 
-      <h5 className="card-title display-6 ">{summary.title}</h5>
+        <div className="card-body">
+          <hr className="border border-danger m-0" />
 
-        {/* <h5 className="card-title">{summary.title}</h5> */}
-
-        {/* <p className="card-text">{summary.description}</p> */}
-
-        <p className="card-text">created by:<MiniProfile userId = {summary.userId}/> </p>
-
-        <div className='d-flex align-items-center justify-content-around'>
-        {/* <p className="card-text">{downloads} downloads </p> */}
-        <button className='btn btn-info m-2' onClick={() => { onButtonClickDownload(summary.url) }}>
-                <GoDownload className='fs-2'/>
-
-        </button>
-        <button className='btn btn-info m-2' onClick={() => { onButtonClickPreviwo(summary.url)}}>
-        <FaEye className='fs-2'/>
-        </button>
-        {summary.userId === userConnectedId && (
-        
-        <button className='btn btn-info m-2 ' onClick={() => { onButtonClickDelete(summary.url) }}>
-          <MdDeleteOutline className='fs-2' />
-        </button>
-      )}
-  
+          <h5 className="card-title display-6 h-50">{summary.title}</h5>
 
 
+          <p className="card-text">{downloads} downloads </p>
+
+          <div className='d-flex align-items-center justify-content-around'>
+            {/* <p className="card-text">{downloads} downloads </p> */}
+            <button className='btn btn-info m-2' onClick={() => { onButtonClickDownload(summary.url) }}>
+              <GoDownload className='fs-2' />
+
+            </button>
+            <button className='btn btn-info m-2' onClick={() => { onButtonClickPreviwo(summary.url) }}>
+              <FaEye className='fs-2' />
+            </button>
+            {summary.userId.id === userConnectedId && (
+
+              <button className='btn btn-info m-2 ' onClick={() => { onButtonClickDelete(summary.url) }}>
+                <MdDeleteOutline className='fs-2' />
+              </button>
+            )}
+
+
+      
         </div>
         <div className='d-flex'>
-    </div>
+        </div>
 
-         </div>
-    </div>
+      </div>
+    </div >
 
 
 
+    </>
   )
 }

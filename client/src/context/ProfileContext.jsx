@@ -5,6 +5,22 @@ const ProfileContext = createContext({});
 
 const ProfileContextProvider = ({ children }) => {
     const [profileData, setProfileData] = useState({});
+    const [miniprofile, setminiprofile] = useState({})
+    const getIdDetailsMiniProfile = async(userId)=>{
+        try {
+            const url = `http://localhost:3000/users/get-user-data/${userId}`
+            const res = await fetch(url);
+            const temp = await res.json()
+            setminiprofile(temp);
+            console.log({miniprofile})
+
+        }
+        catch (error) {
+        console.log(error.message);
+    }
+
+}
+
     // const [userLoggedIn, setUserLoggedIn] = useState(false);
 
     const getProfileData = async () => {
@@ -98,7 +114,7 @@ const ProfileContextProvider = ({ children }) => {
     }, [])
 
 
-    const shared = { profileData, setProfileData, login, register, updateUserProfile, logout /*userLoggedIn,*/ }
+    const shared = { profileData, setProfileData, login, register, updateUserProfile, logout /*userLoggedIn,*/,miniprofile, setminiprofile,getIdDetailsMiniProfile }
     return (
         <ProfileContext.Provider value={shared}>
             {children}
