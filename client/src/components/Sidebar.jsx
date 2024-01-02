@@ -1,9 +1,13 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 
-export default function Sidebar(props) {
-    const { courseId } = props;
+export default function Sidebar({ courseId }) {
 
   return (
-    <div>Sidebar: {courseId}</div>
+    <nav>
+      <Link to={`/course_details/${courseId}/summeries`}>Summeries </Link>
+      <Link to={`/course_details/${courseId}/forum`}>Forum </Link>
+      <Link to={`/course_details/${courseId}/sharedLearning`}>Shared Learning </Link>
+    </nav>
   )
 }
