@@ -1,5 +1,5 @@
 import React, { useContext, useState } from 'react'
-import { Card, Form, Button, Modal, Alert } from 'react-bootstrap'
+import { Card, Form, Button, Modal } from 'react-bootstrap'
 import { fetchUser } from '../service/httpService';
 import { Link, useNavigate } from 'react-router-dom';
 import ProfileContext from '../context/ProfileContext';
