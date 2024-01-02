@@ -64,7 +64,7 @@ const Login = () => {
     return (
         // <div className='d-flex flex-column justify-content-center align-items-center'>
         //     <h1 className='my-3'>Login</h1>
-        <div>
+
             <Card style={{ width: "24em", textAlign:"center" }} className="d-flex flex-column justify-content-center align-items-center p-4 ">
                 <HiOutlineDocumentArrowDown color='#2d3092' size={60}/>
                 <p>Enter your user connection details</p>
