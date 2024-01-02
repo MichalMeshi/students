@@ -17,6 +17,7 @@ export default function CourseCardList() {
 
   const searchByField = async () => {
     try {
+      setError("");
       console.log({ search });
       const res = await fetch(`http://localhost:3000/courses/search-course/${search}`, {
         headers: {
@@ -24,11 +25,12 @@ export default function CourseCardList() {
         }
       });
       const courses = await res.json();
+      if (courses.length === 0)
+        setError("No courses found");
       if (courses && Array.isArray(courses)) {
         setcourses([...courses]);
       }
-      else
-        setError("No results found");
+
     } catch (error) {
       setError(error.message);
     }
@@ -54,8 +56,7 @@ export default function CourseCardList() {
       }
     });
     const data = await response.json();
-    if (data)
-      console.log(data.msg);
+
   };
 
   useEffect(() => {
@@ -64,15 +65,19 @@ export default function CourseCardList() {
   useEffect(() => {
     if (search.length > 0)
       searchByField();
+    else {
+      setError("");
+      getCourses();
+    }
   }, [search])
 
 
   return (
     <div>
       <h1>Courses List</h1>
-      <Form className="d-flex" onSubmit={searchByField}>
+      <Form className="d-flex">
         <Form.Control
-          type="search"
+          type="text"
           placeholder="Search"
           className="me-2"
           aria-label="Search"
@@ -81,7 +86,7 @@ export default function CourseCardList() {
           autoComplete="off"
           onChange={(e) => setSearch(e.target.value)}
         />
-        <Button variant="outline-success" type='submit'>Search</Button>
+        <Button variant="outline-success" type="button" onClick={searchByField}>Search</Button>
       </Form>
 
       {profileData.role === 'admin' && <Button onClick={() => setIsClicked(true)}>Add Course</Button>}
