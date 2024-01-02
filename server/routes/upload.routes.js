@@ -48,7 +48,7 @@ router.get('/:courseId',authMiddleware.auth, async (req, res, next) => {
 const {courseId}=req.params;
 const userConnectedId = req.user.id;
   try {
-    const summaies = await Summary.find({courseId})
+    const summaies = await Summary.find({courseId}).populate("userId")
     res.json({summeries:summaies,userConnectedId:userConnectedId});
   }
   catch (error) {

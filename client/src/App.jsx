@@ -8,6 +8,7 @@ import CourseDatialPage from './pages/CourseDatialPage';
 import { ProfileContextProvider } from './context/ProfileContext';
 import { ForumContextProvider } from './context/ForumContext';
 import SummaryContext, { SummaryContextProvider } from './context/SummaryContext';
+import EntrancePage from './pages/EntrancePage';
 
 function App() {
 
@@ -17,6 +18,7 @@ function App() {
         <ProfileContextProvider>
           <CourseContextProvider>
             <BrowserRouter>
+            <EntrancePage/>
               <Navbar />
               <AppRoutes />
             </BrowserRouter>

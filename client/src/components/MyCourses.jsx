@@ -1,7 +1,7 @@
 import React, { useContext, useEffect, useState } from 'react'
 import CourseCard from './CourseCard';
 import CourseContext from '../context/CourseContext';
-import { Col, Container, Row } from 'react-bootstrap';
+import { Col, Container, Row, Alert } from 'react-bootstrap';
 
 const MyCourses = () => {
     // const [favorite, setFavorite] = useState(true);
