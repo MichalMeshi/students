@@ -17,22 +17,22 @@ const userJoiSchema = {
         name: Joi.string().required(),
         address: Joi.string(),
         college: Joi.string(),
-        // image: Joi.string()
+        image: Joi.string().min(0)
     })
 }
 
 exports.register = asyncWrap(async (req, res, next) => {
-    const { password, email, name, address, college } = req.body;
-    const validate = userJoiSchema.register.validate({ password, email, name, address, college });
+    const { password, email, name, address, college, image } = req.body;
+    const validate = userJoiSchema.register.validate({ password, email, name, address, college, image });
     if (validate.error) return next(new AppError(400, validate.error));
 
     const user = await checkIfUserExist(email);
     if (user) return next(new AppError(401, 'User already exist'));
 
-    const newUser = new User({ password, email, name, address, college });
+    const newUser = new User({ password, email, name, address, college, image });
     await newUser.save();
     //token
-    const token = generateToken(user);
+    const token = generateToken(newUser);
 
     res.status(201).json({ newUser, token });
 });
@@ -59,16 +59,17 @@ exports.login = asyncWrap(async (req, res, next) => {
 })
 
 exports.getUser = asyncWrap(async (req, res, next) => {
-    const token = req.headers["authorization"]; // Assuming you're using a library like cookie-parser to parse cookies
-    if (!token) return next(new AppError(401, "Please login"));
-    const payload = decodeToken(token);
-    const id = payload._doc.id;
-
-    const user = await User.findById(id);
+    const userId = req.user.id;
+    const user = await User.findById(userId);
     if (!user) return next(new AppError(400, "User not exist"));
     res.status(200).json(user);
 });
-
+exports.getUserData = asyncWrap(async (req, res, next) => {
+    const { userId } = req.params;
+    const user = await User.findById(userId);
+    if (!user) return next(new AppError(400, "User not exist"));
+    res.status(200).json(user);
+});
 exports.updateUser = asyncWrap(async (req, res, next) => {
     const userId = req.user.id;
     const body = req.body;

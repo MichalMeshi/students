@@ -1,5 +1,5 @@
 import React, { useContext, useState } from 'react'
-import { Card, Form, Button, Modal } from 'react-bootstrap'
+import { Card, Form, Button, Modal, Alert } from 'react-bootstrap'
 import { fetchUser } from '../service/httpService';
 import { Link, useNavigate } from 'react-router-dom';
 import ProfileContext from '../context/ProfileContext';
@@ -15,7 +15,7 @@ const Login = () => {
     });
     const [isClicked, setIsClicked] = useState(false);
     const [email, setEmail] = useState('');
-
+    const [error, setError] = useState("");
     const { login } = useContext(ProfileContext);
 
     const handleSubmit = async (e) => {
@@ -26,9 +26,9 @@ const Login = () => {
             if (res)
                 navigate('/');
             else
-                alert(res.message);
+                setError(res.message);
         } catch (error) {
-            console.log(error.message);
+            setError(error.message);
         }
     }
 
@@ -41,7 +41,6 @@ const Login = () => {
 
     const forgotPassword = async (e) => {
         e.preventDefault();
-        console.log("send email in forgot password");
         setIsClicked(false);
         try {
             const response = await fetch('http://localhost:3000/users/forgot-password', {
@@ -57,7 +56,7 @@ const Login = () => {
                 navigate('/verify');
             }
         } catch (error) {
-            console.log(error.message);
+            setError(error.message);
         }
     }
 
@@ -65,6 +64,7 @@ const Login = () => {
     return (
         // <div className='d-flex flex-column justify-content-center align-items-center'>
         //     <h1 className='my-3'>Login</h1>
+        <div>
             <Card style={{ width: "24em", textAlign:"center" }} className="d-flex flex-column justify-content-center align-items-center p-4 ">
                 <HiOutlineDocumentArrowDown color='#2d3092' size={60}/>
                 <p>Enter your user connection details</p>
@@ -97,6 +97,7 @@ const Login = () => {
                                     name="email"
                                     value={email}
                                     onChange={(e) => setEmail(e.target.value)}
+                                    required
                                 />
                             </Form.Group>
                             <Button variant="primary" type="submit">

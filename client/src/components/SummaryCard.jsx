@@ -1,54 +1,122 @@
-import React from 'react'
+import React, { useEffect, useState, useContext } from 'react'
+import SummaryContext from '../context/SummaryContext';
+import { GoDownload } from "react-icons/go";
+import { MdDeleteOutline } from "react-icons/md";
+import { FaEye } from "react-icons/fa";
+
+import { Link } from 'react-router-dom';
+import MiniProfile from './MiniProfile';
+import { Alert } from 'react-bootstrap';
+
 
 export default function SummaaryCard(props) {
+  const [downloads, setdownloads] = useState(0);
+  const { summaries, setsummaries, userConnectedId } = useContext(SummaryContext);
+  const [error, setError] = useState("");
 
   const { summary } = props;
-  // console.log("summary",summary);
-  const onButtonClick =(url)=>{
+
+  useEffect(() => {
+    setdownloads(summary.downloadsAmount);
+  }, [])
+  const updateDownloadsSum = async () => {
+    try {
+      const response = await fetch('http://localhost:3000/upload/' + summary._id, {
+        method: 'PUT',
+        body: JSON.stringify({ downloadsAmount: downloads + 1 }),
+        headers: {
+          "Content-Type": "application/json",
+        },
+      })
+      const res = await response.json();
+      return res;
+    } catch (error) {
+      setError('Error during url put:', error);
+    }
+
+  }
+  const onButtonClickDelete = async (url) => {
+    try {
+      const response = await fetch('http://localhost:3000/upload/' + summary._id, {
+        method: 'DELETE',
+        headers: {
+          "Content-Type": "application/json",
+        },
+      })
+      const res = await response.json();
+      console.log({ summaries });
+      setsummaries(summaries.filter(summary => summary.url !== url));
+
+      return res;
+
+    } catch (error) {
+      setError('Error during delete:', error);
+    }
+    console.log('delete ', url);
+  }
+  const onButtonClickDownload = (url) => {
+    setdownloads(downloads + 1);
+    updateDownloadsSum()
+    //update downloads to db
     fetch(url).then((response) => {
       response.blob().then((blob) => {
-       
-          // Creating new object of PDF file
-          const fileURL =
-              window.URL.createObjectURL(blob);
-               
-          // Setting various property values
-          let alink = document.createElement("a");
-          alink.href = fileURL;
-          alink.download = url.split("/").at(-1);
-          alink.click();
+        const fileURL =
+          window.URL.createObjectURL(blob);
+        let alink = document.createElement("a");
+        alink.href = fileURL;
+        alink.download = url.split("/").at(-1);
+        alink.click();
+
       });
-  });
+    });
+  }
+  const onButtonClickPreviwo = (url) => {
+    window.open(url, '_blank');
   }
 
+
   return (
+    <>
+    <div className="card col-sm-12 col-md-4 d-flex align-items-center justify-content-center m-3 shadow p-3 mb-5 bg-white rounded" style={{ width: "18rem" }}>
+      <embed src={summary.url} type="application/pdf" className='card-top w-100' />
+      <div className="card-body">
+        <hr className="border border-danger m-0" />
+
+        <h5 className="card-title display-6 ">{summary.title}</h5>
+
+        {/* <h5 className="card-title">{summary.title}</h5> */}
+
+        {/* <p className="card-text">{summary.description}</p> */}
+
+        <p className="card-text">created by:<MiniProfile userId={summary.userId} /> </p>
+
+        <div className='d-flex align-items-center justify-content-around'>
+          {/* <p className="card-text">{downloads} downloads </p> */}
+          <button className='btn btn-info m-2' onClick={() => { onButtonClickDownload(summary.url) }}>
+            <GoDownload className='fs-2' />
+
+          </button>
+          <button className='btn btn-info m-2' onClick={() => { onButtonClickPreviwo(summary.url) }}>
+            <FaEye className='fs-2' />
+          </button>
+          {summary.userId === userConnectedId && (
+
+            <button className='btn btn-info m-2 ' onClick={() => { onButtonClickDelete(summary.url) }}>
+              <MdDeleteOutline className='fs-2' />
+            </button>
+          )}
 
 
-<div className="card col-sm-12 col-md-4" style={{width: "18rem"}}>
-<embed src = {summary.url} type="application/pdf" className='card-top w-100' />  
-<div className="card-body">
-    <h5 className="card-title">Card title</h5>
-    <p className="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-    <button className='btn btn-info' onClick={()=>{onButtonClick(summary.url)}}>
-                    Download PDF
-                </button>  </div>
-</div>
 
-//     <div className='card text-center w-50'>
+        </div>
+        <div className='d-flex'>
+        </div>
 
-//         <h3>{summary.userId} </h3>
-//         <h3>{summary.courseId} </h3>
-// <div>
-
-//
-
-/* <button onClick={()=>{onButtonClick(summary.url)}}>
-                    Download PDF
-                </button> */
+      </div>
+    </div>
+    {error? <Alert variant="danger">{error}</Alert>:""}   
 
 
-// </div>
-
-//     </div>
+    </>
   )
 }

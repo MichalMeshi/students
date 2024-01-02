@@ -1,9 +1,11 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import ProfileContext from '../context/ProfileContext';
-import { Button, Modal, Form } from 'react-bootstrap';
+import { Button, Modal, Form, Alert } from 'react-bootstrap';
 
 const EditProfile = ({ setEdit }) => {
     const { profileData, updateUserProfile } = useContext(ProfileContext); // Assuming you have a method to set profileData
+    const [imageFile, setImageFile] = useState(null);
+    const [error, setError] = useState("");
 
     const [formData, setFormData] = useState({
         name: profileData.name,
@@ -24,24 +26,54 @@ const EditProfile = ({ setEdit }) => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        await updateUserProfile(formData); // Call the updateUserProfile method from context
+        const imgUrl = await handleUpload();
+        console.log({ formData });
+        await updateUserProfile({ ...formData, image: imgUrl }); // Call the updateUserProfile method from context
         setEdit(false); // Close the modal after saving changes
     };
-
+    const handleFileChange = async (event) => {
+        setImageFile(event.target.files[0]);
+    };
+    const handleUpload = async () => {
+        const imgToProfile = new FormData();
+        imgToProfile.append('file', imageFile);
+        try {
+            const response = await fetch('http://localhost:3000/upload', {
+                method: 'POST',
+                body: imgToProfile,
+            });
+            const a = await response.json();
+            const imgUrl = a.secure_url;
+            // setFormData(prevState => ({ ...prevState, image: imgUrl }));
+            return imgUrl;
+        } catch (error) {
+           setError(`Error during file upload: ${error}`);
+        }
+    };
     return (
+        <div>
         <Modal show={true} onHide={() => setEdit(false)}>
             <Modal.Header closeButton>
                 <Modal.Title>Edit Profile</Modal.Title>
             </Modal.Header>
             <Modal.Body>
                 <Form onSubmit={handleSubmit}>
-                    <Form.Group controlId="name">
+                    {/* <Form.Group controlId="name">
                         <Form.Label>Img</Form.Label>
                         <Form.Control
                             type="text"
                             name="image"
                             value={formData.image}
                             onChange={handleChange}
+                        />
+                    </Form.Group> */}
+                    <Form.Group controlId="formImg">
+                        <Form.Label>Image </Form.Label>
+                        <Form.Control
+                            type="file"
+                            placeholder=""
+                            name="image"
+                            onChange={handleFileChange}
                         />
                     </Form.Group>
                     <Form.Group controlId="name">
@@ -62,15 +94,6 @@ const EditProfile = ({ setEdit }) => {
                             onChange={handleChange}
                         />
                     </Form.Group>
-                    {/* <Form.Group controlId="password">
-                        <Form.Label>Password</Form.Label>
-                        <Form.Control
-                            type="password"
-                            name="password"
-                            value={formData.password}
-                            onChange={handleChange}
-                        />
-                    </Form.Group> */}
                     <Form.Group controlId="college">
                         <Form.Label>College</Form.Label>
                         <Form.Control
@@ -95,6 +118,8 @@ const EditProfile = ({ setEdit }) => {
                 </Form>
             </Modal.Body>
         </Modal>
+        {error ? <Alert variant="danger">{error}</Alert> : ""}
+        </div>
     );
 };
 

@@ -7,10 +7,10 @@ const getEmailTemplate = require('../utils/emailTemplate');
 
 const crypto = require('crypto');
 exports.auth = asyncWrap(async (req, res, next) => {
-    console.log({
-        "Incoming Authorization header:": req.headers["authorization"],
-        url: req.url
-    }); // Ensure it logs correctly.
+    // console.log({
+    //     "Incoming Authorization header:": req.headers["authorization"],
+    //     url: req.url
+    // }); // Ensure it logs correctly.
     const token = req.headers["authorization"];
     if (!token) return next(new AppError(401, "Please login, no token"));
 
@@ -52,7 +52,7 @@ exports.forgotPassword = asyncWrap(async (req, res, next) => {
     if (!emailTemplate) {
         console.error('Failed to load email template.');
         return;
-      }
+    }
     console.log({ resetToken });
     await user.save({ validateBeforeSave: false });
     console.log("after create password reset token");
@@ -67,7 +67,7 @@ exports.forgotPassword = asyncWrap(async (req, res, next) => {
             text: message,
             htmlContent: formattedEmail
         }, "students@stud.com", formattedEmail);  // Provide the HTML content here
-    
+
     } catch (err) {
         user.passwordResetToken = undefined;
         user.passwordResetExpires = undefined;

@@ -5,6 +5,7 @@ const authMiddlware = require('../middlewares/auth')
 router.post('/login', userController.login)
 router.post('/register', userController.register)
 router.get('/get-user', authMiddlware.auth, userController.getUser)
+router.get('/get-user-data/:userId', userController.getUserData)
 router.patch('/update-user', authMiddlware.auth, userController.updateUser)
 
 
