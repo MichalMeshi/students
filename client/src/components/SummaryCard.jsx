@@ -1,6 +1,11 @@
 import React, { useEffect, useState,useContext } from 'react'
 import SummaryContext from '../context/SummaryContext';
-SummaryContext
+import { GoDownload } from "react-icons/go";
+import { MdDeleteOutline  } from "react-icons/md";
+import { FaEye } from "react-icons/fa";
+
+import { Link } from 'react-router-dom';
+
 
 export default function SummaaryCard(props) {
   const [downloads, setdownloads] = useState(0);
@@ -12,7 +17,6 @@ export default function SummaaryCard(props) {
     setdownloads(summary.downloadsAmount);
   }, [])
   const updateDownloadsSum = async () => {
-    console.log({ downloads });
     try {
       const response = await fetch('http://localhost:3000/upload/' + summary._id, {
         method: 'PUT',
@@ -22,7 +26,6 @@ export default function SummaaryCard(props) {
         },
       })
       const res = await response.json();
-      console.log({ res });
       return res;
     } catch (error) {
       console.error('Error during url put:', error);
@@ -64,24 +67,47 @@ export default function SummaaryCard(props) {
       });
     });
   }
+  const onButtonClickPreviwo = (url) => {
+    window.open(url, '_blank');
+  }
+
 
   return (
-    <div className="card col-sm-12 col-md-4" style={{ width: "18rem" }}>
+    <div className="card col-sm-12 col-md-4 d-flex align-items-center justify-content-center m-3 shadow p-3 mb-5 bg-white rounded" style={{ width: "18rem" }}>
       <embed src={summary.url} type="application/pdf" className='card-top w-100' />
       <div className="card-body">
-        <h5 className="card-title">{summary.title}</h5>
-        <p className="card-text">description: {summary.description}</p>
-        <p className="card-text">{downloads} downloads </p>
+      <hr className="border border-danger m-0"/>
+
+      <h5 className="card-title display-6 ">{summary.title}</h5>
+
+        {/* <h5 className="card-title">{summary.title}</h5> */}
+
+        {/* <p className="card-text">{summary.description}</p> */}
+
         <p className="card-text">created by: {summary.userId} </p>
+
+        <div className='d-flex align-items-center justify-content-around'>
+        {/* <p className="card-text">{downloads} downloads </p> */}
         <button className='btn btn-info m-2' onClick={() => { onButtonClickDownload(summary.url) }}>
-          Download PDF
+                <GoDownload className='fs-2'/>
+
         </button>
-      
+        <button className='btn btn-info m-2' onClick={() => { onButtonClickPreviwo(summary.url)}}>
+        <FaEye className='fs-2'/>
+        </button>
         {summary.userId === userConnectedId && (
-      <button className='btn btn-info m-2' onClick={() => { onButtonClickDelete(summary.url) }}>
-        Delete PDF
-      </button>
-    )}
+        
+        <button className='btn btn-info m-2 ' onClick={() => { onButtonClickDelete(summary.url) }}>
+          <MdDeleteOutline className='fs-2' />
+        </button>
+      )}
+  
+
+
+        </div>
+        <div className='d-flex'>
+    </div>
+
          </div>
     </div>
 
