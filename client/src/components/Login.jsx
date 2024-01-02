@@ -1,5 +1,5 @@
 import React, { useContext, useState } from 'react'
-import { Card, Form, Button, Modal } from 'react-bootstrap'
+import { Card, Form, Button, Modal, Alert } from 'react-bootstrap'
 import { fetchUser } from '../service/httpService';
 import { Link, useNavigate } from 'react-router-dom';
 import ProfileContext from '../context/ProfileContext';
@@ -12,7 +12,7 @@ const Login = () => {
     });
     const [isClicked, setIsClicked] = useState(false);
     const [email, setEmail] = useState('');
-
+    const [error, setError] = useState("");
     const { login } = useContext(ProfileContext);
 
     const handleSubmit = async (e) => {
@@ -23,9 +23,9 @@ const Login = () => {
             if (res)
                 navigate('/');
             else
-                alert(res.message);
+                setError(res.message);
         } catch (error) {
-            console.log(error.message);
+            setError(error.message);
         }
     }
 
@@ -38,7 +38,6 @@ const Login = () => {
 
     const forgotPassword = async (e) => {
         e.preventDefault();
-        console.log("send email in forgot password");
         setIsClicked(false);
         try {
             const response = await fetch('http://localhost:3000/users/forgot-password', {
@@ -54,7 +53,7 @@ const Login = () => {
                 navigate('/verify');
             }
         } catch (error) {
-            console.log(error.message);
+            setError(error.message);
         }
     }
 
@@ -66,11 +65,11 @@ const Login = () => {
                 <Form onSubmit={handleSubmit} className="w-100">
                     <Form.Group className="mb-3" controlId="formBasicEmail">
                         <Form.Label>Email address</Form.Label>
-                        <Form.Control type="email" name="email" value={formData.email || ''} onChange={handleChange} placeholder="Enter email" />
+                        <Form.Control type="email" name="email" value={formData.email || ''} onChange={handleChange} placeholder="Enter email" required/>
                     </Form.Group>
                     <Form.Group className="mb-3" controlId="formBasicPassword">
                         <Form.Label>Password</Form.Label>
-                        <Form.Control type="password" placeholder="Password" name="password" value={formData.password || ''} onChange={handleChange} />
+                        <Form.Control type="password" placeholder="Password" name="password" value={formData.password || ''} onChange={handleChange} required/>
                     </Form.Group>
                     <div className="d-flex justify-content-center w-100">
                         <Button variant="secondary" type="submit" className="w-50">
@@ -92,6 +91,7 @@ const Login = () => {
                                     name="email"
                                     value={email}
                                     onChange={(e) => setEmail(e.target.value)}
+                                    required
                                 />
                             </Form.Group>
                             <Button variant="primary" type="submit">
@@ -102,6 +102,7 @@ const Login = () => {
                 </Modal>
                 <h6>Not User? Need to <Link to='/register'>Register</Link></h6>
             </Card>
+            {error ? <Alert variant="danger">{error}</Alert> : ""}
         </div>
     )
 }

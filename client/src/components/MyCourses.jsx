@@ -6,6 +6,7 @@ import { Col, Container, Row } from 'react-bootstrap';
 const MyCourses = () => {
     // const [favorite, setFavorite] = useState(true);
     const { setMyCourses, myCourses } = useContext(CourseContext)
+    const [error, setError] = useState("");
 
     const getMyCourses = async () => {
         try {
@@ -21,10 +22,10 @@ const MyCourses = () => {
                     setMyCourses([...temp]);
             }
             else
-                console.log("Please Login (from MyCourses)");
+                setError("You have to login to view your courses");
 
         } catch (error) {
-            console.log(error.message);
+            setError(error.message);
         }
     }
 
@@ -45,6 +46,7 @@ const MyCourses = () => {
                     })}
                 </Row>
             </Container>
+            {error? <Alert variant="danger">{error}</Alert>:""}   
         </div>)
 }
 

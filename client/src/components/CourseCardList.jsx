@@ -1,7 +1,7 @@
 import React, { useContext, useEffect, useState } from 'react'
 import CourseContext from '../context/CourseContext';
 import CourseCard from './CourseCard';
-import { Button, Form, Modal } from 'react-bootstrap';
+import { Alert, Button, Form, Modal } from 'react-bootstrap';
 import ProfileContext from '../context/ProfileContext';
 
 export default function CourseCardList() {
@@ -13,6 +13,7 @@ export default function CourseCardList() {
     field: '',
   })
   const [search, setSearch] = useState('');
+  const [error, setError] = useState("");
 
   const searchByField = async () => {
     try {
@@ -27,9 +28,9 @@ export default function CourseCardList() {
         setcourses([...courses]);
       }
       else
-        console.log("No results found");
+        setError("No results found");
     } catch (error) {
-      console.log(error.message);
+      setError(error.message);
     }
   }
 
@@ -103,6 +104,7 @@ export default function CourseCardList() {
                 name="name"
                 value={courseData.name}
                 onChange={handleChange}
+                required
               />
             </Form.Group>
             <Form.Group controlId="field">
@@ -112,6 +114,7 @@ export default function CourseCardList() {
                 name="field"
                 value={courseData.field}
                 onChange={handleChange}
+                required
               />
             </Form.Group>
             <Button variant="primary" type="submit">
@@ -120,7 +123,7 @@ export default function CourseCardList() {
           </Form>
         </Modal.Body>
       </Modal>
-
+      {error ? <Alert variant="danger">{error}</Alert> : ""}
     </div >
   )
 }
