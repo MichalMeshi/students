@@ -71,12 +71,13 @@ export default function CourseCardList() {
       <h1>Courses List</h1>
       <Form className="d-flex" onSubmit={searchByField}>
         <Form.Control
-          type="search"
+          type="text"
           placeholder="Search"
           className="me-2"
           aria-label="Search"
           name="search"
-          value={search}
+          defaultValue={search}
+          autoComplete={"off"}
           onChange={(e) => setSearch(e.target.value)}
         />
         <Button variant="outline-success" type='submit'>Search</Button>
