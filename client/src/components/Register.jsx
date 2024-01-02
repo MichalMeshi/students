@@ -46,7 +46,7 @@ const Register = () => {
         <div className='d-flex flex-column justify-content-center align-items-center'>
             <h1 className='my-3'>REGISTER</h1>
             <Card style={{ width: "24em", background: 'black', color: 'white' }} className="d-flex flex-column justify-content-center align-items-center">
-                <Form onSubmit={handleSubmit} className="w-100">
+                <Form onSubmit={handleSubmit} className="w-100" autoComplete="off">
                     <Form.Group className="mb-3" controlId="formBasicName">
                         <Form.Label>Name</Form.Label>
                         <Form.Control type="text" name="name" value={formData.name || ''} onChange={handleChange} placeholder="Enter Name" />
