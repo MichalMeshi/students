@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { Button, Form } from 'react-bootstrap';
+import { Alert, Button, Form } from 'react-bootstrap';
 import { useNavigate, useParams } from 'react-router-dom';
 
 const ResetPassword = () => {
@@ -9,6 +9,7 @@ const ResetPassword = () => {
     });
     const navigate = useNavigate()
     const {resetToken} = useParams();
+    const [error, setError] = useState("");
     console.log(resetToken);
     const handleChange = (e) => {
         setPasswords({
@@ -32,10 +33,10 @@ const ResetPassword = () => {
                 navigate('/login');
                 localStorage.setItem("token", data.token)
             } else {
-                console.log("reset password failed");
+                setError("reset password failed");
             }
         } catch (error) {
-            console.log(error.message);
+            setError(error.message);
         }
     }
 
@@ -64,6 +65,7 @@ const ResetPassword = () => {
                     Reset Password
                 </Button>
             </Form>
+            {error? <Alert variant="danger">{error}</Alert>:""}   
         </div>
     )
 }

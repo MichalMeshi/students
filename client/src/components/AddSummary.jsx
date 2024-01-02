@@ -5,6 +5,8 @@ export default function AddSummary(props) {
     const [title, setTitle] = useState('');
     const [uploadStatus, setUploadStatus] = useState(null);
     const { summaries, setsummaries } = useContext(SummaryContext);
+    const [error, setError] = useState("");
+
     const handleFileChange = (event) => {
         setFile(event.target.files[0]);
         setUploadStatus(null);
@@ -25,7 +27,7 @@ export default function AddSummary(props) {
             console.log({ res });
             return res;
         } catch (error) {
-            console.error('Error during url upload:', error);
+            setError(`Error during url upload: ${error}`);
         }
     }
     const handleTitle = (e) => {
@@ -57,7 +59,7 @@ export default function AddSummary(props) {
             setsummaries([...summaries, mySummary]);
 
         } catch (error) {
-            console.error('Error during file upload:', error);
+            setError(`Error during file upload: ${error}`);
         }
     };
 
@@ -69,7 +71,7 @@ export default function AddSummary(props) {
 
                 <form>
                     <label htmlFor="file">Choose a file:</label>
-                    <input type="file" className='form-control' lang="en-GB" id="file" onChange={handleFileChange} ref={inputRef} />
+                    <input type="file" className='form-control' lang="en-GB" id="file" onChange={handleFileChange} ref={inputRef} required/>
                     <label>title:</label>
                     <input type="text" className='form-control' name="title" onChange={handleTitle} />
                     <button type="button" className='btn btn-primary btn-block btn-outlined m-2'
@@ -80,6 +82,7 @@ export default function AddSummary(props) {
                 </form>
                 {uploadStatus && <p className={uploadStatus.includes('Error') ? 'text-danger' : 'text-success'}>{uploadStatus}</p>}
             </div>
+            {error?<Alert variant="danger">{error}</Alert>:""}
         </div>
     )
 }

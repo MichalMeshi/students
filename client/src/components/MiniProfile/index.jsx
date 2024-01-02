@@ -6,9 +6,9 @@ export default function MiniProfile(props) {
     const { userId } = props;
     return (
 
-        <Row className =''>
+        <Row className ='bor w-100'>
                     {console.log({userId})}
-            <Col sm={3} className='circle-img d-flex align-items-center' >
+            <Col sm={3} className='bor circle-img d-flex align-items-center' >
                 <img className='profile-image'src={userId.image} width={40} height={40} alt="Profile Image"  />
             </Col>
 

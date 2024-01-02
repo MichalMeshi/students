@@ -1,10 +1,11 @@
 import React, { useContext, useEffect, useState } from 'react';
 import ProfileContext from '../context/ProfileContext';
-import { Button, Modal, Form } from 'react-bootstrap';
+import { Button, Modal, Form, Alert } from 'react-bootstrap';
 
 const EditProfile = ({ setEdit }) => {
     const { profileData, updateUserProfile } = useContext(ProfileContext); // Assuming you have a method to set profileData
     const [imageFile, setImageFile] = useState(null);
+    const [error, setError] = useState("");
 
     const [formData, setFormData] = useState({
         name: profileData.name,
@@ -46,10 +47,11 @@ const EditProfile = ({ setEdit }) => {
             // setFormData(prevState => ({ ...prevState, image: imgUrl }));
             return imgUrl;
         } catch (error) {
-            console.error('Error during file upload:', error);
+           setError(`Error during file upload: ${error}`);
         }
     };
     return (
+        <div>
         <Modal show={true} onHide={() => setEdit(false)}>
             <Modal.Header closeButton>
                 <Modal.Title>Edit Profile</Modal.Title>
@@ -116,6 +118,8 @@ const EditProfile = ({ setEdit }) => {
                 </Form>
             </Modal.Body>
         </Modal>
+        {error ? <Alert variant="danger">{error}</Alert> : ""}
+        </div>
     );
 };
 

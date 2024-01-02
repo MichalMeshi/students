@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from 'react'
-import { Button, Col, Container, Form, Modal, Row } from 'react-bootstrap'
+import { Alert, Button, Col, Container, Form, Modal, Row } from 'react-bootstrap'
 import TutoringPost from './TutoringPost';
 
 const Tutoring = () => {
     const [tutoringPosts, setTutoringPosts] = useState([]);
     const [isClicked, setIsClicked] = useState(false);
+    const [error, setError] = useState("");
     const [postData, setPostData] = useState({
         subject: '',
         field: '',
@@ -31,9 +32,9 @@ const Tutoring = () => {
                     setTutoringPosts([...temp.reverse()]);
             }
             else
-                console.log("Please Login (from Tutoring)");
+                setError("Please Login to view your tutoring posts");
         } catch (error) {
-            console.log(error.message);
+            setError(error.message);
         }
     }
 
@@ -87,6 +88,7 @@ const Tutoring = () => {
                                 name="subject"
                                 value={postData.subject}
                                 onChange={handleChange}
+                                required
                             />
                         </Form.Group>
                         <Form.Group controlId="field">
@@ -96,6 +98,7 @@ const Tutoring = () => {
                                 name="field"
                                 value={postData.field}
                                 onChange={handleChange}
+                                required
                             />
                         </Form.Group>
                         <Form.Group controlId="message">
@@ -105,6 +108,7 @@ const Tutoring = () => {
                                 name="message"
                                 value={postData.message}
                                 onChange={handleChange}
+                                required
                             />
                         </Form.Group>
 
@@ -115,6 +119,7 @@ const Tutoring = () => {
                                 name="city"
                                 value={postData.city}
                                 onChange={handleChange}
+                                required
                             />
                         </Form.Group>
                         <Form.Group controlId="contactInfo">
@@ -124,6 +129,7 @@ const Tutoring = () => {
                                 name="contactInfo"
                                 value={postData.contactInfo}
                                 onChange={handleChange}
+                                required
                             />
                         </Form.Group>
                         <Button variant="primary" type="submit">
@@ -132,6 +138,7 @@ const Tutoring = () => {
                     </Form>
                 </Modal.Body>
             </Modal>
+            {error ? <Alert variant="danger">{error}</Alert> : ""}
         </div>
     )
 }

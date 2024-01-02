@@ -26,6 +26,7 @@ const AppRoutes = () => {
             <Route path='/logout' element={<Logout />} />
             <Route path='/reset-password/:resetToken' element={<ResetPassword />} />
             <Route path='/courses-list' element={<CourseCardList />} />
+            <Route path='/verify' element={<CodeVerification />} />
             <Route path='/tutoring' element={<Tutoring />} />
             {/* <Route path='/forum' element={<PostList />} /> */}
             <Route path='*' element={<NoPage />} />
