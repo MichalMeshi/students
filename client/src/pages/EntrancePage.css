@@ -1,0 +1,103 @@
+body {
+    margin: 0;
+    background-color: #f5f5ef3a;
+}
+
+#strip {
+    padding: 0;
+    /* border: 2px solid red; */
+    height: 100vh;
+    background-image: url("https://cdn.pixabay.com/photo/2020/01/19/13/40/startup-4777863_1280.jpg");
+    background-position: center;
+    position: relative;
+
+}
+
+.img-fluid {
+    margin: 0;
+    /* height: 100vh; */
+    position: fixed;
+
+}
+
+#entrance-wellcome {
+    /* border: 2px solid green; */
+    position: absolute;
+    bottom: 100%;
+    background-color:#2d30925f
+    ;
+    height: 100vh;
+    /* z-index: 1; */
+    /* opacity: 0.5; */
+}
+.expanded{
+    transition: 1.5s;
+    transform:translateY(100vh);
+}
+
+.wellcom-content{
+    border: 3px solid black;
+    text-align: left;
+    
+
+}
+#wellcome-title{
+    color: rgba(255, 255, 255);
+    /* text-align: center; */
+}
+#wellcome-info{
+    color: rgba(255, 255, 255);
+
+}
+#entrance-login{
+    height: inherit;
+}
+/* .container{
+    border: 2px solid yellow;
+} */
+.icon-info>h1{
+    color: #2D3092
+
+    ;
+    font-weight: bold;
+}
+.icon-card {
+    text-align: center;
+}
+.slick-slide>div{
+    margin: 0 10px;
+}
+.person-card{
+    background-color:#f5f5ef3a ;
+}
+/* #profile-slider{
+    border: 4px solid red;
+    max-height: 40px;
+} */
+.offer-card-one{
+    background-color:#2d3092;
+    color: white ;
+}
+.offer-card-two{
+    background-color:#BCDCFC;
+    
+}
+#ofer-strip{
+    padding: 0;
+    /* margin: 0; */
+   
+}
+#ofer-row{
+    width: 80%;
+    margin: 0 auto;
+}
+.offer-card{
+    min-height: 30vh;
+}
+.offer-card:hover{
+    transition: 0.8s;
+transform: scale(1.1);
+color:red;
+background-color: #f5f5ef3a;
+}
+
