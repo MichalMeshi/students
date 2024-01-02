@@ -15,7 +15,6 @@ exports.auth = asyncWrap(async (req, res, next) => {
     if (!token) return next(new AppError(401, "Please login, no token"));
 
     const payload = decodeToken(token);
-    console.log({ payload });
     const id = payload._doc.id;
 
     const user = await User.findById(id);

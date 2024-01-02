@@ -1,17 +1,18 @@
 import React, { useContext, useEffect, useState } from 'react'
 import SummaryContext from '../context/SummaryContext'
 import SummaaryCard from './SummaryCard'
+import { useParams } from 'react-router-dom';
+import AddSummary from './AddSummary';
 
 export default function SummariesList(props) {
   const { summaries, getSummaries } = useContext(SummaryContext);
-  const { courseId } = props;
-  const help = async()=>{
-   
+  const { courseId } = useParams();
+  console.log({ courseId });
+  const help = async () => {
     // const a2= await a.json();
-    console.log({a});
+    console.log({ a });
     // return a2;
     return a;
-
   }
   useEffect(() => {
     // const a=help();
@@ -19,11 +20,12 @@ export default function SummariesList(props) {
     // setuserConnectedId(a);
     // id=a;
 
-  }, [])
+  }, [courseId])
   return (
     <div className='container'>
       {/* {console.log(userConnectedId)} */}
       <h1>Summary List</h1>
+      <AddSummary courseId={courseId} />
       {/* {console.log("summaries",summaries)} */}
       <div className='row'>
         {summaries
