@@ -12,7 +12,7 @@ router.post('/posts', authMiddlware.auth, async (req, res, next) => {
         const newPost = new Post(body)
         newPost.userId = req.user.id;
         await newPost.save();
-        res.status(201).json({ msg: "saved" ,newPost:newPost});
+        res.status(201).json({ msg: "saved", newPost: newPost });
     } catch (err) {
         res.send(err);
     }
@@ -35,8 +35,9 @@ router.post('/posts/comments/:postId', async (req, res, next) => {
     try {
         const { postId } = req.params;
         const { body } = req;
-        const post = await Post.findOne({ _id: postId });
+        const post = await Post.findOne({ _id: postId }).populate('userId');
         post.myComments.push(body._id);
+        console.log(post.myComments);
         await post.save();
         // console.log(post);
         res.json(post);
@@ -60,10 +61,12 @@ router.get('/posts/comments/:postId', async (req, res, next) => {
 router.post('/comments', authMiddlware.auth, async (req, res, next) => {
     //add comment to db
     const body = req.body;
+    console.log({ body });
     try {
         const newComment = new Comment(body)
-        await newComment.save();
         newComment.userId = req.user.id;
+        await newComment.save();
+        console.log({ newComment });
         res.json(newComment);
     } catch (err) {
         res.send(err);
@@ -77,8 +80,10 @@ router.post('/comments/comments/:commentId', async (req, res, next) => {
     try {
         const { commentId } = req.params;
         const { body } = req;
-        const comment = await Comment.findOne({ _id: commentId });
+        const comment = await Comment.findOne({ _id: commentId }).populate('userId');
         comment.myComments.push(body._id);
+        console.log(comment.myComments);
+
         await comment.save();
         // console.log(comment);
         res.json(comment);

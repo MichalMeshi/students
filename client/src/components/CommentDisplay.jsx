@@ -6,6 +6,7 @@ import MiniProfile from './MiniProfile';
 
 export default function CommentDisplay(props) {
   const { comment } = props;
+  // console.log("comment in displayyyyyyy", comment);
   const [inputFlag, setinputFlag] = useState(false)
   const [commentFlag, setcommentFlag] = useState(false)
   const [comments, setcomments] = useState([])
@@ -15,22 +16,22 @@ export default function CommentDisplay(props) {
     setinputFlag(true);
   }
   const getMyComments = async () => {
-    const res = await getCommentsOfComment(comment._id);
+    const res = await getCommentsOfComment(comment?._id);
     console.log({ res });
     setcomments(res)
     setcommentFlag(true)
   }
   const handleAddComment = async () => {
     const { value } = inputRef.current;
-    const res = await addCommentToComment(comment._id, value);
+    const res = await addCommentToComment(comment?._id, value);
     await getMyComments();
     setcomments([...comments, res]);
     inputRef.current.value = "";
   }
   return (
     <div style={{ margin: "25px" }}>
-      <MiniProfile userId={comment.userId} />
-      <p>({getTimeSincePostCreation(comment.dateCreated)} ago)</p>
+      <MiniProfile userId={comment?.userId} />
+      <p>({getTimeSincePostCreation(comment?.dateCreated)} ago)</p>
 
       <p
         className="fst-italic"
@@ -42,7 +43,9 @@ export default function CommentDisplay(props) {
           marginBottom: '0' // Add this to remove bottom margin
         }}
       >
-        {comment.content}
+        {/* {console.log(comment.content)
+        }       */}
+          {comment?.content}
       </p>
       <div className='d-flex justify-content-between'>
         <Button

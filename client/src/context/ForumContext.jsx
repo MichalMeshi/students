@@ -13,7 +13,6 @@ const ForumContextProvider = ({ children }) => {
         const currentDate = new Date(); // Get the current date and time
 
         const timeDifference = currentDate - postDate; // Calculate the time difference in milliseconds
-        console.log({});
         // Convert milliseconds to days
         const days = Math.floor(timeDifference / (1000 * 60 * 60 * 24));
 
@@ -79,8 +78,14 @@ const ForumContextProvider = ({ children }) => {
     const addComment = async (parentId, content) => {
         //add comment to db (comments collection)
         const data = {
+            dateCreated: Date.now(),
             content: content
         }
+        // const dataToSend = {
+        //     ...postData,
+        //     dateCreated: Date.now(),
+        //     courseId: courseId // Assuming courseId is passed as a prop to the component
+        // };
         const response = await fetch('http://localhost:3000/forums/comments', {
             method: "POST", // *GET, POST, PUT, DELETE, etc.
             mode: "cors", // no-cors, *cors, same-origin
@@ -110,14 +115,15 @@ const ForumContextProvider = ({ children }) => {
     const getCommentsOfPost = async (postId) => {
         const data = await fetch('http://localhost:3000/forums/posts/comments/' + postId)
         const res = await data.json();
-        // console.log({res});
+        console.log({"get comments pf postttttt": res });
         const commentIds = res.myComments.filter(commentId => commentId !== null);
-        const postComments = commentIds.map(async (comment) => {
+        const postComments = commentIds?.map(async (comment) => {
             const temp = await fetch('http://localhost:3000/forums/comments/' + comment);
             return temp.json();
         })
+        console.log({ postComments });
         const comments = Promise.all(postComments);
-        // console.log({comments});
+        console.log({ comments });
         return comments;
         // console.log(res);
     }
@@ -126,10 +132,11 @@ const ForumContextProvider = ({ children }) => {
         const res = await data.json();
         // console.log({res});
         const commentIds = res.myComments?.filter(commentId => commentId !== null);
-        const commentComments = commentIds.map(async (comment) => {
+        const commentComments = commentIds?.map(async (comment) => {
             const temp = await fetch('http://localhost:3000/forums/comments/' + comment);
             return temp.json();
         })
+        console.log({ commentComments });
         const comments = Promise.all(commentComments);
         console.log({ comments });
         return comments;
