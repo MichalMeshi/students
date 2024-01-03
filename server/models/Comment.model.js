@@ -2,12 +2,21 @@ const mongoose = require('mongoose');
 
 const commentSchema = new mongoose.Schema({
     // parentId:String,
- content: String,
- myComments: [
-    {
+    content: String,
+    myComments: [
+        {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: "Comments"
+        },],
+    userId: {
         type: mongoose.Schema.Types.ObjectId,
-        ref: "Comments"
-    },]
+        ref: "User"
+    },
+    dateCreated: {
+        type: Date,
+        default: new Date()
+    }
+
 });
 
 const Comment = mongoose.model('Comments', commentSchema);

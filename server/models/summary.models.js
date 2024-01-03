@@ -19,10 +19,6 @@ const SummarySchema = new mongoose.Schema({
         type: String,
         required: true,
     },
-    description: {
-        type: String,
-        required: true,
-    },
     downloadsAmount:{
         type: Number,
         required: true,

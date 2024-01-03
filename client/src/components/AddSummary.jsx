@@ -3,7 +3,6 @@ import SummaryContext from '../context/SummaryContext';
 export default function AddSummary(props) {
     const [file, setFile] = useState(null);
     const [title, setTitle] = useState('');
-    const [description, setDescription] = useState('');
     const [uploadStatus, setUploadStatus] = useState(null);
     const { summaries, setsummaries } = useContext(SummaryContext);
     const [error, setError] = useState("");
@@ -18,7 +17,7 @@ export default function AddSummary(props) {
         try {
             const response = await fetch('http://localhost:3000/upload/url/' + courseId, {
                 method: 'POST',
-                body: JSON.stringify({ url: url, title: title, description: description }),
+                body: JSON.stringify({ url: url, title: title }),
                 headers: {
                     "authorization":localStorage.getItem("token"),
                     "Content-Type": "application/json",
@@ -34,9 +33,7 @@ export default function AddSummary(props) {
     const handleTitle = (e) => {
         setTitle(e.target.value);
     }
-    const handleDescription = (e) => {
-        setDescription(e.target.value);
-    }
+   
 
     const handleUpload = async () => {
         const formData = new FormData();
@@ -76,11 +73,9 @@ export default function AddSummary(props) {
                     <label htmlFor="file">Choose a file:</label>
                     <input type="file" className='form-control' lang="en-GB" id="file" onChange={handleFileChange} ref={inputRef} required/>
                     <label>title:</label>
-                    <input type="text" className='form-control' name="title" onChange={handleTitle} required/>
-                    <label>description:</label>
-                    <input type="text" className='form-control' name="description" onChange={handleDescription} required/>
+                    <input type="text" className='form-control' name="title" onChange={handleTitle} />
                     <button type="button" className='btn btn-primary btn-block btn-outlined m-2'
-                        disabled={!file || !title || !description}
+                        disabled={!file || !title}
                         onClick={handleUpload}>
                         Upload
                     </button>

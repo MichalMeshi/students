@@ -12,6 +12,7 @@ import { Alert } from 'react-bootstrap';
 export default function SummaaryCard(props) {
   const [downloads, setdownloads] = useState(0);
   const { summaries, setsummaries, userConnectedId } = useContext(SummaryContext);
+
   const [error, setError] = useState("");
 
   const { summary } = props;
@@ -77,44 +78,43 @@ export default function SummaaryCard(props) {
 
   return (
     <>
-    <div className="card col-sm-12 col-md-4 d-flex align-items-center justify-content-center m-3 shadow p-3 mb-5 bg-white rounded" style={{ width: "18rem" }}>
-      <embed src={summary.url} type="application/pdf" className='card-top w-100' />
-      <div className="card-body">
-        <hr className="border border-danger m-0" />
+      <div className="card col-sm-12 col-md-4 d-flex align-items-center justify-content-center m-3 shadow p-3 mb-5 bg-white rounded" style={{ width: "18rem" }}>
+<MiniProfile userId={summary.userId}/>
+        <embed src={summary.url} type="application/pdf" className='card-top w-100' />
 
-        <h5 className="card-title display-6 ">{summary.title}</h5>
+        <div className="card-body">
+          <hr className="border border-danger m-0" />
 
-        {/* <h5 className="card-title">{summary.title}</h5> */}
+          <h5 className="card-title display-6 h-50">{summary.title}</h5>
 
-        {/* <p className="card-text">{summary.description}</p> */}
 
-        <p className="card-text">created by:<MiniProfile userId={summary.userId} /> </p>
+          <p className="card-text">{downloads} downloads </p>
 
-        <div className='d-flex align-items-center justify-content-around'>
-          {/* <p className="card-text">{downloads} downloads </p> */}
-          <button className='btn btn-info m-2' onClick={() => { onButtonClickDownload(summary.url) }}>
-            <GoDownload className='fs-2' />
+          <div className='d-flex align-items-center justify-content-around'>
+            {/* <p className="card-text">{downloads} downloads </p> */}
+            <button className='btn btn-info m-2' onClick={() => { onButtonClickDownload(summary.url) }}>
+              <GoDownload className='fs-2' />
 
-          </button>
-          <button className='btn btn-info m-2' onClick={() => { onButtonClickPreviwo(summary.url) }}>
-            <FaEye className='fs-2' />
-          </button>
-          {summary.userId === userConnectedId && (
-
-            <button className='btn btn-info m-2 ' onClick={() => { onButtonClickDelete(summary.url) }}>
-              <MdDeleteOutline className='fs-2' />
             </button>
-          )}
+            <button className='btn btn-info m-2' onClick={() => { onButtonClickPreviwo(summary.url) }}>
+              <FaEye className='fs-2' />
+            </button>
+            {summary.userId.id === userConnectedId && (
+
+              <button className='btn btn-info m-2 ' onClick={() => { onButtonClickDelete(summary.url) }}>
+                <MdDeleteOutline className='fs-2' />
+              </button>
+            )}
 
 
-
+      
         </div>
         <div className='d-flex'>
         </div>
 
       </div>
-    </div>
-    {error? <Alert variant="danger">{error}</Alert>:""}   
+    </div >
+
 
 
     </>

@@ -14,7 +14,7 @@ const SummaryContextProvider = ({ children }) => {
                 "authorization":localStorage.getItem("token")
             }
         })
-        const temp = await res.json()
+        const temp = await res.json();
         console.log({temp});
         setsummaries([...temp.summeries]);
         console.log(temp.userConnectedId);

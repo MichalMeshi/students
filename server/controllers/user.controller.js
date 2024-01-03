@@ -48,14 +48,14 @@ exports.login = asyncWrap(async (req, res, next) => {
     if (validate.error) return next(new AppError(400, validate.error));
 
     const user = await checkIfUserExist(body.email);
-    if (!user) return next(new AppError(404, 'User not exist, please register before login'));
+    if (!user) return next(new AppError(400, 'User not exist, please register before login'));
 
     const passwordMatch = await bcrypt.compare(body.password.trim(), user.password);
     if (!passwordMatch) return next(new AppError(400, 'Oops, Incorrect password'));
 
     //token
     const token = generateToken(user);
-    res.status(200).json({ message: "Login successful", user, token });
+    res.status(200).json({ message: "success", user, token });
 })
 
 exports.getUser = asyncWrap(async (req, res, next) => {

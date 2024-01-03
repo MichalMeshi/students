@@ -1,27 +1,22 @@
-import React from 'react'
-import { Alert } from 'react-bootstrap';
-
+import React, { useContext, useEffect, useState } from 'react'
+import ProfileContext from '../../context/ProfileContext';
+import './MiniProfile.css'
+import { Col, Row } from 'react-bootstrap'
 export default function MiniProfile(props) {
-  const [error, setError] = useState("");
-  const { userId } = props;
-  const getIdDetails = async (userId) => {
-    try {
-      const url = `http://localhost:3000/users/get-user-data/${userId}`
-      const res = await fetch(url);
-      const profile = await res.json();
-      console.log({ profile });
+    const { userId } = props;
+    return (
 
-    }
+        <Row className ='bor w-100'>
+                    {console.log({userId})}
+            <Col sm={3} className='bor circle-img d-flex align-items-center' >
+                <img className='profile-image'src={userId.image} width={40} height={40} alt="Profile Image"  />
+            </Col>
 
-    catch (error) {
-      setError(error.message);
-    }
+            <Col sm={9} className=' p-0'>
+                   <div className=' p-0 mt-2'>{userId.name}</div> 
+            </Col>
+        
+        </Row>
+    )
 
-  }
-  return (
-    <>
-    <div>MiniProfile: {userId}</div>
-    {error? <Alert variant="danger">{error}</Alert>:""}   
-    </>
-  )
 }
