@@ -3,7 +3,8 @@ import { Card, Form, Button, Alert } from 'react-bootstrap'
 import { fetchUser } from '../service/httpService';
 import { useNavigate } from 'react-router-dom';
 import ProfileContext from '../context/ProfileContext';
-
+import { LuPenSquare } from "react-icons/lu";
+import '../stylesheets/register.css'
 const Register = () => {
     const [formData, setFormData] = useState({
         name: '',
@@ -42,39 +43,42 @@ const Register = () => {
     };
 
     return (
-        <div className='d-flex flex-column justify-content-center align-items-center'>
-            <h1 className='my-3'>REGISTER</h1>
-            <Card style={{ width: "24em", background: 'black', color: 'white' }} className="d-flex flex-column justify-content-center align-items-center">
-                <Form onSubmit={handleSubmit} className="w-100" autoComplete="off">
-                    <Form.Group className="mb-3" controlId="formBasicName">
-                        <Form.Label>Name</Form.Label>
-                        <Form.Control type="text" name="name" value={formData.name || ''} onChange={handleChange} placeholder="Enter Name" required/>
-                    </Form.Group>
-                    <Form.Group className="mb-3" controlId="formBasicEmail">
-                        <Form.Label>Email</Form.Label>
-                        <Form.Control type="email" name="email" value={formData.email || ''} onChange={handleChange} placeholder="Enter email" required/>
-                    </Form.Group>
-                    <Form.Group className="mb-3" controlId="formBasicPassword" >
-                        <Form.Label>Password</Form.Label>
-                        <Form.Control type="password" placeholder="Password" name="password" value={formData.password || ''} onChange={handleChange} required/>
-                    </Form.Group>
-                    <Form.Group className="mb-3" controlId="formBasicCollege">
-                        <Form.Label>College</Form.Label>
-                        <Form.Control type="text" placeholder="College" name="college" value={formData.college || ''} onChange={handleChange} required/>
-                    </Form.Group>
-                    <Form.Group className="mb-3" controlId="formBasicAddress">
-                        <Form.Label>Address</Form.Label>
-                        <Form.Control type="text" placeholder="Address" name="address" value={formData.address || ''} onChange={handleChange} required/>
-                    </Form.Group>
-                    <div className="d-flex justify-content-center w-100">
-                        <Button variant="secondary" type="submit" className="w-50">
-                            Register
-                        </Button>
-                    </div>
-                </Form>
-            </Card>
-            {error?<Alert variant="danger">{error}</Alert>:""}
-        </div>
+        // <div className='d-flex flex-column justify-content-center align-items-center'>
+        //     <h1 className='my-3'>REGISTER</h1>
+        <Card style={{ width: "24em",textAlign:"center"}} className="d-flex flex-column justify-content-center align-items-center p-4">
+            <LuPenSquare color='#2d3092' size={60} />
+            <p>Please fill the details below</p>
+            <Form onSubmit={handleSubmit} className="w-100" autoComplete="off">
+                <Form.Group className="mb-3" controlId="formBasicName">
+                    <Form.Label>Name</Form.Label>
+                    <Form.Control type="text" name="name" value={formData.name || ''} onChange={handleChange} required />
+                </Form.Group>
+                <Form.Group className="mb-3" controlId="formBasicEmail">
+                    <Form.Label>Email</Form.Label>
+                    <Form.Control type="email" name="email" value={formData.email || ''} onChange={handleChange} required />
+                </Form.Group>
+                <Form.Group className="mb-3" controlId="formBasicPassword" >
+                    <Form.Label>Password</Form.Label>
+                    <Form.Control type="password" name="password" value={formData.password || ''} onChange={handleChange} required />
+                </Form.Group>
+                <Form.Group className="mb-3" controlId="formBasicCollege">
+                    <Form.Label>College</Form.Label>
+                    <Form.Control type="text" name="college" value={formData.college || ''} onChange={handleChange} required />
+                </Form.Group>
+                <Form.Group className="mb-3" controlId="formBasicAddress">
+                    <Form.Label>Address</Form.Label>
+                    <Form.Control type="text" name="address" value={formData.address || ''} onChange={handleChange} required />
+                </Form.Group>
+                <div className="d-flex justify-content-center w-100">
+                    <Button id='registerbtn' variant="secondary" type="submit" className="w-50">
+                        Sign Up
+                    </Button>
+                </div>
+            </Form>
+            {error ? <Alert variant="danger">{error}</Alert> : ""}
+
+        </Card>
+        // </div>
     )
 }
 

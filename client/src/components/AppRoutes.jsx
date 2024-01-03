@@ -13,6 +13,8 @@ import PostList from './PostList';
 import CodeVerification from './CodeVerification'
 import SummariesList from './SummariesList';
 import SharedLearning from './SharedLearning';
+import CourseListPage from '../pages/CourseListPage';
+
 const AppRoutes = () => {
     return (
         <Routes>
@@ -25,7 +27,7 @@ const AppRoutes = () => {
             <Route path='/login' element={<Login />} />
             <Route path='/logout' element={<Logout />} />
             <Route path='/reset-password/:resetToken' element={<ResetPassword />} />
-            <Route path='/courses-list' element={<CourseCardList />} />
+            <Route path='/courses-list' element={<CourseListPage />} />
             <Route path='/verify' element={<CodeVerification />} />
             <Route path='/tutoring' element={<Tutoring />} />
             {/* <Route path='/forum' element={<PostList />} /> */}

@@ -1,9 +1,9 @@
 import React, { useContext, useEffect, useState } from 'react'
 import CourseContext from '../context/CourseContext';
 import CourseCard from './CourseCard';
-import { Alert, Button, Form, Modal } from 'react-bootstrap';
+import { Alert, Button, Form, Modal, Row, Col } from 'react-bootstrap';
 import ProfileContext from '../context/ProfileContext';
-
+import '../stylesheets/courseList.css'
 export default function CourseCardList() {
   const { courses, getCourses, setcourses } = useContext(CourseContext);
   const { profileData } = useContext(ProfileContext);
@@ -15,7 +15,8 @@ export default function CourseCardList() {
   const [search, setSearch] = useState('');
   const [error, setError] = useState("");
 
-  const searchByField = async () => {
+  const searchByField = async (e) => {
+    e.preventDefault();
     try {
       setError("");
       console.log({ search });
@@ -74,11 +75,18 @@ export default function CourseCardList() {
 
   return (
     <div>
-      <h1>Courses List</h1>
-      <Form className="d-flex">
+      <div className='container-fluid'>
+        <div className='contsiner text-center'>
+          <h1>Get your course</h1>
+          <p>Scroll down and find your favorite courses</p>
+        </div>
+      </div>
+<div className='container-fluid'>
+  <div className='container'>
+      <Form onSubmit={searchByField} className="d-flex">
         <Form.Control
           type="text"
-          placeholder="Search"
+          placeholder="Type here to search..."
           className="me-2"
           aria-label="Search"
           name="search"
@@ -86,15 +94,23 @@ export default function CourseCardList() {
           autoComplete="off"
           onChange={(e) => setSearch(e.target.value)}
         />
-        <Button variant="outline-success" type="button" onClick={searchByField}>Search</Button>
+        {/* <Button variant="outline-success" type="button" onClick={searchByField}>Search</Button> */}
       </Form>
-
+      </div>
+      </div>
+      
       {profileData.role === 'admin' && <Button onClick={() => setIsClicked(true)}>Add Course</Button>}
-      {
-        courses?.map((course, index) => {
-          return <CourseCard course={course} key={index} />
-        })
-      }
+      <div className='container-fluid'>
+      <div className='container'>
+      <Row id='courses-row' className='justify-content-center'>
+          {
+            courses?.map((course, index) => {
+              return  <Col xs={12} md={4} sm={6}><CourseCard course={course} key={index} /></Col>
+            })
+          }
+        </Row>
+      </div>
+      </div>
 
       <Modal show={isClicked} onHide={() => setIsClicked(false)}>
         <Modal.Header closeButton>

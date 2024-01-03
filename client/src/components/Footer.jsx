@@ -8,68 +8,74 @@ import { FaFacebookSquare } from "react-icons/fa";
 import { FaTwitterSquare } from "react-icons/fa";
 import { FaLinkedin } from "react-icons/fa";
 import { FaGithubSquare } from "react-icons/fa";
-
-
+import '../stylesheets/footer.css'
+import footerImg from '../images/footerImg.png'
 export default function Footer() {
     return (
-        <div className='container-fluid'>
-            <Row>
-                <Col sm={12} md={6}>
-                    <ul className='list-unstyled'>
-                        <li>
-                            <Row>
-                                <Col md={1}>
-                                    <IoLocationSharp size={25} color='black' />
+        <div>
+            <img id='footer-img' src={footerImg} className='mt-5'></img>
+            <div id='footer' className='container-fluid pb-3'>
+                <Row>
+                    <Col xs={12} md={4} id='footer-col'>
+                        <ul className='list-unstyled m-3'>
+                            <li className='m-2'>
+                                <Row>
+                                    <Col xs={2} md={1} >
+                                        <IoLocationSharp size={25} color='white' />
+                                    </Col>
+                                    <Col xs={10} md={10} >
+                                        Dizengoff center, Tel Aviv, IL
+                                    </Col>
+                                </Row>
+                            </li>
+                            <li className='m-2'>
+                                <Row>
+                                    <Col xs={2} md={1}>
+                                        <MdOutlineAlternateEmail size={25} color='white' />
+                                    </Col>
+                                    <Col xs={10} md={10}>
+                                        academix@org.il
+                                    </Col>
+                                </Row></li>
+                            <li className='m-2'>  <Row>
+                                <Col xs={2} md={1}>
+                                    <MdOutlineEmail size={25} color='white' />
                                 </Col>
-                                <Col md={10}>
-                                    Dizengoff center, Tel Aviv, IL
+                                <Col xs={10} md={10}>
+                                    237756 PO box
+                                </Col>
+                            </Row></li>
+                            <li className='m-2'>  <Row>
+                                <Col xs={2} md={1}>
+                                    <CiPhone size={25} color='white' />
+                                </Col>
+                                <Col xs={10} md={10}>
+                                    +972 456 789 12
+                                </Col>
+                            </Row></li>
+                        </ul>
+                    </Col>
+                    <Col id='social' xs={12} md={4} className='d-flex text-align-center justify-content-center'>
+                        <div>
+                            <h2 className='m-3'>Let's get social</h2>
+                            <Row className='justify-content-center align-items-center'>
+                                <Col xs={2} md={2}>
+                                    <FaFacebookSquare size={30} />
+                                </Col>
+                                <Col xs={2} md={2}>
+                                    <FaTwitterSquare size={30} />
+                                </Col>
+                                <Col xs={2} md={2}>
+                                    <FaLinkedin size={30} />
+                                </Col>
+                                <Col xs={2} md={2}>
+                                    <FaGithubSquare size={30} />
                                 </Col>
                             </Row>
-                        </li>
-                        <li>  <Row>
-                            <Col md={1}>
-                                <MdOutlineAlternateEmail size={25} color='black' />
-                            </Col>
-                            <Col md={10}>
-                                academix@org.il
-                            </Col>
-                        </Row></li>
-                        <li>  <Row>
-                            <Col md={1}>
-                                <MdOutlineEmail size={25} color='black' />
-                            </Col>
-                            <Col md={10}>
-                                237756 PO box
-                            </Col>
-                        </Row></li>
-                        <li>  <Row>
-                            <Col md={1}>
-                                <CiPhone size={25} color='black' />
-                            </Col>
-                            <Col md={10}>
-                                +972 456 789 12
-                            </Col>
-                        </Row></li>
-                    </ul>
-                </Col>
-                <Col sm={12} md={6}>
-                    <h2>Let's get social</h2>
-                    <Row>
-                        <Col md={3}>
-                            <FaFacebookSquare size={30} />
-                        </Col>
-                        <Col md={3}>
-                            <FaTwitterSquare size={30} />
-                        </Col>
-                        <Col md={3}>
-                            <FaLinkedin size={30}/>
+                        </div>
                     </Col>
-                        <Col md={3}>
-                            <FaGithubSquare size={30}/>
-                    </Col>
-                    </Row>
-                </Col>
-            </Row>
+                </Row>
+            </div>
         </div>
     )
 }

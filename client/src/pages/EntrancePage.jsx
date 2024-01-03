@@ -61,10 +61,20 @@ export default function EntrancePage() {
     //     slidesToShow: 3,
     //     slidesToScroll: 1
     // };
-    const settings = {
+    const md_settings = {
         dots: true,
         infinite: true,
-        slidesToShow: 3,
+        slidesToShow: 4,
+        slidesToScroll: 1,
+        autoplay: true,
+        speed: 2000,
+        autoplaySpeed: 3000,
+        cssEase: "linear"
+      };
+      const sm_settings = {
+        dots: true,
+        infinite: true,
+        slidesToShow: 1,
         slidesToScroll: 1,
         autoplay: true,
         speed: 2000,
@@ -90,7 +100,7 @@ export default function EntrancePage() {
                         </Col>
                         <Col id="login" sm={12} md={6} className='d-flex flex-column justify-content-center align-items-center '>
                             <div id="login-card">
-                                <Login />
+                                <Login/>
                             </div>
                         </Col>
                     </Row>
@@ -131,8 +141,26 @@ export default function EntrancePage() {
                 </div>
                 <div className='container-fluid'>
                     <div className='container'>
-                        <div id="profile-slider" className='h-50'>
-                            <Slider {...settings}>
+                        <div id="profile-slider" className='h-50  slider-md'>
+                            <Slider {...md_settings}>
+                                {data.map((item, index) => {
+                                    return <Card style={{ width: "10rem" }} className='person-card p-3 d-flex flex-column justify-content-center align-items-center shadow p-3 mb-5 rounded text-center'>
+                                        {/* <Card.Img variant="top" src={item.img} roundedCircle /> */}
+                                        <Image src={item.img} roundedCircle width={100} height={100}></Image>
+                                        <Card.Body>
+                                            <Card.Title>{item.name}</Card.Title>
+                                            <Card.Text>
+                                            <RiDoubleQuotesL size={15}/>
+                                                {item.info}
+                                                <RiDoubleQuotesR size={15}/>
+                                            </Card.Text>
+                                        </Card.Body>
+                                    </Card>
+                                })}
+                            </Slider>
+                        </div>
+                        <div id="profile-slider" className='h-50  slider-sm'>
+                            <Slider {...sm_settings}>
                                 {data.map((item, index) => {
                                     return <Card style={{ width: "10rem" }} className='person-card p-3 d-flex flex-column justify-content-center align-items-center shadow p-3 mb-5 rounded text-center'>
                                         {/* <Card.Img variant="top" src={item.img} roundedCircle /> */}

@@ -1,0 +1,9 @@
+#courses-row{
+    display: flex;
+    /* align-items: ; */
+    /* align-items: center; */
+    justify-content: space-between;
+    /* justify-content: space-between; */
+    /* margin: 0 auto; */
+    border: 2px saddlebrown solid;
+}

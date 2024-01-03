@@ -1,0 +1,12 @@
+#footer{
+    background-color: #2D3092;
+    color: white;
+    /* background-image: url('../images/footer_img.png'); */
+    /* background-position: top; */
+    padding: 0;
+}
+#footer-img{
+margin: 0;
+height: 10vh;
+width: 100%;
+}
