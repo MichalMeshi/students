@@ -1,5 +1,5 @@
 import React, { useContext, useState } from 'react'
-import { Card, Form, Button, Modal } from 'react-bootstrap'
+import { Card, Form, Button, Modal, Alert } from 'react-bootstrap'
 import { fetchUser } from '../service/httpService';
 import { Link, useNavigate } from 'react-router-dom';
 import ProfileContext from '../context/ProfileContext';
@@ -27,9 +27,12 @@ const Login = () => {
             console.log("res", res);
             if (res)
                 navigate('/personalArea');
-            else
+            else{
+                console.log("in else");
                 setError("Wrong email or password");
+            }
         } catch (error) {
+            console.log("in catch", error.message);
             setError(error.message);
         }
     }
