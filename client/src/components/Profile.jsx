@@ -1,10 +1,10 @@
 import React, { useContext, useState } from 'react';
-import { Card, Col, Container, Row } from 'react-bootstrap';
+import { Card, Col, Container, Row, Image } from 'react-bootstrap';
 import ProfileContext from '../context/ProfileContext';
 import { CiEdit } from "react-icons/ci";
 import EditProfile from '../components/EditProfile';
 import { IoStar, IoStarHalf, IoStarOutline } from "react-icons/io5";
-
+import '../stylesheets/profile.css'
 const Profile = () => {
     const { profileData } = useContext(ProfileContext);
     const [edit, setEdit] = useState(false);
@@ -18,46 +18,52 @@ const Profile = () => {
 
         // Add filled stars
         for (let i = 0; i < filledStars; i++) {
-            stars.push(<span key={i}><IoStar /></span>);
+            stars.push(<span key={i}><IoStar color='#FFD43A' /></span>);
         }
 
         // Add half star if decimal part is greater than 0.5
         if (decimalPart >= 0.5) {
-            stars.push(<span key="half"><IoStarHalf /></span>);
+            stars.push(<span key="half"><IoStarHalf color='#FFD43A' /></span>);
         }
 
         // Add remaining empty stars
         const emptyStars = 5 - stars.length;
         for (let i = 0; i < emptyStars; i++) {
-            stars.push(<span key={`empty-${i}`}><IoStarOutline /></span>);
+            stars.push(<span key={`empty-${i}`}><IoStarOutline color='#FFD43A' /></span>);
         }
 
         return stars;
     };
 
     return (
-        <Container>
-            <Card>
-                <Row>
-                    <Col md={4}>
-                        {/* {console.log(profileData?.image)} */}
-                        {profileData?.image ? (
-                            <img src={profileData.image} alt="profileImg" width={50} />
-                        ) : (
-                            <img width={50} src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png" alt="Empty Profile" />
-                        )}
-                        <h2>{renderStars(profileData?.rate)}</h2>
+        <div id='profile-card' class="shadow-lg rounded">
+            <Card id='card-details' className=' p-2'>
+                <Row className='w-100 profile-row-strip'>
+                    <Col className='p-col bord d-flex text-align-center justify-content-center' md={2}>
+                        <div>
+                            <Image roundedCircle src={profileData.image} alt="profileImg" width={80} />
+
+                            {/* {profileData?.image ? (
+                                <Image roundedCircle src={profileData.image} alt="profileImg" width={80} />
+                            ) : (
+                                <Image roundedCircle className='rounded' width={80} src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png" alt="Empty Profile" />
+                            )} */}
+                            <div>{renderStars(profileData?.rate)}</div>
+                        </div>
                     </Col>
-                    <Col md={8}>
-                        <h3>{profileData?.name}</h3>
-                        <h3>{profileData?.college}</h3>
-                        <h3>{profileData?.address}</h3>
+                    <Col className='bord p-col col-sm' md={9}>
+                        <div id='personal-details'>
+                            <h3>{profileData?.name}</h3>
+                            <p>{profileData?.college}, {profileData?.address}</p>
+                        </div>
                     </Col>
-                    <CiEdit onClick={() => setEdit(true)} style={{ cursor: "pointer" }}></CiEdit>
-                    {edit ? (<EditProfile setEdit={setEdit} />) : null}
+                    <Col className='bord p-col col-sm' md={1}>
+                        <CiEdit id='edit-symbol' size={25} onClick={() => setEdit(true)} style={{ cursor: "pointer" }}></CiEdit>
+                        {edit ? (<EditProfile setEdit={setEdit} />) : null}
+                    </Col>
                 </Row>
             </Card>
-        </Container>
+        </div>
     );
 }
 

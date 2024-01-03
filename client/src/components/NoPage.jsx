@@ -4,8 +4,6 @@ import '../stylesheets/bluebutton.css'
 
 const NoPage = () => {
   return (
-
-    
     <div className =''style={{ textAlign: 'center', marginTop: '50px' }}>
       <h1 style={{ color: 'blue' }}>404 Not Found</h1>
       <p>This page doesn't exist.</p>
@@ -14,8 +12,7 @@ const NoPage = () => {
 
       </div>
       <Button id = 'loginbtn'>Home</Button>
-    </div>
-  );
+    </div>)
 }
 
 export default NoPage

@@ -1,0 +1,60 @@
+#profile-card{
+    width: 80%;
+    min-height: 20vh;
+    /* border: 1px springgreen solid; */
+    position: absolute;
+    /* margin: 0 auto; */
+    top:70%;
+    width: 90%;
+}
+#card-details{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 20vh;
+}
+.bord{
+    /* border-radius: 30%; */
+    /* border: 1px solid blue; */
+    padding: 0;
+    margin: 0;
+}
+.profile-row-strip{
+    /* border: 3px solid black; */
+    /* height: 90%; */
+    height: inherit;
+    
+    /* width: 60%; */
+}
+.p-col{
+    height: inherit;
+    display: flex;
+    /* justify-content: center; */
+    align-items: center;
+    position: relative;
+}
+
+#edit-symbol{
+
+    position: absolute;
+    left: 60%;
+    bottom: 70%
+}
+@media (max-width:400px) {
+    .col-sm{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+    #personal-details{
+        text-align: center;
+    }
+    #edit-symbol{
+        position: initial;
+        /* color: rgb(245, 245, 37); */
+    }
+    #profile-card{
+        top: 60%;
+    }
+    
+}

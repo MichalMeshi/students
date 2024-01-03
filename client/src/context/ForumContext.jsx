@@ -8,6 +8,44 @@ const ForumContextProvider = ({ children }) => {
         info: '',
         field: ''
     })
+    const getTimeSincePostCreation = (dateString) => {
+        const postDate = new Date(dateString); // Convert the date string to a Date object
+        const currentDate = new Date(); // Get the current date and time
+
+        const timeDifference = currentDate - postDate; // Calculate the time difference in milliseconds
+        // Convert milliseconds to days
+        const days = Math.floor(timeDifference / (1000 * 60 * 60 * 24));
+
+        // Convert days to weeks, months, or years as necessary
+        if (days >= 7) {
+            const weeks = Math.floor(days / 7);
+            return `${weeks}w`;
+        }
+        else if (days >= 1) {
+            return `${days}d`;
+        }
+        else {
+            // Convert milliseconds to hours
+            const hours = Math.floor(timeDifference / (1000 * 60 * 60));
+
+            if (hours >= 1) {
+                return `${hours}h`;
+            }
+            else {
+                // Convert milliseconds to minutes
+                const minutes = Math.floor(timeDifference / (1000 * 60));
+
+                if (minutes > 1) {
+                    return `${minutes}m`;
+                }
+                else {
+                    // Display 'now' for the time difference less than a minute
+                    return 'now';
+                }
+            }
+        }
+    };
+
     const handleChange = (e) => {
         const { name, value } = e.target;
         setPostData((prevData) => ({
@@ -40,8 +78,14 @@ const ForumContextProvider = ({ children }) => {
     const addComment = async (parentId, content) => {
         //add comment to db (comments collection)
         const data = {
+            dateCreated: Date.now(),
             content: content
         }
+        // const dataToSend = {
+        //     ...postData,
+        //     dateCreated: Date.now(),
+        //     courseId: courseId // Assuming courseId is passed as a prop to the component
+        // };
         const response = await fetch('http://localhost:3000/forums/comments', {
             method: "POST", // *GET, POST, PUT, DELETE, etc.
             mode: "cors", // no-cors, *cors, same-origin
@@ -71,14 +115,15 @@ const ForumContextProvider = ({ children }) => {
     const getCommentsOfPost = async (postId) => {
         const data = await fetch('http://localhost:3000/forums/posts/comments/' + postId)
         const res = await data.json();
-        // console.log({res});
+        console.log({"get comments pf postttttt": res });
         const commentIds = res.myComments.filter(commentId => commentId !== null);
-        const postComments = commentIds.map(async (comment) => {
+        const postComments = commentIds?.map(async (comment) => {
             const temp = await fetch('http://localhost:3000/forums/comments/' + comment);
             return temp.json();
         })
+        console.log({ postComments });
         const comments = Promise.all(postComments);
-        // console.log({comments});
+        console.log({ comments });
         return comments;
         // console.log(res);
     }
@@ -87,10 +132,11 @@ const ForumContextProvider = ({ children }) => {
         const res = await data.json();
         // console.log({res});
         const commentIds = res.myComments?.filter(commentId => commentId !== null);
-        const commentComments = commentIds.map(async (comment) => {
+        const commentComments = commentIds?.map(async (comment) => {
             const temp = await fetch('http://localhost:3000/forums/comments/' + comment);
             return temp.json();
         })
+        console.log({ commentComments });
         const comments = Promise.all(commentComments);
         console.log({ comments });
         return comments;
@@ -149,7 +195,7 @@ const ForumContextProvider = ({ children }) => {
             //update the posts
         }
     }
-    const shared = { posts, setposts, addComment, setPostData, handleChange, postData, getCommentsOfPost, addCommentToPost, addPost, addCommentToComment, getCommentsOfComment }
+    const shared = { posts, setposts, addComment, getTimeSincePostCreation, setPostData, handleChange, postData, getCommentsOfPost, addCommentToPost, addPost, addCommentToComment, getCommentsOfComment }
     return (
         <ForumContext.Provider value={shared}>
             {children}
