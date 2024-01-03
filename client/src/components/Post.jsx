@@ -48,23 +48,26 @@ export default function Post(props) {
         <Card className="mt-3">
             <Card.Title id='mini-profile' className='m-0'>
                 <Row>
-                    <Col md={9}>
+                    <Col md={9} className='pt-1'>
                         <MiniProfile userId={post.userId} />
                     </Col>
-                    <Col md={3} className='border'>
-                        <Row>
-                            <Col id='time-col' xs={8} className='border'>
-                        <p id='time'>{getTimeSincePostCreation(post?.dateCreated)} ago</p>
-                        </Col>
-                        <Col xs={3} className='border  d-flex justify-content-center align-items-center'>
-                        <PiClockCounterClockwiseLight size={20}/>
-                        </Col>
+                    <Col md={3} >
+                        <Row className='my-row'>
+                            <Col id='time-col' xs={8} className=''>
+                                <div id='time'>{getTimeSincePostCreation(post?.dateCreated)} ago</div>
+                            </Col>
+                            <Col xs={3} className=' d-flex justify-content-center align-items-center'>
+                                <PiClockCounterClockwiseLight size={20} />
+                            </Col>
                         </Row>
                     </Col>
                 </Row>
             </Card.Title>
             <hr></hr>
-            {/* <Row>
+            <Card.Text className='text-center'>
+                <h2>{post.title}</h2>
+                <h5>{post.info}</h5>
+                {/* <Row>
                     <Col xs={4}>
                     </Col>
                     <Col >
@@ -73,36 +76,35 @@ export default function Post(props) {
                         <Card.Text> {post?.info}</Card.Text>
                     </Col>
                 </Row> */}
-            <Row>
-            </Row>
+            </Card.Text>
+            <Card.Body>
+                <Row className="mt-3 mb-3">
+                    <Col md={9}>
+                        <div className='d-flex'>
+                            <Form.Control type="text" placeholder="Your comment..." ref={inputRef} required className='mx-1' />
+                            <Button id='send-btn' onClick={handleAddComment} > <IoIosSend size={20} style={{ cursor: 'pointer' }} color='blue' /></Button>
+                        </div>
 
-            <Row className="mt-3 mb-3">
-                <Col>
-                    {btnOpenFlag && (
-                        <Button style={{ backgroundColor: '#5055d1' }} onClick={() => { getMyComments() }}>
-                            <MdOutlineComment /> Comments
-                        </Button>
-                    )}
+                    </Col>
+                    <Col md={3}>
+                        {btnOpenFlag && (
+                            <button id='comments-btn' className='btn' onClick={() => { getMyComments() }}>
+                                <MdOutlineComment /> Comments
+                            </button>
+                        )}
 
-                    {btnCloseFlag && (
-                        <Button style={{ backgroundColor: '#5055d1' }} onClick={toggleCommentFlag}>
-                            Close
-                        </Button>
-                    )}
+                        {btnCloseFlag && (
+                            <Button style={{ backgroundColor: '#5055d1' }} onClick={toggleCommentFlag}>
+                                Close
+                            </Button>
+                        )}
+                    </Col>
 
-                </Col>
-                <Col xs={7}>
-                    <div className='d-flex'>
-                        <Form.Control type="text" placeholder="Add your comment..." ref={inputRef} required />
-                        <Button style={{ backgroundColor: '#5055d1' }} onClick={handleAddComment} > <IoIosSend size={20} style={{ cursor: 'pointer' }} /></Button>
-                    </div>
-                </Col>
-
-            </Row>
-            {commentFlag && comments.map((comment, index) => {
-                return <CommentDisplay key={index} comment={comment} />;
-            })}
-            {/* </Container> */}
+                </Row>
+                {commentFlag && comments.map((comment, index) => {
+                    return <CommentDisplay key={index} comment={comment} />;
+                })}
+            </Card.Body>
         </Card>
 
     )

@@ -1,12 +1,31 @@
 #mini-profile{
-    border: 1px solid red;
+    /* border: 1px solid red; */
 }
 #time{
     font-size: small;
+    /* border: 1px solid green; */
     
 }
 #time-col{
     display: flex;
-    justify-content: center;
+    justify-content: end;
     align-items: center;
+    /* border: 1px solid pink; */
+    height: inherit;
+    padding: 0;
+}
+.my-row{
+    /* border: 1px solid black; */
+    width: 100%;
+    height: 100%;
+}
+#comments-btn{
+color: blue;
+}
+#send-btn{
+    background-color: white;
+}
+#send-btn:hover{
+    transition: 0.5s;
+    border: none;
 }
