@@ -7,6 +7,7 @@ import '../stylesheets/myAccount.css'
 import MyForums from '../components/MyForums'
 import MySummaries from '../components/MySummaries'
 import Footer from '../components/Footer'
+// import profileBg from '../images/profile-bg.jpg';
 const MyAccount = () => {
 
 

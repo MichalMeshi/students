@@ -54,6 +54,7 @@ const ForumContextProvider = ({ children }) => {
         }));
     };
 
+
     const addCommentToPostArray = async (postId, commentId) => {
         //adding comment to post array
         const data = {
@@ -115,7 +116,7 @@ const ForumContextProvider = ({ children }) => {
     const getCommentsOfPost = async (postId) => {
         const data = await fetch('http://localhost:3000/forums/posts/comments/' + postId)
         const res = await data.json();
-        console.log({"get comments pf postttttt": res });
+        console.log({ "get comments pf postttttt": res });
         const commentIds = res.myComments.filter(commentId => commentId !== null);
         const postComments = commentIds?.map(async (comment) => {
             const temp = await fetch('http://localhost:3000/forums/comments/' + comment);
@@ -194,13 +195,16 @@ const ForumContextProvider = ({ children }) => {
             setposts([...posts, data.newPost])
             //update the posts
         }
+
+       
     }
-    const shared = { posts, setposts, addComment, getTimeSincePostCreation, setPostData, handleChange, postData, getCommentsOfPost, addCommentToPost, addPost, addCommentToComment, getCommentsOfComment }
-    return (
-        <ForumContext.Provider value={shared}>
-            {children}
-        </ForumContext.Provider>
-    );
+
+const shared = { posts, setposts, addComment, getTimeSincePostCreation, setPostData, handleChange, postData, getCommentsOfPost, addCommentToPost, addPost, addCommentToComment, getCommentsOfComment }
+return (
+    <ForumContext.Provider value={shared}>
+        {children}
+    </ForumContext.Provider>
+);
 }
 
 export { ForumContextProvider }

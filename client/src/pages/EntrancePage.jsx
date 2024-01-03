@@ -20,38 +20,43 @@ import Footer from '../components/Footer';
 import { Link } from 'react-router-dom';
 import Register from '../components/Register';
 import ChatbotComponent from '../components/ChatbotComponent';
-
+import women1 from '../images/women1.jpg'
+import women2 from '../images/women2.jpg'
+import women3 from '../images/women3.jpg'
+import women4 from '../images/women4.jpg'
+import men1 from '../images/man1.jpg'
+import men2 from '../images/man2.jpg'
 export default function EntrancePage() {
     const [expanded, setexpanded] = useState(false)
     const [isLogin,setisLogin]=useState(true)
     const data = [
         {
-            img: "https://cdn.pixabay.com/photo/2016/11/21/12/42/beard-1845166_1280.jpg",
+            img: men1,
             name: "John Rail",
             info: "This site helped me finish my studies successfully. I feel great."
         },
         {
-            img: "https://cdn.pixabay.com/photo/2017/08/06/15/13/woman-2593366_1280.jpg",
+            img: women1,
             name: "Martha Hood",
             info: "This site helped me finish my studies successfully. I feel great."
         },
         {
-            img: "https://cdn.pixabay.com/photo/2016/11/29/09/38/adult-1868750_1280.jpg",
+            img: men2,
             name: "George Rice",
             info: "This site helped me finish my studies successfully. I feel great."
         },
         {
-            img: "https://cdn.pixabay.com/photo/2018/04/04/10/11/woman-3289372_1280.jpg",
+            img: women3,
             name: "Haily Ghost",
             info: "This site helped me finish my studies successfully. I feel great."
         },
         {
-            img: "https://cdn.pixabay.com/photo/2016/06/11/12/15/females-1450050_1280.jpg",
+            img: women2,
             name: "Sarah Tailwind",
             info: "This site helped me finish my studies successfully. I feel great."
         },
         {
-            img: "https://cdn.pixabay.com/photo/2017/08/07/14/15/woman-2604283_1280.jpg",
+            img: women4,
             name: "Lily Shine",
             info: "This site helped me finish my studies successfully. I feel great."
 

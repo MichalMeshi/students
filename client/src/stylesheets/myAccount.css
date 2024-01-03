@@ -1,5 +1,6 @@
 #profile-strip{
-    background-image: url("https://cdn.pixabay.com/photo/2020/01/04/18/40/trees-4741364_1280.png");
+    /* background-image: url("https://cdn.pixabay.com/photo/2020/01/04/18/40/trees-4741364_1280.png"); */
+    background-image: url('../images/mybg.jpg');
     background-position: center;
     border-radius: 10px;
     min-height: 30vh;

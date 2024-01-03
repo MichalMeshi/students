@@ -9,7 +9,7 @@ import { FaTwitterSquare } from "react-icons/fa";
 import { FaLinkedin } from "react-icons/fa";
 import { FaGithubSquare } from "react-icons/fa";
 import '../stylesheets/footer.css'
-import footerImg from '../images/footerImg.png'
+import footerImg from '../images/imgfooter.png'
 export default function Footer() {
     return (
         <div>

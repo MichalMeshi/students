@@ -2,10 +2,11 @@ const express = require('express')
 const Post = require('../models/Post.model');
 const Comment = require('../models/Comment.model');
 const authMiddlware = require('../middlewares/auth')
+const {User} = require('../models/user.models');
 
 const router = express.Router();
 router.post('/posts', authMiddlware.auth, async (req, res, next) => {
-    //add new post
+    // add new post
     const body = req.body;
 
     try {
@@ -17,6 +18,40 @@ router.post('/posts', authMiddlware.auth, async (req, res, next) => {
         res.send(err);
     }
 
+    // const userId = req.user.id;
+    // // const courseId = req.params.courseId;
+
+    // const user = await User.findById(userId);
+    // if (!user)
+    //     return res.status(401).send("No user");
+    // if (!user.myForums.includes(courseId)) {
+    //     user.myForums.push(courseId);
+    //     await user.save();
+    //     return res.status(201).json({ msg: "course add to user successfully" });
+    // }
+    // res.status(200).json({ msg: "Course already favorite" });
+
+})
+router.get('/posts/myposts',authMiddlware.auth,async(req,res,next)=>{
+    const userId = req.user.id;
+try{
+    const myPosts= await Post.find({userId});
+    res.json(myPosts);
+}
+catch(error){
+    res.send(error.message)
+}
+// console.log("user with forums:",{userWithForums});
+    // if (!userWithForums)
+    //     return res.status(401).send("no user");
+
+
+    // const myForums = userWithForums.myForums;
+    // console.log({ myForums });
+    // if (!myForums || !Array.isArray(myForums)) {
+    //     return res.status(400).send("Courses not found or not an array");
+    // }
+    // res.status(200).send(myForums);
 })
 router.get('/posts/:courseId', authMiddlware.auth, async (req, res, next) => {
     const { courseId } = req.params;

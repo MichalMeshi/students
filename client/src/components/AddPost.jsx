@@ -4,7 +4,6 @@ import ForumContext from '../context/ForumContext';
 
 const AddPost = ({ openPostModal, setOpenPostModal, courseId }) => {
     const { addPost, postData, handleChange } = useContext(ForumContext);
-
     const submit = (e) => {
         e.preventDefault();
         addPost(courseId);
