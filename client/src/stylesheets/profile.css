@@ -11,6 +11,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    min-height: 20vh;
 }
 .bord{
     /* border-radius: 30%; */
@@ -52,6 +53,8 @@
         position: initial;
         /* color: rgb(245, 245, 37); */
     }
-    
+    #profile-card{
+        top: 60%;
+    }
     
 }
