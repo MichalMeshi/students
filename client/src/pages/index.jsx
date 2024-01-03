@@ -1,17 +1,23 @@
-import React from 'react'
-import CourseCardList from '../components/CourseCardList';
-import MyAccount from './MyAccount';
-import { Button } from 'react-bootstrap';
+import React, { useEffect } from 'react';
+import EntrancePage from './EntrancePage';
+import { useNavigate } from 'react-router';
 
 const Home = () => {
+    const token = localStorage.getItem("token");
+    const navigate = useNavigate();
+    // Use useEffect to check if the token exists
+    useEffect(() => {
+        if (token)
+            // navigate('/personalArea')
+            window.location.href = '/personalArea';
+
+    }, []);
+
     return (
         <div>
-            
-            <MyAccount />
-            {/* <CourseCardList /> */}
-            {/* <Button>Hi</Button> */}
+            {!token && <EntrancePage />}
         </div>
-    )
+    );
 }
 
-export default Home
+export default Home;

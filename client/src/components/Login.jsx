@@ -26,7 +26,7 @@ const Login = () => {
             const res = await login(formData);
             console.log("res", res);
             if (res)
-                navigate('/');
+                navigate('/personalArea');
             else
                 setError("Wrong email or password");
         } catch (error) {

@@ -23,7 +23,7 @@ const Register = () => {
         try {
             const res = await register(formData);
             if (res) {
-                navigate('/')
+                navigate('/personalArea')
             }
             else {
                 setError("Something went wrong in registration");
