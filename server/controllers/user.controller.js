@@ -64,6 +64,15 @@ exports.getUser = asyncWrap(async (req, res, next) => {
     if (!user) return next(new AppError(400, "User not exist"));
     res.status(200).json(user);
 });
+
+exports.getAllUsers = asyncWrap(async (req, res, next) => {
+    // const userId = req.user.id;
+    const allUser = await User.find();
+    if (!allUser) return next(new AppError(400, "There are not Users"));
+    res.status(200).json(allUser);
+});
+
+
 exports.getUserData = asyncWrap(async (req, res, next) => {
     const { userId } = req.params;
     const user = await User.findById(userId);

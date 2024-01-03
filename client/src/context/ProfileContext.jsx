@@ -6,6 +6,7 @@ const ProfileContext = createContext({});
 const ProfileContextProvider = ({ children }) => {
     const [profileData, setProfileData] = useState({});
     const [miniprofile, setminiprofile] = useState({})
+
     const getIdDetailsMiniProfile = async(userId)=>{
         try {
             const url = `http://localhost:3000/users/get-user-data/${userId}`
@@ -20,6 +21,34 @@ const ProfileContextProvider = ({ children }) => {
     }
 
 }
+const [allusers, setallusers] = useState([])
+
+const getAllUsers = async()=>{
+    try {
+        const url = `http://localhost:3000/users/get-all-users`
+        const token = localStorage.getItem("token");
+        if (token) {
+            const res = await fetch(url, {
+                headers: {
+                    "authorization": token
+                }
+            });
+            const users = await res.json();
+            console.log({users});
+            if (users){
+
+                setallusers(users);
+            }
+        }
+        else {
+            console.log("Please Login (from client)");
+        }
+    } catch (error) {
+        console.log(error.message);
+    }
+
+}
+
 
     // const [userLoggedIn, setUserLoggedIn] = useState(false);
 
@@ -111,10 +140,11 @@ const ProfileContextProvider = ({ children }) => {
 
     useEffect(() => {
         getProfileData();
+        getAllUsers();
     }, [])
 
 
-    const shared = { profileData, setProfileData, login, register, updateUserProfile, logout /*userLoggedIn,*/,miniprofile, setminiprofile,getIdDetailsMiniProfile }
+    const shared = { profileData, setProfileData, login, register, updateUserProfile, logout /*userLoggedIn,*/,miniprofile, setminiprofile,getIdDetailsMiniProfile, allusers,setallusers }
     return (
         <ProfileContext.Provider value={shared}>
             {children}

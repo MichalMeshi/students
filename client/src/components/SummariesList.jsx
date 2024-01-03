@@ -6,6 +6,7 @@ import AddSummary from './AddSummary';
 import { FaPlus } from "react-icons/fa";
 import MiniProfile from './MiniProfile';
 import { Button, Col, Container, Row } from 'react-bootstrap';
+import '../stylesheets/bluebutton.css'
 
 export default function SummariesList(props) {
   const { summaries, getSummaries } = useContext(SummaryContext);
@@ -16,20 +17,20 @@ export default function SummariesList(props) {
   // console.log({ courseId });
   useEffect(() => {
     getSummaries(courseId);
-
-  }, [courseId])
+    }, [courseId])
   return (
     <div className='container'>
       <h1>Summary List</h1>
 
-      <Button variant='dark' onClick={() => setOpenSummaryModal(true)}>
-        <FaPlus style={{ background: 'grey', color: 'white' }} className='fs-1' />
+      <Button id='loginbtn' onClick={() => setOpenSummaryModal(true)}>
+        <FaPlus className='fs-1' />
       </Button>
       {openSummaryModal && 
             <AddSummary courseId={courseId} openSummaryModal={openSummaryModal} setOpenSummaryModal={setOpenSummaryModal} />
       }
 
       <div className='row'>
+        {console.log({summaries})}
         {summaries
           ?.slice() // create a copy of the array to avoid mutating the original
           .sort((a, b) => b.downloadsAmount - a.downloadsAmount) // sort by summary.sum

@@ -95,7 +95,7 @@ export default function AddSummary(props) {
                 </button>
             </form>
             <div>
-            {loading && <img src={'https://cdn.pixabay.com/animation/2023/03/19/15/09/15-09-56-389_512.gif'} width={100} alt="Loading..." />}
+            {loading && <img src={'https://cdn.pixabay.com/animation/2023/11/30/10/11/10-11-02-622_512.gif'} width={100} alt="Loading..." />}
             </div>
             {uploadStatus && <p className={uploadStatus.includes('Error') ? 'text-danger' : 'text-success'}>{uploadStatus}</p>}
             </Modal.Body>
