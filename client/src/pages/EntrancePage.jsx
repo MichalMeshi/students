@@ -19,6 +19,7 @@ import { Col, Row, Card, Button, Image } from 'react-bootstrap';
 import Footer from '../components/Footer';
 import { Link } from 'react-router-dom';
 import Register from '../components/Register';
+import ChatbotComponent from '../components/ChatbotComponent';
 
 export default function EntrancePage() {
     const [expanded, setexpanded] = useState(false)
@@ -93,6 +94,7 @@ export default function EntrancePage() {
     }, []);
     return (
         <div>
+            <ChatbotComponent/>
             <div id="strip" className='container-fluid'>
                 {/* <img src="https://cdn.pixabay.com/photo/2016/11/08/05/10/students-1807505_1280.jpg" className="img-fluid" alt="learning-people"></img> */}
                 <div id="entrance-wellcome" className={`w-100  ${expanded ? 'expanded' : ''}`}>
