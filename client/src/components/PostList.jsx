@@ -27,17 +27,24 @@ export default function PostList() {
   }, [])
 
   return (
-    <Container >
-      <Button variant='dark' onClick={() => setOpenPostModal(true)}>Add Post</Button>
+    <div className="d-flex justify-content-center align-items-center ">
+    <Container style={{ width: '60%',  fontFamily: 'Arial, sans-serif' }}>
+     <Row className="mt-4">
+      <Col xs={9}>
+       <h2 style={{color:'#2D3092' , fontWeight: 'bold'}}>Course Forum</h2>
+      </Col>
+      <Col>
+       <Button style={{ backgroundColor: '#5055d1' }}  onClick={() => setOpenPostModal(true)}>Create Post</Button>
+       </Col>
       {openPostModal && <AddPost openPostModal={openPostModal} setOpenPostModal={setOpenPostModal} courseId={courseId} />}
-      <Row>
-        {console.log("in list post")}
+
+     </Row>
         {
           posts?.map((item, index) => {
-            return <Col md={6} key={index}><Post post={item} /></Col>
+            return <Row key={index} ><Post post={item} /></Row>
           })
         }
-      </Row>
     </Container>
+    </div>
   )
 }
