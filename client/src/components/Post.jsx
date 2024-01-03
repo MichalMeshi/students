@@ -6,6 +6,7 @@ import { Card, Button, Form } from 'react-bootstrap';
 import { IoIosSend } from "react-icons/io";
 import { MdOutlineComment } from "react-icons/md";
 import ProfileContext from '../context/ProfileContext';
+import MiniProfile from './MiniProfile';
 
 export default function Post(props) {
     const { post } = props;
@@ -45,7 +46,7 @@ export default function Post(props) {
         const currentDate = new Date(); // Get the current date and time
 
         const timeDifference = currentDate - postDate; // Calculate the time difference in milliseconds
-console.log({});
+        console.log({});
         // Convert milliseconds to days
         const days = Math.floor(timeDifference / (1000 * 60 * 60 * 24));
 
@@ -84,8 +85,9 @@ console.log({});
         <Card>
             <Card.Header className='d-flex'>
                 {console.log(profileData.id)}
-                <p>{profileData.id === post.userId._id ? 'You' :
-                    post.userId.name} </p>
+                {/* <p>{profileData.id === post.userId._id ? 'You' :
+                    post.userId.name} </p> */}
+                <MiniProfile userId={post.userId} />
                 <p>({getTimeSincePostCreation(post.dateCreated)} ago)</p>
             </Card.Header>
             <Card.Body>
