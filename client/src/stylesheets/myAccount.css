@@ -1,0 +1,12 @@
+#profile-strip{
+    background-color: red;
+    border-radius: 10px;
+    min-height: 30vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+}
+#card-details{
+    height: inherit;
+}
