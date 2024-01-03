@@ -18,8 +18,6 @@ function App() {
         <ProfileContextProvider>
           <CourseContextProvider>
             <BrowserRouter>
-            <EntrancePage/>
-              <Navbar />
               <AppRoutes />
             </BrowserRouter>
           </CourseContextProvider>

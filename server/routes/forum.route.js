@@ -1,40 +1,41 @@
-const express=require('express')
-const Post=require('../models/Post.model');
-const Comment=require('../models/Comment.model');
+const express = require('express')
+const Post = require('../models/Post.model');
+const Comment = require('../models/Comment.model');
+const authMiddlware = require('../middlewares/auth')
 
 const router = express.Router();
-router.post('/posts',async(req,res,next)=>{
+router.post('/posts', authMiddlware.auth, async (req, res, next) => {
     //add new post
     const body = req.body;
-    
+
     try {
-        const newPost=new Post(body)
+        const newPost = new Post(body)
+        newPost.userId = req.user.id;
         await newPost.save();
-        res.status(201).send("saved");
+        res.status(201).json({ msg: "saved" ,newPost:newPost});
     } catch (err) {
         res.send(err);
     }
 
 })
-router.get('/posts/:courseId',async(req,res,next)=>{
-    //get all posts by courseid
-    const {courseId}=req.params;
+router.get('/posts/:courseId', authMiddlware.auth, async (req, res, next) => {
+    const { courseId } = req.params;
     try {
-        const posts = await Post.find({courseId});
+        const posts = await Post.find({ courseId }).populate('userId');
         res.json(posts);
     }
     catch (error) {
         res.send(error);
     }
 })
-router.post('/posts/comments/:postId',async(req,res,next)=>{
+router.post('/posts/comments/:postId', async (req, res, next) => {
     //add new comment id to array myComments
     //send the comment in body
     //returns the updated post
     try {
-        const {postId}=req.params;
-        const{body}=req;
-        const post = await Post.findOne({_id:postId});
+        const { postId } = req.params;
+        const { body } = req;
+        const post = await Post.findOne({ _id: postId });
         post.myComments.push(body._id);
         await post.save();
         // console.log(post);
@@ -44,11 +45,11 @@ router.post('/posts/comments/:postId',async(req,res,next)=>{
         res.send(error);
     }
 })
-router.get('/posts/comments/:postId',async(req,res,next)=>{
+router.get('/posts/comments/:postId', async (req, res, next) => {
     //get post by id
     try {
-        const{postId}=req.params;
-        const post = await Post.findOne({_id:postId});
+        const { postId } = req.params;
+        const post = await Post.findOne({ _id: postId }).populate('userId');
         res.json(post);
     }
     catch (error) {
@@ -56,26 +57,27 @@ router.get('/posts/comments/:postId',async(req,res,next)=>{
     }
 })
 
-router.post('/comments',async(req,res,next)=>{
+router.post('/comments', authMiddlware.auth, async (req, res, next) => {
     //add comment to db
     const body = req.body;
     try {
-        const newComment=new Comment(body)
+        const newComment = new Comment(body)
         await newComment.save();
+        newComment.userId = req.user.id;
         res.json(newComment);
     } catch (err) {
         res.send(err);
     }
 
 })
-router.post('/comments/comments/:commentId',async(req,res,next)=>{
-     //add new comment id to array myComments of comment
+router.post('/comments/comments/:commentId', async (req, res, next) => {
+    //add new comment id to array myComments of comment
     //send the new comment in body
     //returns the updated comment
     try {
-        const {commentId}=req.params;
-        const{body}=req;
-        const comment = await Comment.findOne({_id:commentId});
+        const { commentId } = req.params;
+        const { body } = req;
+        const comment = await Comment.findOne({ _id: commentId });
         comment.myComments.push(body._id);
         await comment.save();
         // console.log(comment);
@@ -86,11 +88,11 @@ router.post('/comments/comments/:commentId',async(req,res,next)=>{
     }
 })
 
-router.get('/comments/:commentId',async(req,res,next)=>{
+router.get('/comments/:commentId', async (req, res, next) => {
     //return single comment by id
-    const {commentId}=req.params;
+    const { commentId } = req.params;
     try {
-        const comment = await Comment.findOne({_id:commentId});
+        const comment = await Comment.findOne({ _id: commentId }).populate('userId');
         res.json(comment);
     }
     catch (error) {
@@ -108,4 +110,4 @@ router.get('/comments/:commentId',async(req,res,next)=>{
 //         res.send(error);
 //     }
 // })
-module.exports=router;
+module.exports = router;

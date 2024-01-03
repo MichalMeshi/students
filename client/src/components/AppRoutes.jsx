@@ -13,10 +13,14 @@ import PostList from './PostList';
 import CodeVerification from './CodeVerification'
 import SummariesList from './SummariesList';
 import SharedLearning from './SharedLearning';
+import CourseListPage from '../pages/CourseListPage';
+import MyAccount from '../pages/MyAccount';
+
 const AppRoutes = () => {
     return (
         <Routes>
             <Route path='/' element={<Home />} />
+            <Route path='/personalArea' element={<MyAccount />} />
             <Route path='/course_details/:courseId' element={<CourseDatialPage />} />
             <Route path={`/course_details/:courseId/summeries`} element={<SummariesList />} />
             <Route path={`/course_details/:courseId/forum`} element={<PostList />} />
@@ -25,10 +29,9 @@ const AppRoutes = () => {
             <Route path='/login' element={<Login />} />
             <Route path='/logout' element={<Logout />} />
             <Route path='/reset-password/:resetToken' element={<ResetPassword />} />
-            <Route path='/courses-list' element={<CourseCardList />} />
+            <Route path='/courses-list' element={<CourseListPage />} />
             <Route path='/verify' element={<CodeVerification />} />
             <Route path='/tutoring' element={<Tutoring />} />
-            {/* <Route path='/forum' element={<PostList />} /> */}
             <Route path='*' element={<NoPage />} />
         </Routes>
     )

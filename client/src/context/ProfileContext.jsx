@@ -35,8 +35,10 @@ const ProfileContextProvider = ({ children }) => {
                 });
                 const profile = await res.json();
                 console.log({profile});
-                if (profile)
+                if (profile){
+
                     setProfileData(profile);
+                }
             }
             else {
                 console.log("Please Login (from client)");

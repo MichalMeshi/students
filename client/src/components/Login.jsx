@@ -1,10 +1,11 @@
 import React, { useContext, useState } from 'react'
-import { Card, Form, Button, Modal } from 'react-bootstrap'
+import { Card, Form, Button, Modal, Alert } from 'react-bootstrap'
 import { fetchUser } from '../service/httpService';
 import { Link, useNavigate } from 'react-router-dom';
 import ProfileContext from '../context/ProfileContext';
 // import { CiLogin } from "react-icons/ci";
 import { HiOutlineDocumentArrowDown } from "react-icons/hi2";
+import { IoLogInOutline } from "react-icons/io5";
 
 import '../stylesheets/login.css'
 const Login = () => {
@@ -23,11 +24,15 @@ const Login = () => {
         console.log("Login");
         try {
             const res = await login(formData);
+            console.log("res", res);
             if (res)
-                navigate('/');
-            else
-                setError(res.message);
+                navigate('/personalArea');
+            else{
+                console.log("in else");
+                setError("Wrong email or password");
+            }
         } catch (error) {
+            console.log("in catch", error.message);
             setError(error.message);
         }
     }
@@ -65,8 +70,8 @@ const Login = () => {
         // <div className='d-flex flex-column justify-content-center align-items-center'>
         //     <h1 className='my-3'>Login</h1>
 
-            <Card style={{ width: "24em", textAlign:"center" }} className="d-flex flex-column justify-content-center align-items-center p-4 ">
-                <HiOutlineDocumentArrowDown color='#2d3092' size={60}/>
+            <div style={{ width: "20em", textAlign:"center" }} className="d-flex flex-column justify-content-center align-items-center p-2 ">
+                <IoLogInOutline color='#2d3092' size={60}/>
                 <p>Enter your user connection details</p>
                 <Form style={{ width: "24em"}} onSubmit={handleSubmit} className="w-100 d-flex flex-column justify-content-center align-items-center ">
                     <Form.Group className=" w-100 mb-3 d-flex flex-column justify-content-center align-items-center " controlId="formBasicEmail">
@@ -106,8 +111,9 @@ const Login = () => {
                         </Form>
                     </Modal.Body>
                 </Modal>
-                <h6>Need an account ? please <Link to='/register'>Register</Link></h6>
-            </Card>
+                {/* <h6>Need an account ? please <Link to='/register'>Register</Link></h6> */}
+                {error ? <Alert variant="danger">{error}</Alert> : ""}
+            </div>
         // </div>
     )
 }

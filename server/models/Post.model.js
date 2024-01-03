@@ -5,15 +5,23 @@ const postSchema = new mongoose.Schema({
   info: String,
   field: String,
   courseId: {
-    type:mongoose.Schema.Types.ObjectId,
-    ref:"Course"
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "Course"
   },
   myComments: [
     {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: "Comments"
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Comments"
     },
-],
+  ],
+  userId: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "User"
+  },
+  dateCreated: {
+    type: Date,
+    // default: Date.now()
+  }
 });
 
 const Post = mongoose.model('Posts', postSchema);
