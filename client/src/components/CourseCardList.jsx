@@ -81,35 +81,35 @@ export default function CourseCardList() {
           <p>Scroll down and find your favorite courses</p>
         </div>
       </div>
-<div className='container-fluid'>
-  <div className='container'>
-      <Form onSubmit={searchByField} className="d-flex">
-        <Form.Control
-          type="text"
-          placeholder="Type here to search..."
-          className="me-2"
-          aria-label="Search"
-          name="search"
-          defaultValue={search}
-          autoComplete="off"
-          onChange={(e) => setSearch(e.target.value)}
-        />
-        {/* <Button variant="outline-success" type="button" onClick={searchByField}>Search</Button> */}
-      </Form>
+      <div className='container-fluid'>
+        <div className='container'>
+          <Form onSubmit={searchByField} className="d-flex">
+            <Form.Control
+              type="text"
+              placeholder="Type here to search..."
+              className="me-2"
+              aria-label="Search"
+              name="search"
+              defaultValue={search}
+              autoComplete="off"
+              onChange={(e) => setSearch(e.target.value)}
+            />
+            {/* <Button variant="outline-success" type="button" onClick={searchByField}>Search</Button> */}
+          </Form>
+        </div>
       </div>
-      </div>
-      
+
       {profileData.role === 'admin' && <Button onClick={() => setIsClicked(true)}>Add Course</Button>}
       <div className='container-fluid'>
-      <div className='container'>
-      <Row id='courses-row' className='justify-content-center'>
-          {
-            courses?.map((course, index) => {
-              return  <Col xs={12} md={4} sm={6}><CourseCard course={course} key={index} /></Col>
-            })
-          }
-        </Row>
-      </div>
+        <div className='container'>
+          <Row id='courses-row'>
+            {
+              courses?.map((course, index) => {
+                return <Col className='col-card mt-3 mb-3' xs={12} md={4} sm={6}><CourseCard course={course} key={index} /></Col>
+              })
+            }
+          </Row>
+        </div>
       </div>
 
       <Modal show={isClicked} onHide={() => setIsClicked(false)}>

@@ -1,9 +1,15 @@
-#courses-row{
-    display: flex;
-    /* align-items: ; */
-    /* align-items: center; */
-    justify-content: space-between;
-    /* justify-content: space-between; */
-    /* margin: 0 auto; */
+/* #courses-row{
+    
     border: 2px saddlebrown solid;
+} */
+.col-card{
+    /* border: 1px solid blue; */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+#toggle-card{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
 }

@@ -67,7 +67,7 @@ const Login = () => {
         // <div className='d-flex flex-column justify-content-center align-items-center'>
         //     <h1 className='my-3'>Login</h1>
 
-            <Card style={{border:"none", width: "20em", textAlign:"center" }} className="d-flex flex-column justify-content-center align-items-center p-2 ">
+            <div style={{ width: "20em", textAlign:"center" }} className="d-flex flex-column justify-content-center align-items-center p-2 ">
                 <IoLogInOutline color='#2d3092' size={60}/>
                 <p>Enter your user connection details</p>
                 <Form style={{ width: "24em"}} onSubmit={handleSubmit} className="w-100 d-flex flex-column justify-content-center align-items-center ">
@@ -108,9 +108,9 @@ const Login = () => {
                         </Form>
                     </Modal.Body>
                 </Modal>
-                <h6>Need an account ? please <Link to='/register'>Register</Link></h6>
+                {/* <h6>Need an account ? please <Link to='/register'>Register</Link></h6> */}
                 {error ? <Alert variant="danger">{error}</Alert> : ""}
-            </Card>
+            </div>
         // </div>
     )
 }

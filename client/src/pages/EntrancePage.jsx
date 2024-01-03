@@ -14,13 +14,15 @@ import { CiLock } from "react-icons/ci";
 import { LiaUserFriendsSolid } from "react-icons/lia";
 import { RiDoubleQuotesL } from "react-icons/ri";
 import { RiDoubleQuotesR } from "react-icons/ri";
-
 import booksImage from '../images/books-removebg-preview.png';
 import { Col, Row, Card, Button, Image } from 'react-bootstrap';
 import Footer from '../components/Footer';
+import { Link } from 'react-router-dom';
+import Register from '../components/Register';
 
 export default function EntrancePage() {
     const [expanded, setexpanded] = useState(false)
+    const [isLogin,setisLogin]=useState(true)
     const data = [
         {
             img: "https://cdn.pixabay.com/photo/2016/11/21/12/42/beard-1845166_1280.jpg",
@@ -81,6 +83,9 @@ export default function EntrancePage() {
         autoplaySpeed: 3000,
         cssEase: "linear"
       };
+      const toggleIsLogin=()=>{
+        setisLogin(!isLogin);
+      }
     useEffect(() => {
         // Set 'expanded' to true after component mount
         setexpanded(true);
@@ -100,7 +105,15 @@ export default function EntrancePage() {
                         </Col>
                         <Col id="login" sm={12} md={6} className='d-flex flex-column justify-content-center align-items-center '>
                             <div id="login-card">
-                                <Login/>
+                                <Card id="toggle-card" style={{ width: "22em"}}>
+                                {isLogin?<Login/>:<Register/>}
+                                <Card.Text className='text-center pb-1'>
+                                {isLogin&&<h6>Need an account ? please <a onClick={toggleIsLogin} href='#'>Register</a></h6>}
+                                {!isLogin&&<h6>Alradey have an account ? please <a onClick={toggleIsLogin} href='#'>Log in</a></h6>}
+
+                                </Card.Text>
+                                </Card>
+                                
                             </div>
                         </Col>
                     </Row>
