@@ -41,18 +41,20 @@ const Profile = () => {
                 <Row className='w-100 profile-row-strip'>
                     <Col className='p-col bord d-flex text-align-center justify-content-center' md={2}>
                         <div>
-                            {profileData?.image ? (
+                            <Image roundedCircle src={profileData.image} alt="profileImg" width={80} />
+
+                            {/* {profileData?.image ? (
                                 <Image roundedCircle src={profileData.image} alt="profileImg" width={80} />
                             ) : (
                                 <Image roundedCircle className='rounded' width={80} src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png" alt="Empty Profile" />
-                            )}
+                            )} */}
                             <div>{renderStars(profileData?.rate)}</div>
                         </div>
                     </Col>
                     <Col className='bord p-col col-sm' md={9}>
                         <div id='personal-details'>
-                        <h3>{profileData?.name}</h3>
-                        <p>{profileData?.college}, {profileData?.address}</p>
+                            <h3>{profileData?.name}</h3>
+                            <p>{profileData?.college}, {profileData?.address}</p>
                         </div>
                     </Col>
                     <Col className='bord p-col col-sm' md={1}>
