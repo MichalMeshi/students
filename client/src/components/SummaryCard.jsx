@@ -3,10 +3,10 @@ import SummaryContext from '../context/SummaryContext';
 import { GoDownload } from "react-icons/go";
 import { MdDeleteOutline } from "react-icons/md";
 import { FaEye } from "react-icons/fa";
-
+import '../stylesheets/bluebutton.css'
 import { Link } from 'react-router-dom';
 import MiniProfile from './MiniProfile';
-import { Alert } from 'react-bootstrap';
+import { Alert, Button } from 'react-bootstrap';
 
 
 export default function SummaaryCard(props) {
@@ -17,8 +17,10 @@ export default function SummaaryCard(props) {
 
   const { summary } = props;
 
+
   useEffect(() => {
     setdownloads(summary.downloadsAmount);
+    console.log({summary});
   }, [])
   const updateDownloadsSum = async () => {
     try {
@@ -79,11 +81,11 @@ export default function SummaaryCard(props) {
   return (
     <>
       <div className="card col-sm-12 col-md-4 d-flex align-items-center justify-content-center m-3 shadow p-3 mb-5 bg-white rounded" style={{ width: "18rem" }}>
-<MiniProfile userId={summary.userId}/>
-        <embed src={summary.url} type="application/pdf" className='card-top w-100' />
+          <MiniProfile userId={summary.userId}/>
+        <embed src={summary.url} type="application/pdf" className='card-top w-100'/>
 
         <div className="card-body">
-          <hr className="border border-danger m-0" />
+          <hr className="border border-info m-0" />
 
           <h5 className="card-title display-6 h-50">{summary.title}</h5>
 
@@ -92,18 +94,19 @@ export default function SummaaryCard(props) {
 
           <div className='d-flex align-items-center justify-content-around'>
             {/* <p className="card-text">{downloads} downloads </p> */}
-            <button className='btn btn-info m-2' onClick={() => { onButtonClickDownload(summary.url) }}>
+            <Button id = 'loginbtn' className=' m-2' onClick={() => { onButtonClickDownload(summary.url) }}>
               <GoDownload className='fs-2' />
 
-            </button>
-            <button className='btn btn-info m-2' onClick={() => { onButtonClickPreviwo(summary.url) }}>
+            </Button>
+            <Button id = 'loginbtn' className=' m-2' onClick={() => { onButtonClickPreviwo(summary.url) }}>
               <FaEye className='fs-2' />
-            </button>
-            {summary.userId.id === userConnectedId && (
+            </Button>
+            {console.log({summary})}
+            {(summary.userId.id === userConnectedId || summary.userId === userConnectedId ) && (
 
-              <button className='btn btn-info m-2 ' onClick={() => { onButtonClickDelete(summary.url) }}>
+              <Button id = 'loginbtn' className=' m-2 ' onClick={() => { onButtonClickDelete(summary.url) }}>
                 <MdDeleteOutline className='fs-2' />
-              </button>
+              </Button>
             )}
 
 
