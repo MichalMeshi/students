@@ -2,13 +2,14 @@ import React, { useContext, useRef, useState } from 'react'
 import ForumContext from '../context/ForumContext';
 import { Button, ButtonToolbar } from 'react-bootstrap';
 import { IoIosSend } from 'react-icons/io';
+import MiniProfile from './MiniProfile';
 
 export default function CommentDisplay(props) {
   const { comment } = props;
   const [inputFlag, setinputFlag] = useState(false)
   const [commentFlag, setcommentFlag] = useState(false)
   const [comments, setcomments] = useState([])
-  const { addCommentToComment, getCommentsOfComment } = useContext(ForumContext);
+  const { addCommentToComment, getCommentsOfComment, getTimeSincePostCreation } = useContext(ForumContext);
   const inputRef = useRef(null);
   const openCommentInput = () => {
     setinputFlag(true);
@@ -28,6 +29,9 @@ export default function CommentDisplay(props) {
   }
   return (
     <div style={{ margin: "25px" }}>
+      <MiniProfile userId={comment.userId} />
+      <p>({getTimeSincePostCreation(comment.dateCreated)} ago)</p>
+
       <p
         className="fst-italic"
         style={{
@@ -47,7 +51,7 @@ export default function CommentDisplay(props) {
             background: 'none',
             border: 'none',
             color: 'inherit',
-            marginRight:'20px',
+            marginRight: '20px',
             padding: 0,
             margin: 0,
           }}

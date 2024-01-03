@@ -14,7 +14,7 @@ export default function Post(props) {
     const [commentFlag, setcommentFlag] = useState(false)
     const [btnCloseFlag, setbtnCloseFlag] = useState(false);
     const [btnOpenFlag, setbtnOpenFlag] = useState(true);
-    const { getCommentsOfPost, addCommentToPost } = useContext(ForumContext);
+    const { getCommentsOfPost, addCommentToPost,getTimeSincePostCreation } = useContext(ForumContext);
     const { profileData } = useContext(ProfileContext);
     const inputRef = useRef(null);
     const getMyComments = async () => {
@@ -41,45 +41,7 @@ export default function Post(props) {
         inputRef.current.value = "";
 
     }
-    const getTimeSincePostCreation = (dateString) => {
-        const postDate = new Date(dateString); // Convert the date string to a Date object
-        const currentDate = new Date(); // Get the current date and time
-
-        const timeDifference = currentDate - postDate; // Calculate the time difference in milliseconds
-        console.log({});
-        // Convert milliseconds to days
-        const days = Math.floor(timeDifference / (1000 * 60 * 60 * 24));
-
-        // Convert days to weeks, months, or years as necessary
-        if (days >= 7) {
-            const weeks = Math.floor(days / 7);
-            return `${weeks}w`;
-        }
-        else if (days >= 1) {
-            return `${days}d`;
-        }
-        else {
-            // Convert milliseconds to hours
-            const hours = Math.floor(timeDifference / (1000 * 60 * 60));
-
-            if (hours >= 1) {
-                return `${hours}h`;
-            }
-            else {
-                // Convert milliseconds to minutes
-                const minutes = Math.floor(timeDifference / (1000 * 60));
-
-                if (minutes > 1) {
-                    return `${minutes}m`;
-                }
-                else {
-                    // Display 'now' for the time difference less than a minute
-                    return 'now';
-                }
-            }
-        }
-    };
-
+   
 
     return (
         <Card>
