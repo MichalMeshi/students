@@ -6,11 +6,11 @@ const Navbar = () => {
     return (
         <nav>
             {/* {console.log(userLoggedIn)} */}
-            <Link to='/'>Home </Link>
+            <Link to='/'>Home </Link> 
             {/* {!userLoggedIn && <Link to="/register">Register </Link>}
             {!userLoggedIn && <Link to="/login">Login </Link>} */}
-            <Link to="/register">Register </Link>
-            <Link to="/login">Login </Link>
+            {/* <Link to="/register">Register </Link>
+            <Link to="/login">Login </Link> */}
             {/* {userLoggedIn && <Link to='/logout'>Logout </Link>} */}
             <Link to='/courses-list'>Courses </Link>
             <Link to='/tutoring'>Tutoring </Link>
