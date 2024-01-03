@@ -16,7 +16,8 @@ export default function CourseCardList() {
   const [error, setError] = useState("");
 
   const searchByField = async (e) => {
-    e.preventDefault();
+    if(e)
+      e.preventDefault();
     try {
       setError("");
       console.log({ search });
@@ -94,7 +95,7 @@ export default function CourseCardList() {
               autoComplete="off"
               onChange={(e) => setSearch(e.target.value)}
             />
-            {/* <Button variant="outline-success" type="button" onClick={searchByField}>Search</Button> */}
+            <Button variant="outline-success" type="button" onClick={searchByField}>Search</Button>
           </Form>
         </div>
       </div>
