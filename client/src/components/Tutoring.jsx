@@ -65,6 +65,7 @@ const Tutoring = () => {
         const data = await response.json();
         if (data)
             console.log(data.msg);
+        setTutoringPosts([...tutoringPosts, data.newPost])
 
     };
 
@@ -77,11 +78,11 @@ const Tutoring = () => {
                         <h2 style={{ color: '#2D3092', fontWeight: 'bold' }}>Tutoring Posts</h2>
                     </Col>
                     <Col md={2} >
-                        <Button style={{ backgroundColor: '#5055d1' ,width:'100%'}} onClick={() => setIsClicked(true)}>Post</Button>
+                        <Button style={{ backgroundColor: '#5055d1', width: '100%' }} onClick={() => setIsClicked(true)}>Post</Button>
                     </Col>
                 </Row>
 
-                <Row className='justify-content-center'>
+                <Row className='justify-content-center my-3'>
                     {tutoringPosts?.map((post, index) => {
                         return <Col md={12} key={index} className='d-flex justify-content-center'><TutoringPost post={post} /></Col>
                     })}
@@ -104,7 +105,7 @@ const Tutoring = () => {
                                 required
                             />
                         </Form.Group>
-                        <Form.Group controlId="field"  className='w-75 text-center'>
+                        <Form.Group controlId="field" className='w-75 text-center'>
                             <Form.Label>Field</Form.Label>
                             <Form.Control
                                 type="text"
@@ -114,7 +115,7 @@ const Tutoring = () => {
                                 required
                             />
                         </Form.Group>
-                        <Form.Group controlId="message"  className='w-75 text-center'>
+                        <Form.Group controlId="message" className='w-75 text-center'>
                             <Form.Label>Message</Form.Label>
                             <Form.Control
                                 as="textarea"

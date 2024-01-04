@@ -12,11 +12,11 @@ import { AiFillMessage } from "react-icons/ai";
 const TutoringPost = ({ post }) => {
     const { getTimeSincePostCreation } = useContext(ForumContext);
     return (
-        <Card className="mt-3 w-100" style={{ border: 'dashed 2px #5055d1', background:'#E6F7FF'}}>
+        <Card className="mt-3 w-100" style={{ border: 'dashed 2px #5055d1', background: '#E6F7FF' }}>
             <Card.Title id='mini-profile' className='m-0'>
                 <Row>
                     <Col xs={7} md={9} className='pt-1 '>
-                        <MiniProfile userId={post.userId} />
+                        <MiniProfile userId={post.ownerId} />
                     </Col>
                     <Col md={3} xs={5} >
                         <Row className='my-row' >
