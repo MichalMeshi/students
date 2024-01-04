@@ -48,7 +48,7 @@ export default function CommentDisplay(props) {
                     <div id='responder'>{(comment?.userId.name) || (profileData.name)}</div>
                   </Col>
                   <Col md={2}>
-                    <p className='time'>{getTimeSincePostCreation(comment?.dateCreated)} ago</p>
+                    <p className='time'>{getTimeSincePostCreation(comment?.dateCreated)}</p>
                   </Col>
                 </Row>
                 <p>{comment?.content}</p>

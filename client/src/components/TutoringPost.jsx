@@ -22,7 +22,7 @@ const TutoringPost = ({ post }) => {
                     <Col md={3} xs={5} >
                         <Row className='my-row' >
                             <Col id='time-col' xs={7}>
-                                <div id='time'>{getTimeSincePostCreation(post?.dateCreated)} ago</div>
+                                <div id='time'>{getTimeSincePostCreation(post?.dateCreated)}</div>
                             </Col>
                             <Col xs={5} className='d-flex justify-content-start align-items-center'>
                                 <PiClockCounterClockwiseLight size={20} />

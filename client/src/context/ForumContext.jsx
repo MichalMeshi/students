@@ -19,24 +19,24 @@ const ForumContextProvider = ({ children }) => {
         // Convert days to weeks, months, or years as necessary
         if (days >= 7) {
             const weeks = Math.floor(days / 7);
-            return `${weeks}w`;
+            return `${weeks}w ago`;
         }
         else if (days >= 1) {
-            return `${days}d`;
+            return `${days}d ago`;
         }
         else {
             // Convert milliseconds to hours
             const hours = Math.floor(timeDifference / (1000 * 60 * 60));
 
             if (hours >= 1) {
-                return `${hours}h`;
+                return `${hours}h ago`;
             }
             else {
                 // Convert milliseconds to minutes
                 const minutes = Math.floor(timeDifference / (1000 * 60));
 
                 if (minutes > 1) {
-                    return `${minutes}m`;
+                    return `${minutes}m ago`;
                 }
                 else {
                     // Display 'now' for the time difference less than a minute
