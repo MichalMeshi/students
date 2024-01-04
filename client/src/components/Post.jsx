@@ -45,18 +45,18 @@ export default function Post(props) {
 
 
     return (
-        <Card className="mt-3">
+        <Card className="mt-3 w-100">
             <Card.Title id='mini-profile' className='m-0'>
                 <Row>
-                    <Col md={9} className='pt-1'>
+                    <Col xs={7} md={9} className='pt-1 '>
                         <MiniProfile userId={post.userId} />
                     </Col>
-                    <Col md={3} >
-                        <Row className='my-row'>
-                            <Col id='time-col' xs={8} className=''>
+                    <Col md={3} xs={5} >
+                        <Row className='my-row' >
+                            <Col id='time-col' xs={7}>
                                 <div id='time'>{getTimeSincePostCreation(post?.dateCreated)} ago</div>
                             </Col>
-                            <Col xs={3} className=' d-flex justify-content-center align-items-center'>
+                            <Col xs={5} className=' d-flex justify-content-start align-items-center'>
                                 <PiClockCounterClockwiseLight size={20} />
                             </Col>
                         </Row>
@@ -67,15 +67,6 @@ export default function Post(props) {
             <Card.Text className='text-center'>
                 <h2>{post.title}</h2>
                 <h5>{post.info}</h5>
-                {/* <Row>
-                    <Col xs={4}>
-                    </Col>
-                    <Col >
-                        <h3 style={{ fontWeight: 'bold' }}>{post?.title}</h3>
-                        <h4>{post?.field}</h4>
-                        <Card.Text> {post?.info}</Card.Text>
-                    </Col>
-                </Row> */}
             </Card.Text>
             <Card.Body>
                 <Row className="mt-3 mb-3">

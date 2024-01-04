@@ -1,17 +1,25 @@
-#loginbtn{
-    background-color:#2d3092 ;
+#getLink,
+#loginbtn {
+    background-color: #2d3092;
 }
-#loginbtn:hover{
+.blueText{
+    color: #2d3092;
+}
+#getLink:hover,
+#loginbtn:hover {
     transition: 0.5s;
     background-color: white;
-    color:#2d3092 ;
+    color: #2d3092;
 }
-#footer{
-    background-color: skyblue ;
+
+#footer {
+    background-color: skyblue;
 }
-#social{
+
+#social {
     margin: 0 auto;
 }
-#footer-col{
+
+#footer-col {
     margin: 0 auto;
 }

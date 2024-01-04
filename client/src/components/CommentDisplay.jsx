@@ -4,7 +4,7 @@ import { Button, ButtonToolbar, Container, Row, Col, Card } from 'react-bootstra
 import { IoIosSend } from 'react-icons/io';
 import MiniProfile from './MiniProfile';
 import { MdOutlineComment } from 'react-icons/md';
-
+import '../stylesheets/comment.css'
 export default function CommentDisplay(props) {
   const { comment } = props;
   // console.log("comment in displayyyyyyy", comment);
@@ -30,37 +30,61 @@ export default function CommentDisplay(props) {
     inputRef.current.value = "";
   }
   return (
-    <div style={{ margin: "25px" }}>
-      <Card >
-        <Container className="mx-5 mt-3 mb-3">
-          <Row >
+    <div className='ms-5'>
+      <div >
+       
+          <Row>
+            <Col md={1} className=' circle-img d-flex align-items-top justify-content-top' >
+              <img className='profile-image' src={(comment?.userId.image)} width={40} height={40} alt="Profile Image" />
+            </Col>
+            <Col md={9} id='comment-card'>
+              <div id='comment-card' style={{ backgroundColor: '#e9ecef' }} className='p-2' >
+                <Row>
+                  <Col md={10}>
+                    <div id='responder'>{(comment?.userId.name)}</div>
+                  </Col>
+                  <Col md={2}>
+                    <p className='time'>{getTimeSincePostCreation(comment?.dateCreated)} ago</p>
+                  </Col>
+                </Row>
+                <p>{comment?.content}</p>
+              </div>
+              <Row>
+                <Col xs={3} md={2} className='d-flex align-items-end justify-content-end p-1'>
+                  <button id='replaybtn' className='comment-btn p-0 m-0' onClick={openCommentInput}>
+                    replay
+                  </button>
+                </Col> 
+                <Col xs={7} md={9} className=' d-flex align-items-start justify-content-start p-1'>
+                  <button id='commentsbtn' className='comment-btn' onClick={getMyComments}>
+                    comments
+                  </button>
+                </Col>
+              </Row>
+            </Col>
+
+          </Row>
+
+
+          {/* <Row >
             <Col xs={4}>
-              <MiniProfile userId={comment?.userId} />
               <p>({getTimeSincePostCreation(comment?.dateCreated)} ago)</p>
             </Col>
             <Col>
               <Row style={{ backgroundColor: '#e9ecef' }}>
+                <Col xs={8} md={10} className=' p-0'>
+                  <div className=' p-0 mt-2'>{(comment?.userId.name)}</div>
+                </Col>
                 <Col xs={1}>
                   <MdOutlineComment />
                 </Col>
                 <Col>
-                  <p
-                    className="fst-italic"
-                  // style={{
-                  //   backgroundColor: '#e9ecef', // Background color
-                  //   padding: '20px', // Padding
-                  //   borderRadius: '8px', // Optional: Rounded corners
-                  //   borderTopLeftRadius: '0', // No rounded corners for top-left
-                  //   marginBottom: '0' // Add this to remove bottom margin
-                  // }}
-                  >
-                    {comment?.content}
-                  </p>
+                  
                 </Col>
               </Row>
             </Col>
-          </Row>
-          <div className='d-flex justify-content-between'>
+          </Row> */}
+          {/* <div className='d-flex justify-content-between'>
             <Button
               onClick={openCommentInput}
               style={{
@@ -90,7 +114,7 @@ export default function CommentDisplay(props) {
             >
               comments
             </Button>
-          </div>
+          </div> */}
           {commentFlag && comments.map((comment, index) => {
             return <CommentDisplay key={index} comment={comment} />
           })}
@@ -98,8 +122,7 @@ export default function CommentDisplay(props) {
             <input type='text' className='form-control' placeholder='type here...' ref={inputRef}></input>
             <IoIosSend size={25} style={{ cursor: 'pointer' }} onClick={handleAddComment} />
           </div>}
-        </Container>
-      </Card>
+      </div>
     </div>
   )
 }
