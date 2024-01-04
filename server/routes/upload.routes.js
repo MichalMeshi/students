@@ -4,7 +4,8 @@ const {decodeToken } = require('../utils/jwt');
 const authMiddleware = require('../middlewares/auth')
 const upload = require("../middlewares/multer");
 const { cloudinary } = require("../utils/cloudinary");
-const { Summary } = require('../models/summary.models')
+const { Summary } = require('../models/summary.models');
+const { User } = require('../models/user.models');
 
 
 router.post('/url/:courseId',authMiddleware.auth,(req,res,next)=>{
@@ -43,6 +44,16 @@ router.post('/', upload.single('file') ,function (req, res) {
 res.send(err);
 }
 });
+router.get('/getall',authMiddleware.auth, async (req, res, next) => {
+  const userConnectedId = req.user.id;
+    try {
+      const summaries = await Summary.find({userId: userConnectedId})
+      res.json({summeries:summaries,userConnectedId:userConnectedId});
+    }
+    catch (error) {
+      next(error);
+    }
+  });
 
 router.get('/:courseId',authMiddleware.auth, async (req, res, next) => {
 const {courseId}=req.params;
@@ -56,6 +67,8 @@ const userConnectedId = req.user.id;
   }
 });
 
+  
+  
 
 
 
