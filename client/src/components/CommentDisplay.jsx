@@ -4,7 +4,7 @@ import { Button, ButtonToolbar, Container, Row, Col, Card } from 'react-bootstra
 import { IoIosSend } from 'react-icons/io';
 import MiniProfile from './MiniProfile';
 import { MdOutlineComment } from 'react-icons/md';
-
+import '../stylesheets/comment.css'
 export default function CommentDisplay(props) {
   const { comment } = props;
   // console.log("comment in displayyyyyyy", comment);
@@ -30,21 +30,23 @@ export default function CommentDisplay(props) {
     inputRef.current.value = "";
   }
   return (
-    <div style={{ margin: "25px" }}>
+    <div>
       <Card >
-        <Container className="mx-5 mt-3 mb-3">
-          <Row >
-            <Col xs={4}>
-              <MiniProfile userId={comment?.userId} />
-              <p>({getTimeSincePostCreation(comment?.dateCreated)} ago)</p>
+        <Container>
+          <Row>
+            <Col md={2} className='circle-img d-flex align-items-center justify-content-center mx-1' >
+              <img className='profile-image' src={(comment?.userId.image)} width={40} height={40} alt="Profile Image" />
             </Col>
-            <Col>
-              <Row style={{ backgroundColor: '#e9ecef' }}>
-                <Col xs={1}>
-                  <MdOutlineComment />
+            <Col md={9} id='comment-card' style={{ backgroundColor: '#e9ecef' }}>
+              <Row className='bor'>
+                <Col md={10}>
+                <div  className='responder'>{(comment?.userId.name)}</div>
                 </Col>
-                <Col>
-                  <p
+                <Col md={2}>
+                <p className='responder'>{getTimeSincePostCreation(comment?.dateCreated)} ago</p>
+                </Col>
+              </Row>
+              <p
                     className="fst-italic"
                   // style={{
                   //   backgroundColor: '#e9ecef', // Background color
@@ -56,10 +58,28 @@ export default function CommentDisplay(props) {
                   >
                     {comment?.content}
                   </p>
+            </Col>
+          </Row>
+
+
+          {/* <Row >
+            <Col xs={4}>
+              <p>({getTimeSincePostCreation(comment?.dateCreated)} ago)</p>
+            </Col>
+            <Col>
+              <Row style={{ backgroundColor: '#e9ecef' }}>
+                <Col xs={8} md={10} className=' p-0'>
+                  <div className=' p-0 mt-2'>{(comment?.userId.name)}</div>
+                </Col>
+                <Col xs={1}>
+                  <MdOutlineComment />
+                </Col>
+                <Col>
+                  
                 </Col>
               </Row>
             </Col>
-          </Row>
+          </Row> */}
           <div className='d-flex justify-content-between'>
             <Button
               onClick={openCommentInput}
