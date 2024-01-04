@@ -1,9 +1,3 @@
-.mainNav {
-    font-family: 'Arial, sans-serif';
-    font-weight: bold;
-   
-}
-
 .mainNav .navbar-nav .nav-link {
     color: #2D3092; /* Set the color for all Nav links */
     font-size: x-large;
