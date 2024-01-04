@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import { Card, Form, Button, Alert,Row,Col } from 'react-bootstrap'
 import { fetchUser } from '../service/httpService';
 import { useNavigate } from 'react-router-dom';
@@ -6,6 +6,8 @@ import ProfileContext from '../context/ProfileContext';
 import { LuPenSquare } from "react-icons/lu";
 import '../stylesheets/register.css'
 const Register = () => {
+    const [location, setLocation] = useState('');
+
     const [formData, setFormData] = useState({
         name: '',
         email: '',
@@ -20,8 +22,14 @@ const Register = () => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
+        const data = {
+            ...formData,
+            location:location
+        }
+        console.log(data);
+        setFormData(data);
         try {
-            const res = await register(formData);
+            const res = await register(data);
             if (res) {
                 navigate('/personalArea')
             }
@@ -41,6 +49,24 @@ const Register = () => {
             [e.target.name]: e.target.value,
         });
     };
+    useEffect(() => {
+        if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(
+                (position) => {
+                    const { latitude, longitude } = position.coords;
+                   setLocation( { lat:Number(latitude), lon:Number(longitude) })
+                },
+                (err) => {
+                    setError(err.message);
+                }
+            );
+        } else {
+            setError('Geolocation is not supported by your browser');
+        }
+    }, []);
+    
+    
+  
 
     return (
         // <div className='d-flex flex-column justify-content-center align-items-center'>

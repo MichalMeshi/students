@@ -1,6 +1,7 @@
 const mongoose = require('mongoose');
 const bcrypt = require('bcryptjs');
 const crypto = require("crypto");
+const { type } = require('os');
 const userSchema = new mongoose.Schema({
     id: {
         type: String,
@@ -22,6 +23,11 @@ const userSchema = new mongoose.Schema({
     address: {
         type: String
     },
+    location: {
+        lat: { type: Number },
+        lon: { type: Number }
+    },
+
     college: {
         type: String
     },

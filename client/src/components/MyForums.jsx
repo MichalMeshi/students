@@ -41,7 +41,7 @@ export default function MyForums() {
                         <h3>#MY FORUMS</h3>
                     </Card.Header>
                     <Card.Body>
-                        <Row className='bor'>
+                        <Row>
                 {myForums.length? myForums.map((forum, index) => {
                     return <Col className='d-flex justify-content-center align-items-center mb-3' md={12} key={index} >
                         <Post

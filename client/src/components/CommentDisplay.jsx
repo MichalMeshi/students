@@ -4,9 +4,13 @@ import { Button, ButtonToolbar, Container, Row, Col, Card } from 'react-bootstra
 import { IoIosSend } from 'react-icons/io';
 import MiniProfile from './MiniProfile';
 import { MdOutlineComment } from 'react-icons/md';
+// import ProfileContext from '../../context/ProfileContext';
+
 import '../stylesheets/comment.css'
+import ProfileContext from '../context/ProfileContext';
 export default function CommentDisplay(props) {
   const { comment } = props;
+  const {profileData} = useContext(ProfileContext)
   // console.log("comment in displayyyyyyy", comment);
   const [inputFlag, setinputFlag] = useState(false)
   const [commentFlag, setcommentFlag] = useState(false)
@@ -30,35 +34,39 @@ export default function CommentDisplay(props) {
     inputRef.current.value = "";
   }
   return (
-    <div>
-      <Card >
-        <Container>
+    <div className='ms-5'>
+      <div >
+       
           <Row>
-            <Col md={2} className='circle-img d-flex align-items-center justify-content-center mx-1' >
-              <img className='profile-image' src={(comment?.userId.image)} width={40} height={40} alt="Profile Image" />
+            <Col md={1} className=' circle-img d-flex align-items-top justify-content-top' >
+              <img className='profile-image' src={(comment?.userId.image) ||(profileData.image)} width={40} height={40} alt="Profile Image" />
             </Col>
-            <Col md={9} id='comment-card' style={{ backgroundColor: '#e9ecef' }}>
-              <Row className='bor'>
-                <Col md={10}>
-                <div  className='responder'>{(comment?.userId.name)}</div>
-                </Col>
-                <Col md={2}>
-                <p className='responder'>{getTimeSincePostCreation(comment?.dateCreated)} ago</p>
+            <Col md={9} id='comment-card'>
+              <div id='comment-card' style={{ backgroundColor: '#e9ecef' }} className='p-2' >
+                <Row>
+                  <Col md={10}>
+                    <div id='responder'>{(comment?.userId.name) || (profileData.name)}</div>
+                  </Col>
+                  <Col md={2}>
+                    <p className='time'>{getTimeSincePostCreation(comment?.dateCreated)} ago</p>
+                  </Col>
+                </Row>
+                <p>{comment?.content}</p>
+              </div>
+              <Row>
+                <Col xs={3} md={2} className='d-flex align-items-end justify-content-end p-1'>
+                  <button id='replaybtn' className='comment-btn p-0 m-0' onClick={openCommentInput}>
+                    replay
+                  </button>
+                </Col> 
+                <Col xs={7} md={9} className=' d-flex align-items-start justify-content-start p-1'>
+                  <button id='commentsbtn' className='comment-btn' onClick={getMyComments}>
+                    comments
+                  </button>
                 </Col>
               </Row>
-              <p
-                    className="fst-italic"
-                  // style={{
-                  //   backgroundColor: '#e9ecef', // Background color
-                  //   padding: '20px', // Padding
-                  //   borderRadius: '8px', // Optional: Rounded corners
-                  //   borderTopLeftRadius: '0', // No rounded corners for top-left
-                  //   marginBottom: '0' // Add this to remove bottom margin
-                  // }}
-                  >
-                    {comment?.content}
-                  </p>
             </Col>
+
           </Row>
 
 
@@ -80,7 +88,7 @@ export default function CommentDisplay(props) {
               </Row>
             </Col>
           </Row> */}
-          <div className='d-flex justify-content-between'>
+          {/* <div className='d-flex justify-content-between'>
             <Button
               onClick={openCommentInput}
               style={{
@@ -110,7 +118,7 @@ export default function CommentDisplay(props) {
             >
               comments
             </Button>
-          </div>
+          </div> */}
           {commentFlag && comments.map((comment, index) => {
             return <CommentDisplay key={index} comment={comment} />
           })}
@@ -118,8 +126,7 @@ export default function CommentDisplay(props) {
             <input type='text' className='form-control' placeholder='type here...' ref={inputRef}></input>
             <IoIosSend size={25} style={{ cursor: 'pointer' }} onClick={handleAddComment} />
           </div>}
-        </Container>
-      </Card>
+      </div>
     </div>
   )
 }
