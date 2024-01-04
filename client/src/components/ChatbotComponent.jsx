@@ -1,5 +1,7 @@
 import React from 'react'
 import ChatBot from 'react-simple-chatbot'
+import Home from '../pages'
+import { Link } from 'react-router-dom'
 const ChatbotComponent = () => {
     return (
         <ChatBot
@@ -46,16 +48,6 @@ const ChatbotComponent = () => {
                 {
                     id: '5',
                     message: 'Hi {previousValue}, In which subject do you need help?',
-                    trigger: '6'
-                },
-                {
-                    id: '6',
-                    user: true,
-                    trigger: '7'
-                },
-                {
-                    id: '7',
-                    message: 'Here are some features you might be interested in:',
                     trigger: '8'
                 },
                 {
@@ -70,34 +62,77 @@ const ChatbotComponent = () => {
                 },
                 {
                     id: '9',
-                    message: 'Ok, good luck:)',
+                    message: 'Ok, good luck :)',
+                    trigger: "15",
                     end: true
                 },
                 {
                     id: '10',
                     message: 'You can share and access summaries for various subjects. Visit the summaries section to get started.',
-                    end: true
+                    
+                    trigger: "15"
                 },
                 {
                     id: '11',
                     message: 'Search for learning resources by location to find study groups, libraries, or other educational events near you.',
-                    end: true
+                    
+                    trigger: "15"
                 },
                 {
                     id: '12',
                     message: 'Explore tutoring services where you can find tutors or offer your services to other students.',
-                    end: true
+                    
+                    trigger: "15"
                 },
                 {
                     id: '13',
                     message: 'Engage in course forums to discuss topics, ask questions, and collaborate with fellow students.',
-                    end: true
+                    
+                    trigger: "15"
                 },
                 {
                     id: '14',
                     message: 'The private area allows you to manage your profile, view preferred courses, and access personalized content.',
-                    end: true
-                }
+                    
+                    trigger: "15"
+                },
+                // {
+                //     id:'15',
+                //     message:'Is there anything else I can help you?',
+                //     options: [
+                //         { value: 1, label: 'Yes', trigger: '8' },
+                //         { value: 2, label: 'No', trigger: '9' },
+                //     ]
+                // },
+                {
+                    id: '15',
+                    message: 'Did I help you?',
+                    trigger: 'helpResponse',
+                },
+                {
+                    id: 'helpResponse',
+                    options: [
+                        { value: 1, label: 'Yes', trigger: '16' },
+                        { value: 2, label: 'No', trigger: '17' },
+                    ],
+                },
+                {
+                    id: '16',
+                    message: 'Is there anything else I can help you with?',
+                    trigger: 'helpResponse',
+                },
+                
+                {
+                    id: '17',
+                    component: (
+                      <div>
+                        <p>Click the link to go to a specific page:</p>
+                        <Link to="/home">Go to Home</Link>
+                      </div>
+                    ),
+                    end: true,
+                  },
+
             ]}
         />
     )
