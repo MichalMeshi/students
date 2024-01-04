@@ -1,0 +1,12 @@
+.bor{
+    border: 1px solid red;
+}
+#comment-profile{
+   /* width: 20%; */
+   /* height: 1vh; */
+   /* height: 10px; */
+}
+.responder{
+    font-size: small;
+    font-weight: bold;
+}
