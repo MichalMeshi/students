@@ -1,9 +1,23 @@
 .mainNav .navbar-nav .nav-link {
     color: #2D3092; /* Set the color for all Nav links */
-    font-size: x-large;
+    /* font-size: x-large; */
 }
 
 /* Optional: Add styles for the toggler icon */
 .mainNav .navbar-toggler-icon {
     color: #2D3092;
 }
+.nav-link{
+    font-size: medium;
+    /* border: 1px solid red; */
+    /* transition: 0.3s; */
+}
+
+.nav-link:hover{
+    /* transform: scale(1.05); */
+    font-weight: bold;
+}
+/* .nav-link:hover::after{
+    height: 10vh;
+border: #2D3092 1px solid;
+} */
