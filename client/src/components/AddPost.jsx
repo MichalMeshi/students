@@ -1,6 +1,7 @@
 import React, { useContext, useState } from 'react'
 import { Button, Form, Modal } from 'react-bootstrap';
 import ForumContext from '../context/ForumContext';
+import '../stylesheets/bluebutton.css'
 
 const AddPost = ({ openPostModal, setOpenPostModal, courseId }) => {
     const { addPost, postData, handleChange } = useContext(ForumContext);
@@ -17,11 +18,11 @@ const AddPost = ({ openPostModal, setOpenPostModal, courseId }) => {
     return (
         <Modal show={openPostModal} onHide={() => setOpenPostModal(false)}>
             <Modal.Header closeButton>
-                profile
+                New post
             </Modal.Header>
             <Modal.Body>
-                <Form onSubmit={submit}>
-                    <Form.Group controlId="title">
+                <Form onSubmit={submit} className='d-flex flex-column justify-content-center align-items-center'>
+                    <Form.Group controlId="title" className='w-75 text-center'>
                         <Form.Label>Title</Form.Label>
                         <Form.Control
                             type="text"
@@ -30,7 +31,7 @@ const AddPost = ({ openPostModal, setOpenPostModal, courseId }) => {
                             onChange={handleChange}
                         />
                     </Form.Group>
-                    <Form.Group controlId="info">
+                    <Form.Group controlId="info" className='w-75 text-center'>
                         <Form.Label>More info...</Form.Label>
                         <Form.Control
                             type="text"
@@ -39,7 +40,7 @@ const AddPost = ({ openPostModal, setOpenPostModal, courseId }) => {
                             onChange={handleChange}
                         />
                     </Form.Group>
-                    <Form.Group controlId="field">
+                    <Form.Group controlId="field" className='w-75 text-center'>
                         <Form.Label>Field</Form.Label>
                         <Form.Control
                             type="text"
@@ -48,7 +49,7 @@ const AddPost = ({ openPostModal, setOpenPostModal, courseId }) => {
                             onChange={handleChange}
                         />
                     </Form.Group>
-                    <Button variant="dark" type="submit">
+                    <Button id='loginbtn' type="submit" className='mt-3'>
                         Post
                     </Button>
                 </Form>

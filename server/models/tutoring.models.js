@@ -1,7 +1,9 @@
 const mongoose = require('mongoose');
 const tutoringSchema = new mongoose.Schema({
-
-    owenrId: mongoose.Schema.Types.ObjectId,
+    ownerId: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "User"
+    },
     ownerName: String,
     subject: String,
     field: String,
@@ -9,7 +11,7 @@ const tutoringSchema = new mongoose.Schema({
     message: String,
     dateCreated: {
         type: Date,
-        default: new Date()
+        // default: new Date()
     },
     contactInfo: String
 },

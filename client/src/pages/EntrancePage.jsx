@@ -164,7 +164,7 @@ export default function EntrancePage() {
                         <div id="profile-slider" className='h-50  slider-md'>
                             <Slider {...md_settings}>
                                 {data.map((item, index) => {
-                                    return <Card style={{ width: "10rem" }} className='person-card p-3 d-flex flex-column justify-content-center align-items-center shadow p-3 mb-5 rounded text-center'>
+                                    return <Card key={index} style={{ width: "10rem" }} className='person-card p-3 d-flex flex-column justify-content-center align-items-center shadow p-3 mb-5 rounded text-center'>
                                         {/* <Card.Img variant="top" src={item.img} roundedCircle /> */}
                                         <Image src={item.img} roundedCircle width={100} height={100}></Image>
                                         <Card.Body>

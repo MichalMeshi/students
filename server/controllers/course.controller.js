@@ -8,7 +8,7 @@ exports.addNewCourse = async (req, res, next) => {
     const newCourse = new Course(body);
     try {
         await newCourse.save();
-        res.status(201).json({ msg: "saved" })
+        res.status(201).json({ msg: "saved", newCourse: newCourse })
     }
     catch (err) {
         res.send(err.message)
