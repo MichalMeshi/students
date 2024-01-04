@@ -52,11 +52,11 @@ export default function Post(props) {
                         <MiniProfile userId={post.userId} />
                     </Col>
                     <Col md={3} xs={5} >
-                        <Row className='my-row' style={{border:'1px solid yellow'}}>
+                        <Row className='my-row' >
                             <Col id='time-col' xs={7} className='border'>
                                 <div id='time'>{getTimeSincePostCreation(post?.dateCreated)} ago</div>
                             </Col>
-                            <Col style={{border:'1px solid black'}} xs={5} className=' d-flex justify-content-start align-items-center'>
+                            <Col xs={5} className=' d-flex justify-content-start align-items-center'>
                                 <PiClockCounterClockwiseLight size={20} />
                             </Col>
                         </Row>
@@ -67,15 +67,6 @@ export default function Post(props) {
             <Card.Text className='text-center'>
                 <h2>{post.title}</h2>
                 <h5>{post.info}</h5>
-                {/* <Row>
-                    <Col xs={4}>
-                    </Col>
-                    <Col >
-                        <h3 style={{ fontWeight: 'bold' }}>{post?.title}</h3>
-                        <h4>{post?.field}</h4>
-                        <Card.Text> {post?.info}</Card.Text>
-                    </Col>
-                </Row> */}
             </Card.Text>
             <Card.Body>
                 <Row className="mt-3 mb-3">
