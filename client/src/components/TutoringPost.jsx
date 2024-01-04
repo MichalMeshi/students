@@ -16,7 +16,8 @@ const TutoringPost = ({ post }) => {
             <Card.Title id='mini-profile' className='m-0'>
                 <Row>
                     <Col xs={7} md={9} className='pt-1 '>
-                        <MiniProfile userId={post.ownerId} />
+                        {console.log(post?.ownerId)}
+                        <MiniProfile userId={post?.ownerId} />
                     </Col>
                     <Col md={3} xs={5} >
                         <Row className='my-row' >

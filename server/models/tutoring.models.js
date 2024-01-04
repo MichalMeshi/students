@@ -1,7 +1,9 @@
 const mongoose = require('mongoose');
 const tutoringSchema = new mongoose.Schema({
-
-    ownerId: mongoose.Schema.Types.ObjectId,
+    ownerId: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "User"
+    },
     ownerName: String,
     subject: String,
     field: String,
