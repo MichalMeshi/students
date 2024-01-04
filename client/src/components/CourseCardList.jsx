@@ -4,6 +4,7 @@ import CourseCard from './CourseCard';
 import { Alert, Button, Form, Modal, Row, Col } from 'react-bootstrap';
 import ProfileContext from '../context/ProfileContext';
 import '../stylesheets/courseList.css'
+import '../stylesheets/bluebutton.css'
 
 export default function CourseCardList() {
   const { courses, getCourses, setcourses } = useContext(CourseContext);
@@ -126,8 +127,8 @@ export default function CourseCardList() {
           <Modal.Title>Add Course as Admin</Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          <Form onSubmit={handleSubmit}>
-            <Form.Group controlId="name">
+          <Form onSubmit={handleSubmit} className='d-flex flex-column justify-content-center align-items-center'>
+            <Form.Group controlId="name" className='w-75 text-center'>
               <Form.Label>Name</Form.Label>
               <Form.Control
                 type="text"
@@ -137,7 +138,7 @@ export default function CourseCardList() {
                 required
               />
             </Form.Group>
-            <Form.Group controlId="field">
+            <Form.Group controlId="field" className='w-75 text-center'>
               <Form.Label>Field</Form.Label>
               <Form.Control
                 type="text"
@@ -147,7 +148,7 @@ export default function CourseCardList() {
                 required
               />
             </Form.Group>
-            <Button variant="primary" type="submit">
+            <Button id='loginbtn' type="submit" className='mt-3'>
               Add New Course
             </Button>
           </Form>

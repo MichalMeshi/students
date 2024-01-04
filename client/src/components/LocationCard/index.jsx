@@ -3,11 +3,10 @@ import { CiLocationOn } from "react-icons/ci";
 
 export default function LocationCard(props) {
     const cardStyle = {
-        width: '250px',
-        height: '250px',
+        // width: '250px',
+        // height: '250px',
         borderRadius: '50%',
         boxShadow: '0 0 10px rgba(0, 0, 0, 0.1)', // Optional: Add a box shadow for a subtle effect
-        display: 'flex'      
     };
 
     const imgStyle = {
@@ -18,21 +17,15 @@ export default function LocationCard(props) {
     const { userId, distance } = props;
 
     return (
-        <div style={cardStyle} className=''>
+        <div style={cardStyle} className='w-25 rounded-5 rounded-circle d-flex flex-column justify-content-center align-items-center overflow p-4'>
 
-            <div className='w-100 d-flex'>
+            
             <CiLocationOn />
-            </div>
-            <hr/>
-            <div style={imgStyle}>
-                <img width = {50 } height={50} style={imgStyle} src={userId.image}/>
-            </div>
-            <div className='w-100 d-flex'>
+    
+            
+                <img className='rounded-circle w-50' src={userId.image}/>
             <h4>{userId.name}</h4>
-            </div>
-            <div className='w-100 d-flex'>
-            {distance} KM from you
-            </div>
+            <h5>{distance} KM from you</h5>
 
             </div>
     )

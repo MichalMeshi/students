@@ -39,7 +39,7 @@ export default function PostList() {
           {openPostModal && <AddPost openPostModal={openPostModal} setOpenPostModal={setOpenPostModal} courseId={courseId} />}
 
         </Row>
-        <Row>
+        <Row className='my-4'>
           {
             posts?.map((item, index) => {
               return <Row key={index} ><Post post={item} /></Row>

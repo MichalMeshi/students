@@ -101,8 +101,8 @@ export default function SummaaryCard(props) {
             <Button id = 'loginbtn' className=' m-2' onClick={() => { onButtonClickPreviwo(summary.url) }}>
               <FaEye className='fs-2' />
             </Button>
-            {console.log({summary})}
-            {(summary.userId?.id === userConnectedId || summary.userId === userConnectedId ) && (
+            {console.log({summary} ,{userConnectedId})}
+            {(( summary.userId === userConnectedId)|| (summary.userId?.id === userConnectedId  ) )&& (
 
               <Button id = 'loginbtn' className=' m-2 ' onClick={() => { onButtonClickDelete(summary.url) }}>
                 <MdDeleteOutline className='fs-2' />
