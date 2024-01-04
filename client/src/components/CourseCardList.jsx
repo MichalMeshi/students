@@ -4,6 +4,7 @@ import CourseCard from './CourseCard';
 import { Alert, Button, Form, Modal, Row, Col } from 'react-bootstrap';
 import ProfileContext from '../context/ProfileContext';
 import '../stylesheets/courseList.css'
+
 export default function CourseCardList() {
   const { courses, getCourses, setcourses } = useContext(CourseContext);
   const { profileData } = useContext(ProfileContext);
@@ -16,7 +17,7 @@ export default function CourseCardList() {
   const [error, setError] = useState("");
 
   const searchByField = async (e) => {
-    if(e)
+    if (e)
       e.preventDefault();
     try {
       setError("");
@@ -58,12 +59,13 @@ export default function CourseCardList() {
       }
     });
     const data = await response.json();
-
+    setcourses([...courses, data.newCourse])
   };
 
   useEffect(() => {
     getCourses();
   }, [isClicked])
+
   useEffect(() => {
     if (search.length > 0)
       searchByField();
@@ -77,36 +79,42 @@ export default function CourseCardList() {
   return (
     <div>
       <div className='container-fluid'>
-        <div className='contsiner text-center'>
-          <h1>Get your course</h1>
-          <p>Scroll down and find your favorite courses</p>
-        </div>
-      </div>
-      <div className='container-fluid'>
-        <div className='container'>
-          <Form onSubmit={searchByField} className="d-flex">
-            <Form.Control
-              type="text"
-              placeholder="Type here to search..."
-              className="me-2"
-              aria-label="Search"
-              name="search"
-              defaultValue={search}
-              autoComplete="off"
-              onChange={(e) => setSearch(e.target.value)}
-            />
-            <Button variant="outline-success" type="button" onClick={searchByField}>Search</Button>
-          </Form>
+        <div className='container text-center mt-3'>
+          <Row className=' d-flex align-items-center'>
+            <Col>
+              <h1>Get your course</h1>
+              <p>Scroll down and find your favorite courses</p>
+            </Col>
+            <Col>
+              {profileData.role === 'admin' && <Button onClick={() => setIsClicked(true)} style={{ backgroundColor: '#5055d1' }}>Add Course</Button>}
+            </Col>
+            <Col>
+              <Form onSubmit={searchByField} className="d-flex">
+                <Form.Control
+                  type="text"
+                  placeholder="Type here to search..."
+                  className="me-2"
+                  aria-label="Search"
+                  name="search"
+                  defaultValue={search}
+                  autoComplete="off"
+                  onChange={(e) => setSearch(e.target.value)}
+                />
+                <Button variant="outline-success" type="button" onClick={searchByField}>Search</Button>
+              </Form>
+            </Col>
+          </Row>
         </div>
       </div>
 
-      {profileData.role === 'admin' && <Button onClick={() => setIsClicked(true)}>Add Course</Button>}
+
+
       <div className='container-fluid'>
         <div className='container'>
           <Row id='courses-row'>
             {
               courses?.map((course, index) => {
-                return <Col className='col-card mt-3 mb-3' xs={12} md={4} sm={6}><CourseCard course={course} key={index} /></Col>
+                return <Col className='col-card mt-3 mb-3' xs={12} md={4} sm={6} key={index}><CourseCard course={course} /></Col>
               })
             }
           </Row>

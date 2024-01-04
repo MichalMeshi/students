@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { Alert, Button, Col, Container, Form, Modal, Row } from 'react-bootstrap'
 import TutoringPost from './TutoringPost';
+import '../stylesheets/bluebutton.css'
 
 const Tutoring = () => {
     const [tutoringPosts, setTutoringPosts] = useState([]);
@@ -49,9 +50,13 @@ const Tutoring = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         setIsClicked(false);
+        const dataToSend = {
+            ...postData,
+            dateCreated: Date.now(),
+        };
         const response = await fetch('http://localhost:3000/tutoring/add-tutoring', {
             method: 'POST',
-            body: JSON.stringify(postData),
+            body: JSON.stringify(dataToSend),
             headers: {
                 'Content-type': 'application/json',
                 "authorization": localStorage.getItem("token")
@@ -66,22 +71,30 @@ const Tutoring = () => {
 
     return (
         <div>
-            <Container>
-            <h1>Tutoring List</h1>
-            <Button onClick={() => setIsClicked(true)}>Add Post</Button>
-                <Row>
+            <Container style={{ width: '50%', fontFamily: 'Arial, sans-serif' }}>
+                <Row className="mt-4 d-flex justify-content-between align-items-center">
+                    <Col md={6}>
+                        <h2 style={{ color: '#2D3092', fontWeight: 'bold' }}>Tutoring Posts</h2>
+                    </Col>
+                    <Col md={2} >
+                        <Button style={{ backgroundColor: '#5055d1' ,width:'100%'}} onClick={() => setIsClicked(true)}>Post</Button>
+                    </Col>
+                </Row>
+
+                <Row className='justify-content-center'>
                     {tutoringPosts?.map((post, index) => {
-                        return <Col md={6} key={index}><TutoringPost post={post} /></Col>
+                        return <Col md={12} key={index} className='d-flex justify-content-center'><TutoringPost post={post} /></Col>
                     })}
                 </Row>
             </Container>
+
             <Modal show={isClicked} onHide={() => setIsClicked(false)}>
                 <Modal.Header closeButton>
                     <Modal.Title>Tutoring Post</Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
-                    <Form onSubmit={handleSubmit}>
-                        <Form.Group controlId="subject">
+                    <Form onSubmit={handleSubmit} className='d-flex flex-column justify-content-center align-items-center'>
+                        <Form.Group controlId="subject" className='w-75 text-center'>
                             <Form.Label>Subject</Form.Label>
                             <Form.Control
                                 type="text"
@@ -91,7 +104,7 @@ const Tutoring = () => {
                                 required
                             />
                         </Form.Group>
-                        <Form.Group controlId="field">
+                        <Form.Group controlId="field"  className='w-75 text-center'>
                             <Form.Label>Field</Form.Label>
                             <Form.Control
                                 type="text"
@@ -101,7 +114,7 @@ const Tutoring = () => {
                                 required
                             />
                         </Form.Group>
-                        <Form.Group controlId="message">
+                        <Form.Group controlId="message"  className='w-75 text-center'>
                             <Form.Label>Message</Form.Label>
                             <Form.Control
                                 as="textarea"
@@ -112,7 +125,7 @@ const Tutoring = () => {
                             />
                         </Form.Group>
 
-                        <Form.Group controlId="city">
+                        <Form.Group controlId="city" className='w-75 text-center'>
                             <Form.Label>City</Form.Label>
                             <Form.Control
                                 type="text"
@@ -122,7 +135,7 @@ const Tutoring = () => {
                                 required
                             />
                         </Form.Group>
-                        <Form.Group controlId="contactInfo">
+                        <Form.Group controlId="contactInfo" className='w-75 text-center'>
                             <Form.Label>Contact Info</Form.Label>
                             <Form.Control
                                 type="text"
@@ -132,7 +145,7 @@ const Tutoring = () => {
                                 required
                             />
                         </Form.Group>
-                        <Button variant="primary" type="submit">
+                        <Button id='loginbtn' type="submit" className='mt-3'>
                             Add Post
                         </Button>
                     </Form>

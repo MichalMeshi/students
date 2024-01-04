@@ -14,6 +14,6 @@ exports.addTutoring = asyncWrap(async (req, res, next) => {
 })
 
 exports.getTutoringPosts = asyncWrap(async (req, res, next) => {
-    const posts = await TutoringPost.find({})
+    const posts = await TutoringPost.find({}).populate('ownerId')
     res.json(posts);
 })
