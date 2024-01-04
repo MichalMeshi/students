@@ -3,52 +3,43 @@ import ProfileContext from '../context/ProfileContext';
 import MiniProfile from './MiniProfile';
 import { Card } from 'react-bootstrap';
 import { useParams } from 'react-router-dom';
+import LocationCard from './LocationCard';
 
 
 export default function SharedLearning(props) {
-  const { allusers,profileData } = useContext(ProfileContext)
+  const { allusers, profileData } = useContext(ProfileContext)
   const { courseId } = useParams();
-  const [location, setLocation] = useState('');
+  const [distance, setdistance] = useState(0)
 
   const getDistanse = (lat1, lat2, lon1, lon2) => {
     const φ1 = lat1 * Math.PI / 180, φ2 = lat2 * Math.PI / 180, Δλ = (lon2 - lon1) * Math.PI / 180, R = 6371e3;
     const d = Math.acos(Math.sin(φ1) * Math.sin(φ2) + Math.cos(φ1) * Math.cos(φ2) * Math.cos(Δλ)) * R;
-    return d/1000;
+    return d / 1000;
 
 
   }
-  useEffect(() => {
-    if (navigator.geolocation) {
-        navigator.geolocation.getCurrentPosition(
-            (position) => {
-                const { latitude, longitude } = position.coords;
-                setLocation({ latitude, longitude });
-            },
-            (err) => {
-                setError(err.message);
-            }
-        );
-    } else {
-        setError('Geolocation is not supported by your browser');
-    }
-}, []);
-
 
   return (
-    <div>
+    <div className='container'>
       <h1 className='display-2'>People in your area:</h1>
-{ console.log({location})}
       {
-      allusers?.filter((user) => {if(user.myCourses.includes(courseId)&&user.id!==profileData.id){return true}})
-      .sort((a, b) => getDistanse(a.address[0],profileData.address[0],a.address[1],profileData.address[1]) - getDistanse(b.address[0],profileData.address[0],b.address[1],profileData.address[1]))
-      .slice(0, 10) // Limit to the first 10 results
-        .map((user,index) => (
-          <Card className='m-2 w-50'>
-          <MiniProfile userId={user} key={index}/>
-          <h2> {getDistanse(user.address[0],profileData.address[0],user.address[1],profileData.address[1]).toFixed(2)} kilometer from you</h2>
-          </Card>
-        ))
-        }
+        (profileData.location) && (allusers.length === 1) &&
+        <h2>There are no users in your area</h2>
+      }
+      {
+        (profileData.location) &&
+        allusers.filter((user) => { if (user.myCourses.includes(courseId) && user.id !== profileData.id && user.location) { return true } })
+          .sort((a, b) => getDistanse(a.location?.lat, profileData.location?.lat, a.location?.lon, profileData.location?.lon) - getDistanse(b.location?.lat, profileData.location?.lat, b.location?.lon, profileData.location?.lon))
+          .slice(0, 10) // Limit to the first 10 results
+          .map((user, index) => (
+              <LocationCard userId={user} key={index} distance={(getDistanse(user.location?.lat, profileData.location?.lat,
+                 user.location?.lon, profileData.location?.lon).toFixed(2))} />
+          ))
+      }
+      {
+        (!profileData.location) &&
+        <h2>your loaction is not allowd</h2>
+      }
     </div>
   )
 }
@@ -58,7 +49,7 @@ export default function SharedLearning(props) {
 
 // import axios from 'axios';
 // const SharedLearning = () => {
-//     const [location, setLocation] = useState({
+//     const [location?, setLocation] = useState({
 //         loaded: false,
 //         coordinates: { lat: '', lon: '' },
 //         address: '',

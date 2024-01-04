@@ -22,14 +22,18 @@ const userJoiSchema = {
 }
 
 exports.register = asyncWrap(async (req, res, next) => {
-    const { password, email, name, address, college, image } = req.body;
+    const { password, email, name, address, college, image,location } = req.body;
+    console.log("body",req.body);
+    console.log("location",req.body.location);
+
     const validate = userJoiSchema.register.validate({ password, email, name, address, college, image });
     if (validate.error) return next(new AppError(400, validate.error));
 
     const user = await checkIfUserExist(email);
     if (user) return next(new AppError(401, 'User already exist'));
 
-    const newUser = new User({ password, email, name, address, college, image });
+    const newUser = new User({ password, email, name, address, college, image ,location});
+    console.log({newUser});
     await newUser.save();
     //token
     const token = generateToken(newUser);
