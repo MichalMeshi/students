@@ -1,22 +1,32 @@
-import React, { useContext } from 'react'
+import React, { useContext, useEffect } from 'react'
 import { Card, Col, Row } from 'react-bootstrap'
 import ForumContext from '../context/ForumContext'
 import MiniProfile from './MiniProfile';
 import { PiClockCounterClockwiseLight } from 'react-icons/pi';
-import '../stylesheets/post.css'
+import '../stylesheets/tutoringpost.css'
+import AOS from 'aos';
+import 'aos/dist/aos.css';
 import { MdContactMail } from 'react-icons/md';
 import { IoIosContact } from 'react-icons/io';
 import { FaCity } from "react-icons/fa";
 import { AiFillMessage } from "react-icons/ai";
+import { IoLocationSharp } from "react-icons/io5";
+import { TiContacts } from "react-icons/ti";
+import { LiaQuoteLeftSolid } from "react-icons/lia";
+import { LiaQuoteRightSolid } from "react-icons/lia";
+import { BsBlockquoteLeft } from "react-icons/bs";
 
 const TutoringPost = ({ post }) => {
+    useEffect(()=>{
+        AOS.init();
+    },[])
     const { getTimeSincePostCreation } = useContext(ForumContext);
     return (
-        <Card className="mt-3 w-100" style={{ border: 'dashed 2px #5055d1', background: '#E6F7FF' }}>
+        <Card id='tutoring-card' className="mt-3 w-100 card-border" data-aos="fade-up">
             <Card.Title id='mini-profile' className='m-0'>
                 <Row>
                     <Col xs={7} md={9} className='pt-1 '>
-                        {console.log(post?.ownerId)}
+
                         <MiniProfile userId={post?.ownerId} />
                     </Col>
                     <Col md={3} xs={5} >
@@ -30,17 +40,41 @@ const TutoringPost = ({ post }) => {
                         </Row>
                     </Col>
                 </Row>
+                <hr />
             </Card.Title>
-            <hr style={{ border: 'dashed 1px #5055d1' }} />
-            <div className='text-center'>
-                <h2>{post.subject}</h2>
-                <h5>{post.field}</h5>
-            </div>
             <Card.Body>
-                <h3><AiFillMessage /> {post.message}</h3>
-                <h3><FaCity /> {post.city}</h3>
-                <h3><IoIosContact /> {post.ownerName}</h3>
-                <h3><MdContactMail /> {post.contactInfo}</h3>
+                <div className='text-center'>
+                    <h3 className='m-0 p-0 bold'>{post.subject}</h3>
+                    <p className='m-0 p-0 bold'>{post.field}</p>
+                </div>
+                <div className='m-3'>
+                    <Row>
+                        <Col xs={2} md={2} className='d-flex justify-content-end align-items-end'>
+                            <BsBlockquoteLeft size={60} />
+                        </Col>
+                        <Col xs={10} md={10} className='g'>
+                            <div className='message'>{post.message}</div>
+                        </Col>
+                    </Row>
+                </div>
+
+
+                <hr />
+                <Card.Text>
+                    <Row style={{ color: "grey" }}>
+                        <Col xs={6} md={6} className='d-flex justify-content-center align-items-center'>
+                            <div>
+                                <IoLocationSharp size={25} color='grey' /> {post.city}
+                            </div>
+                        </Col>
+                        <Col xs={6} md={6} className='d-flex justify-content-center align-items-center'>
+                            <div>
+                                <TiContacts size={25} color='grey' />{post.contactInfo}
+                            </div>
+                        </Col>
+                    </Row>
+
+                </Card.Text>
             </Card.Body>
         </Card>
     )

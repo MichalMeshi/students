@@ -5,6 +5,8 @@ import { Button, Card, Row, Col } from 'react-bootstrap'
 import CourseContext from '../context/CourseContext';
 import { IoIosHeartEmpty, IoMdHeart } from "react-icons/io";
 import '../stylesheets/courseCard.css'
+import AOS from 'aos';
+import 'aos/dist/aos.css';
 export default function CourseCard(props) {
   const { course } = props;
   const { handleUnFavoriteCourse, handleFavoriteCourse, myCourses } = useContext(CourseContext);
@@ -13,6 +15,7 @@ export default function CourseCard(props) {
   useEffect(() => {
     const isFound = myCourses.find(item => item._id === course._id);
     if (isFound) setFavorite(true);
+    AOS.init();
   }, [myCourses])
 
   const onUnFavorite = () => {
@@ -39,7 +42,7 @@ export default function CourseCard(props) {
     //     )}
     //   </div>
     // </div>
-    <Card id="course-card" style={{ width: '18rem' }}>
+    <Card id="course-card" style={{ width: '20rem' }}  data-aos="fade-up" >
       <Card.Img variant="top" src={course.img} />
       <Card.Body>
         <Card.Title>{course.name}</Card.Title>
