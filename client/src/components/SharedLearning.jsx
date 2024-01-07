@@ -1,11 +1,12 @@
 import React, { useState, useEffect, useContext } from 'react';
 import ProfileContext from '../context/ProfileContext';
 import MiniProfile from './MiniProfile';
-import { Card, Container } from 'react-bootstrap';
+import { Card, Container,Row,Col } from 'react-bootstrap';
 import { useParams } from 'react-router-dom';
 import LocationCard from './LocationCard';
 import Sidebar from './Sidebar';
 import CourseContext from '../context/CourseContext';
+import MainNavbar from './MainNavbar';
 
 
 export default function SharedLearning(props) {
@@ -25,25 +26,37 @@ export default function SharedLearning(props) {
 
   return (
     <>
+          <MainNavbar />
+
       <Sidebar courseId={courseId} courseName={courseName} isOpen={isOpen} setIsOpen={setIsOpen} />
 
       <Container className={`course-detail-page ${isOpen ? 'sidebar-open' : ''} `}>
 
-        <h1 className='display-2 '>People in your area:</h1>
+      <h1 style={{ color: '#2D3092', fontWeight: 'bold' }}>Learning Partners</h1>
+              <p> Find other users in your area!</p>
         {
           (profileData.location) && (allusers.length === 1) &&
-          <h2>There are no users in your area</h2>
+          <div>
+                          <h1 style={{ color: '#2D3092', fontWeight: 'bold' }}>Learning Partners</h1>
+              <p> There are no users in your area</p>
+
+          </div>
+
         }
+                {/* <div className='row'> */}
+<Row>
         {
           (profileData.location) &&
           allusers.filter((user) => { if (user.myCourses.includes(courseId) && user.id !== profileData.id && user.location) { return true } })
             .sort((a, b) => getDistanse(a.location?.lat, profileData.location?.lat, a.location?.lon, profileData.location?.lon) - getDistanse(b.location?.lat, profileData.location?.lat, b.location?.lon, profileData.location?.lon))
             .slice(0, 10) // Limit to the first 10 results
             .map((user, index) => (
-              <LocationCard userId={user} key={index} distance={(getDistanse(user.location?.lat, profileData.location?.lat,
-                user.location?.lon, profileData.location?.lon).toFixed(2))} />
+              <Col md={4}><LocationCard userId={user} key={index} distance={(getDistanse(user.location?.lat, profileData.location?.lat,
+                user.location?.lon, profileData.location?.lon).toFixed(2))} /></Col>
             ))
         }
+        {/* </div> */}
+        </Row>
         {
           (!profileData.location) &&
           <h2>your loaction is not allowd</h2>
