@@ -2,6 +2,10 @@ import React, { useEffect, useState } from 'react'
 import { Alert, Button, Col, Container, Form, Modal, Row } from 'react-bootstrap'
 import TutoringPost from './TutoringPost';
 import '../stylesheets/bluebutton.css'
+import '../stylesheets/tutoring.css'
+import MainNavbar from './MainNavbar'
+import AOS from 'aos';
+import 'aos/dist/aos.css';
 
 const Tutoring = () => {
     const [tutoringPosts, setTutoringPosts] = useState([]);
@@ -16,6 +20,7 @@ const Tutoring = () => {
     })
     useEffect(() => {
         getTutoringPosts();
+        AOS.init();
     }, [isClicked])
 
     const getTutoringPosts = async () => {
@@ -71,20 +76,37 @@ const Tutoring = () => {
 
 
     return (
-        <div>
-            <Container style={{ width: '50%', fontFamily: 'Arial, sans-serif' }}>
-                <Row className="mt-4 d-flex justify-content-between align-items-center">
-                    <Col md={6}>
-                        <h2 style={{ color: '#2D3092', fontWeight: 'bold' }}>Tutoring Posts</h2>
+        <div >
+            <MainNavbar />
+            <Container>
+                {/* <Row>
+                    <Col md={10}>
+                        <h2>Tutoring Posts</h2>
                     </Col>
                     <Col md={2} >
                         <Button style={{ backgroundColor: '#5055d1', width: '100%' }} onClick={() => setIsClicked(true)}>Post</Button>
                     </Col>
-                </Row>
+                </Row> */}
 
-                <Row className='justify-content-center my-3'>
+                <div data-aos="zoom-in" data-aos-duration="1000"  id='tutring-title' className='d-flex justufy-content-center align-items-center p-4'>
+                    <div>
+                        <Row className='w-100'>
+                            <Col  xs={12} md={4} className='d-flex justify-content-center align-items-center'>
+                             <img id='img-strip' src="https://cdn.pixabay.com/photo/2017/07/31/11/21/people-2557396_1280.jpg" alt="" />
+                                
+                            </Col>
+                            <Col xs={12} md={8} className='tutoring-subtitle'>
+                                <h1>Skill Swap Central</h1>
+                                <h5> Exchange Private Lessons and Boost Your Expertise!</h5>
+                                <div>Welcome to our vibrant community where learning knows no bounds! Here, you can post your expertise and trade private lessons with fellow enthusiasts. Embrace the spirit of mutual learning and open the door to a world of shared knowledge.</div>
+                            </Col>
+                        </Row>
+                    </div>
+                </div>
+
+                <Row className='my-3'>
                     {tutoringPosts?.map((post, index) => {
-                        return <Col md={12} key={index} className='d-flex justify-content-center'><TutoringPost post={post} /></Col>
+                        return <Col xs={12} sm={12} md={6} key={index} className='d-flex justify-content-center'><TutoringPost post={post} /></Col>
                     })}
                 </Row>
             </Container>

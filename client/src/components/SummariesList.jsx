@@ -27,26 +27,30 @@ export default function SummariesList(props) {
   return (
     <>
       <Sidebar courseId={courseId} courseName={courseName} isOpen={isOpen} setIsOpen={setIsOpen} />
-
-      <Container className={`course-detail-page ${isOpen ? 'sidebar-open' : ''} `}>
-        <h1>Summary List</h1>
-
-        <Button id='loginbtn' onClick={() => setOpenSummaryModal(true)}>
-          <FaPlus className='fs-1' />
-        </Button>
+      <Container>
+        <Row className='justify-content-between align-items-center w-100'>
+          <Col md={5}>
+            <h1 style={{ color: '#2D3092', fontWeight: 'bold' }}>Join the Discussion</h1>
+            <p> Explore and Contribute to Our Course Forums!</p>
+          </Col>
+          <Col md={2}>
+            <Button id='loginbtn' onClick={() => setOpenSummaryModal(true)}>
+              Add new Summary
+            </Button>
+          </Col>
+        </Row>
         {openSummaryModal &&
           <AddSummary courseId={courseId} openSummaryModal={openSummaryModal} setOpenSummaryModal={setOpenSummaryModal} />
         }
 
-        <div className='row'>
-          {console.log({ summaries })}
+        <Row>
           {summaries
             ?.slice() // create a copy of the array to avoid mutating the original
             .sort((a, b) => b.downloadsAmount - a.downloadsAmount) // sort by summary.sum
             .map((summary, index) => (
-              <SummaaryCard summary={summary} key={index} />
+              <Col xs={5} md={4} key={index} className='my-2'><SummaaryCard summary={summary} /></Col>
             ))}
-        </div>
+        </Row>
       </Container>
     </>
 

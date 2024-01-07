@@ -1,0 +1,26 @@
+#tutring-title{
+    height: 50vh;
+    width: 100%;
+    background-image: linear-gradient(to right, #2D3092 , #BCDCFC);
+    border-radius: 0px 30px;
+}
+.bor{
+    border : 1px solid red;
+}
+.tutoring-subtitle{
+    color: white;
+}
+
+#img-strip{
+width: 100%;
+}
+
+@media (max-width:400px){
+    #tutring-title{
+        height: 80vh;
+    }
+    #img-strip{
+        margin-bottom: 2vh;
+    }
+}
+    
