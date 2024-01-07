@@ -8,6 +8,7 @@ import Sidebar from './Sidebar';
 
 
 export default function SharedLearning(props) {
+
   const { allusers, profileData } = useContext(ProfileContext)
   const { courseId } = useParams();
   const [distance, setdistance] = useState(0)

@@ -94,19 +94,19 @@ export default function SummaaryCard(props) {
 
           <div className='d-flex align-items-center justify-content-around'>
             {/* <p className="card-text">{downloads} downloads </p> */}
-            <Button id = 'loginbtn' className=' m-2' onClick={() => { onButtonClickDownload(summary.url) }}>
+            <btn id = 'summarybtn' className=' m-2 btn' onClick={() => { onButtonClickDownload(summary.url) }}>
               <GoDownload className='fs-2' />
 
-            </Button>
-            <Button id = 'loginbtn' className=' m-2' onClick={() => { onButtonClickPreviwo(summary.url) }}>
+            </btn>
+            <btn id = 'summarybtn' className=' m-2 btn' onClick={() => { onButtonClickPreviwo(summary.url) }}>
               <FaEye className='fs-2' />
-            </Button>
+            </btn>
             {console.log({summary} ,{userConnectedId})}
             {(( summary.userId === userConnectedId)|| (summary.userId?.id === userConnectedId  ) )&& (
 
-              <Button id = 'loginbtn' className=' m-2 ' onClick={() => { onButtonClickDelete(summary.url) }}>
+              <btn id = 'summarybtn' className=' m-2 btn' onClick={() => { onButtonClickDelete(summary.url) }}>
                 <MdDeleteOutline className='fs-2' />
-              </Button>
+              </btn>
             )}
 
 
