@@ -21,7 +21,7 @@ export default function CourseDatialPage() {
       <MainNavbar />
       <Sidebar courseId={courseId} courseName={courseName} isOpen={isOpen} setIsOpen={setIsOpen} />
       <Container className={`text-center course-detail-page ${isOpen ? 'sidebar-open' : ''}`} >
-        <h1 className='display-3 '>Wellcom to {courseName} Course</h1>
+        <h1 className='display-5 '>Wellcom to {courseName} Course</h1>
         <div style={{ position: 'relative', textAlign: 'center', margin: '0 auto' }}>
           <img id="paint-stain" src='https://cdn.pixabay.com/photo/2014/04/03/10/26/ink-310433_1280.png'
             // style={{ width: '400px', position: 'absolute', top: '0', left: '380px' }}
@@ -33,9 +33,9 @@ export default function CourseDatialPage() {
             alt="Second Image"
           />
         </div>
-        <h1 className='display-6' id='lack-box'
+        <p className='fs-3' id='lack-box'
         // style={{ position: 'absolute', top: '460px', left: '400px' }} 
-        >Academix wish you luck!</h1>
+        >Academix wish you luck!</p>
 
 
       </Container>
