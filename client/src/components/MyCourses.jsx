@@ -34,33 +34,13 @@ const MyCourses = () => {
     }, [])
 
     return (
-        // <div className="container-fluid">
-        //     <div className="container" style={{ border: "1px solid green" }}>
-        //         <h1>My Courses</h1>
-        //         <Container>
-        //             <Row>
-        //                 {myCourses?.map((myCourse, index) => {
-        //                     return <Col md={6} key={index} >
-        //                         <CourseCard
-        //                             course={myCourse} />
-        //                     </Col>
-        //                 })}
-        //             </Row>
-        //         </Container>
-        //         {error ? <Alert variant="danger">{error}</Alert> : ""}
-        //     </div>
-        // </div>
         <div className='container-fluid mt-5 pt-3'>
             <div className='container'>
                 <Card>
                     <Card.Header>
-                        <h3>#MY COURSES</h3>
+                        <h3 style={{color:'#2d3092'}}>#MY COURSES</h3>
                     </Card.Header>
                     <Card.Body>
-                        {/* <Card.Title>Special title treatment</Card.Title> */}
-                        {/* <Card.Text>
-                            With supporting text below as a natural lead-in to additional content.
-                        </Card.Text> */}
                         <Row>
                             {console.log(myCourses)}
                         {myCourses.length? myCourses.map((myCourse, index) => {
