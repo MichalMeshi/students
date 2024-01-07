@@ -81,30 +81,28 @@ export default function CourseCardList() {
     <div>
       <div className='container-fluid'>
         <div className='container text-center mt-3'>
-          <Row className=' d-flex align-items-center'>
-            <Col>
-              <h1>Get your course</h1>
-              <p>Scroll down and find your favorite courses</p>
-            </Col>
-            <Col>
-              {profileData.role === 'admin' && <Button onClick={() => setIsClicked(true)} style={{ backgroundColor: '#5055d1' }}>Add Course</Button>}
-            </Col>
-            <Col>
-              <Form onSubmit={searchByField} className="d-flex">
-                <Form.Control
-                  type="text"
-                  placeholder="Type here to search..."
-                  className="me-2"
-                  aria-label="Search"
-                  name="search"
-                  defaultValue={search}
-                  autoComplete="off"
-                  onChange={(e) => setSearch(e.target.value)}
-                />
-                <Button variant="outline-success" type="button" onClick={searchByField}>Search</Button>
-              </Form>
-            </Col>
-          </Row>
+
+          <h1>Get your course</h1>
+          <p>Scroll down and find your favorite courses</p>
+          <Form onSubmit={searchByField} className='m-2'>
+            <div className='input-container'>
+              <Form.Control
+                id='input-search'
+                type="search"
+                placeholder="Type here to search..."
+                className="me-2"
+                aria-label="Search"
+                name="search"
+                defaultValue={search}
+                autoComplete="off"
+                onChange={(e) => setSearch(e.target.value)}
+              />
+            </div>
+            {/* <Button variant="outline-success" type="button" onClick={searchByField}>Search</Button> */}
+          </Form>
+          
+          {profileData.role === 'admin' && <div id='admin-add'>Admin? <a href='#' onClick={() => setIsClicked(true)} >Add Course</a> </div> }
+
         </div>
       </div>
 

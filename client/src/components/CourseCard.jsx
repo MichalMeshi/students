@@ -40,7 +40,7 @@ export default function CourseCard(props) {
     //   </div>
     // </div>
     <Card id="course-card" style={{ width: '18rem' }}>
-      <Card.Img variant="top" src="https://cdn.pixabay.com/photo/2018/11/09/08/10/board-3804006_1280.jpg" />
+      <Card.Img variant="top" src={course.img} />
       <Card.Body>
         <Card.Title>{course.name}</Card.Title>
         <Card.Text>
@@ -49,7 +49,7 @@ export default function CourseCard(props) {
         </Card.Text>
         <Row>
           <Col md={9}>
-            <Button variant='white'>
+            <Button style={{background:"white", border:'none'}} className='button-link'>
               <Link className="card-link" to={`/course_details/` + course._id}>Get course</Link>
             </Button>
           </Col>

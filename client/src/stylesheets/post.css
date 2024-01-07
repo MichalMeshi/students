@@ -19,13 +19,17 @@
     width: 100%;
     height: 100%;
 }
-#comments-btn{
+.comments-btn{
 color: blue;
 }
+.comments-btn:focus{
+   border: none;
+    }
 #send-btn{
     background-color: white;
+    border: none;
 }
 #send-btn:hover{
     transition: 0.5s;
-    border: none;
+    border: 1px solid blue;
 }
