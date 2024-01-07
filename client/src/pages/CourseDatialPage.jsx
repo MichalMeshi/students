@@ -8,9 +8,8 @@ import CourseContext from '../context/CourseContext';
 import '../stylesheets/coursePage.css'
 
 export default function CourseDatialPage() {
-  const { courseId } = useParams();
-  const { courses, getCourses, setcourses } = useContext(CourseContext);
-
+  const { courseId, courseName } = useParams();
+  const { getCourses, setcourses } = useContext(CourseContext);
   const [isOpen, setIsOpen] = useState(false); // State to manage the sidebar's open/close state
   useEffect(() => {
     getCourses();
@@ -18,11 +17,11 @@ export default function CourseDatialPage() {
 
   return (
     <div >
-      <Sidebar courseId={courseId} isOpen={isOpen} setIsOpen={setIsOpen} />
+      <Sidebar courseId={courseId} courseName={courseName} isOpen={isOpen} setIsOpen={setIsOpen} />
       <Container className={`text-center course-detail-page ${isOpen ? 'sidebar-open' : ''}`} >
-        <h1 className='display-3 '>Wellcom to {courses.find((item) => item._id == courseId)?.name} Course</h1>
+        <h1 className='display-3 '>Wellcom to {courseName} Course</h1>
         <div style={{ position: 'relative', textAlign: 'center', margin: '0 auto' }}>
-          <img id ="paint-stain" src='https://cdn.pixabay.com/photo/2014/04/03/10/26/ink-310433_1280.png'
+          <img id="paint-stain" src='https://cdn.pixabay.com/photo/2014/04/03/10/26/ink-310433_1280.png'
             // style={{ width: '400px', position: 'absolute', top: '0', left: '380px' }}
             alt="First Image"
           />
@@ -32,8 +31,8 @@ export default function CourseDatialPage() {
             alt="Second Image"
           />
         </div>
-        <h1 className='display-6'id='lack-box'
-          // style={{ position: 'absolute', top: '460px', left: '400px' }} 
+        <h1 className='display-6' id='lack-box'
+        // style={{ position: 'absolute', top: '460px', left: '400px' }} 
         >Academix wish you luck!</h1>
 
 

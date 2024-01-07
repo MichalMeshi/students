@@ -50,7 +50,7 @@ export default function CourseCard(props) {
         <Row>
           <Col md={9}>
             <Button style={{background:"white", border:'none'}} className='button-link'>
-              <Link className="card-link" to={`/course_details/` + course._id}>Get course</Link>
+              <Link className="card-link" to={`/course_details/${course._id}/${course.name}` }>Get course</Link>
             </Button>
           </Col>
           <Col md={3} className='d-flex justify-content-center align-items-center'>

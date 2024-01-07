@@ -7,9 +7,10 @@ import AddPost from './AddPost';
 import Sidebar from './Sidebar';
 import MainNavbar from './MainNavbar';
 import '../stylesheets/postlist.css'
+import CourseContext from '../context/CourseContext';
 export default function PostList() {
   const { posts, setposts } = useContext(ForumContext);
-  const { courseId } = useParams();
+  const { courseId, courseName } = useParams();
   const [isOpen, setIsOpen] = useState(false); // State to manage the sidebar's open/close state
 
   const [openPostModal, setOpenPostModal] = useState(false);
@@ -31,8 +32,8 @@ export default function PostList() {
 
   return (
     <>
-    <MainNavbar/>
-      <Sidebar courseId={courseId} isOpen={isOpen} setIsOpen={setIsOpen} />
+      <MainNavbar />
+      <Sidebar courseId={courseId} courseName={courseName} isOpen={isOpen} setIsOpen={setIsOpen} />
       <div className="d-flex justify-content-center align-items-center ">
 
         <Container className={`course-detail-page ${isOpen ? 'sidebar-open' : ''} `}>
@@ -42,17 +43,17 @@ export default function PostList() {
               <p> Explore and Contribute to Our Course Forums!</p>
             </Col>
             <Col md={2} >
-              <Button className='circular-button'  onClick={() => setOpenPostModal(true)}>Start <br /> new forum</Button>
+              <Button className='circular-button' onClick={() => setOpenPostModal(true)}>Start <br /> new forum</Button>
             </Col>
             {openPostModal && <AddPost openPostModal={openPostModal} setOpenPostModal={setOpenPostModal} courseId={courseId} />}
 
           </Row>
           {/* <Row className='border'> */}
-            {
-              posts?.map((item, index) => {
-                return <Row key={index}  ><Col md={12} xs={12} sm={12}><Post post={item} /></Col></Row>
-              })
-            }
+          {
+            posts?.map((item, index) => {
+              return <Row key={index}  ><Col md={12} xs={12} sm={12}><Post post={item} /></Col></Row>
+            })
+          }
           {/* </Row> */}
         </Container>
       </div>
