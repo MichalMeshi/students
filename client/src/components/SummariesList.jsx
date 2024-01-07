@@ -10,7 +10,7 @@ import '../stylesheets/bluebutton.css'
 import Sidebar from './Sidebar';
 import MainNavbar from './MainNavbar'
 import CourseContext from '../context/CourseContext';
-
+import '../stylesheets/summarylist.css'
 export default function SummariesList(props) {
   const { summaries, getSummaries } = useContext(SummaryContext);
   const { courseId, courseName } = useParams();
@@ -31,14 +31,14 @@ export default function SummariesList(props) {
       <Sidebar courseId={courseId} courseName={courseName} isOpen={isOpen} setIsOpen={setIsOpen} />
       <Container>
         <Row className='justify-content-between align-items-center w-100'>
-          <Col md={5}>
-            <h1 style={{ color: '#2D3092', fontWeight: 'bold' }}>Join the Discussion</h1>
-            <p> Explore and Contribute to Our Course Forums!</p>
+          <Col md={7}>
+            <h1 style={{ color: '#2D3092', fontWeight: 'bold' }}>The Summary Collective</h1>
+            <p  style={{ color: '#2D3092'}}> Where Learners Connect through Shared Course Knowledge!</p>
           </Col>
           <Col md={2}>
-            <Button id='loginbtn' onClick={() => setOpenSummaryModal(true)}>
-              Add new Summary
-            </Button>
+          <Button className='circular-button' onClick={() => setOpenSummaryModal(true)}>Add <br /> new summary</Button>
+            {/* <Button id='loginbtn' onClick={() => }> */}
+            {/* </Button> */}
           </Col>
         </Row>
         {openSummaryModal &&

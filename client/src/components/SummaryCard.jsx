@@ -7,7 +7,8 @@ import '../stylesheets/bluebutton.css'
 import { Link } from 'react-router-dom';
 import MiniProfile from './MiniProfile';
 import { Alert, Button, Card } from 'react-bootstrap';
-
+import AOS from 'aos';
+import 'aos/dist/aos.css';
 
 export default function SummaaryCard(props) {
   const [downloads, setdownloads] = useState(0);
@@ -21,6 +22,7 @@ export default function SummaaryCard(props) {
   useEffect(() => {
     setdownloads(summary.downloadsAmount);
     console.log({ summary });
+    AOS.init();
   }, [])
   const updateDownloadsSum = async () => {
     try {
@@ -80,7 +82,7 @@ export default function SummaaryCard(props) {
 
   return (
 
-    <Card className="shadow p-3 bg-white rounded" style={{height:'100%'}}>
+    <Card  data-aos="fade-up" className="shadow p-3 bg-white rounded" style={{height:'100%'}}>
       <MiniProfile userId={summary.userId} />
       <hr />
       <embed src={summary.url} type="application/pdf" className='card-top w-100' />
