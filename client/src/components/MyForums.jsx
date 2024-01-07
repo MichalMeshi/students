@@ -38,7 +38,7 @@ export default function MyForums() {
             <div className='container'>
                 <Card>
                     <Card.Header>
-                        <h3>#MY FORUMS</h3>
+                        <h3  style={{color:'#2d3092'}}>#MY FORUMS</h3>
                     </Card.Header>
                     <Card.Body>
                         <Row>

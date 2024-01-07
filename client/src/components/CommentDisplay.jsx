@@ -51,7 +51,7 @@ export default function CommentDisplay(props) {
                     <p className='time'>{getTimeSincePostCreation(comment?.dateCreated)}</p>
                   </Col>
                 </Row>
-                <p>{comment?.content}</p>
+                <p className='ms-2'>{comment?.content}</p>
               </div>
               <Row>
                 <Col xs={3} md={2} className='d-flex align-items-end justify-content-end p-1'>

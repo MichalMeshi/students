@@ -4,6 +4,7 @@ import TutoringPost from './TutoringPost';
 import '../stylesheets/bluebutton.css'
 import '../stylesheets/tutoring.css'
 import MainNavbar from './MainNavbar'
+import Footer from '../components/Footer'
 import AOS from 'aos';
 import 'aos/dist/aos.css';
 
@@ -84,7 +85,6 @@ const Tutoring = () => {
                         <h2>Tutoring Posts</h2>
                     </Col>
                     <Col md={2} >
-                        <Button style={{ backgroundColor: '#5055d1', width: '100%' }} onClick={() => setIsClicked(true)}>Post</Button>
                     </Col>
                 </Row> */}
 
@@ -99,6 +99,7 @@ const Tutoring = () => {
                                 <h1>Skill Swap Central</h1>
                                 <h5> Exchange Private Lessons and Boost Your Expertise!</h5>
                                 <div>Welcome to our vibrant community where learning knows no bounds! Here, you can post your expertise and trade private lessons with fellow enthusiasts. Embrace the spirit of mutual learning and open the door to a world of shared knowledge.</div>
+                                <button id='post-btn' className='btn mt-3' onClick={() => setIsClicked(true)}>Add your post</button>
                             </Col>
                         </Row>
                     </div>
@@ -175,6 +176,7 @@ const Tutoring = () => {
                 </Modal.Body>
             </Modal>
             {error ? <Alert variant="danger">{error}</Alert> : ""}
+            <Footer/>
         </div>
     )
 }

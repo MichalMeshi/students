@@ -14,13 +14,27 @@
 #img-strip{
 width: 100%;
 }
+#post-btn{
+    border: 1px solid white;
+    color: white;
+    transition: .5s;
+    width: 25;
+}
+#post-btn:hover{
 
+    border: 1px solid #2D3092;
+    color:rgb(45, 48, 146) ;
+
+}
 @media (max-width:400px){
     #tutring-title{
-        height: 80vh;
+        height: 90vh;
     }
     #img-strip{
         margin-bottom: 2vh;
+    }
+    #post-btn{
+        width: 100%;
     }
 }
     
