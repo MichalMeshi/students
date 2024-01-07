@@ -13,6 +13,7 @@ export default function CourseCardList() {
   const [courseData, setCourseData] = useState({
     name: '',
     field: '',
+    img: ''
   })
   const [search, setSearch] = useState('');
   const [error, setError] = useState("");
@@ -99,8 +100,8 @@ export default function CourseCardList() {
             </div>
             {/* <Button variant="outline-success" type="button" onClick={searchByField}>Search</Button> */}
           </Form>
-          
-          {profileData.role === 'admin' && <div id='admin-add'>Admin? <a href='#' onClick={() => setIsClicked(true)} >Add Course</a> </div> }
+
+          {profileData.role === 'admin' && <div id='admin-add'>Admin? <a href='#' onClick={() => setIsClicked(true)} >Add Course</a> </div>}
 
         </div>
       </div>
@@ -125,6 +126,16 @@ export default function CourseCardList() {
         </Modal.Header>
         <Modal.Body>
           <Form onSubmit={handleSubmit} className='d-flex flex-column justify-content-center align-items-center'>
+            <Form.Group controlId="img" className='w-75 text-center'>
+              <Form.Label>Image</Form.Label>
+              <Form.Control
+                type="text"
+                name="img"
+                value={courseData.img}
+                onChange={handleChange}
+                required
+              />
+            </Form.Group>
             <Form.Group controlId="name" className='w-75 text-center'>
               <Form.Label>Name</Form.Label>
               <Form.Control
@@ -135,6 +146,7 @@ export default function CourseCardList() {
                 required
               />
             </Form.Group>
+
             <Form.Group controlId="field" className='w-75 text-center'>
               <Form.Label>Field</Form.Label>
               <Form.Control
