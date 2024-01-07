@@ -108,7 +108,7 @@ const Contact = () => {
                         <h1 style={{ color: '#2D3092' }}>Thank you for<br/> contact us.<br/> We will answer<br/> you soon :)<br/></h1>
                         <Button id='loginbtn' onClick={() => { navigate('/') }} className='mt-4'>Home</Button>
                     </Col>}
-                <Col style={{ height: '100vh' }}>
+                <Col xs={12} md={6} style={{ height: '100vh' }}>
                     <img className="w-100 h-100" src={contactImg} alt="contact" />
                 </Col>
             </Row>
