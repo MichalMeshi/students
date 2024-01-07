@@ -1,6 +1,8 @@
 import React, { useContext, useEffect, useState } from 'react';
 import ProfileContext from '../context/ProfileContext';
 import { Button, Modal, Form, Alert } from 'react-bootstrap';
+import '../stylesheets/bluebutton.css'
+import '../stylesheets/editProfile.css'
 
 const EditProfile = ({ setEdit }) => {
     const { profileData, updateUserProfile } = useContext(ProfileContext); // Assuming you have a method to set profileData
@@ -47,78 +49,69 @@ const EditProfile = ({ setEdit }) => {
             // setFormData(prevState => ({ ...prevState, image: imgUrl }));
             return imgUrl;
         } catch (error) {
-           setError(`Error during file upload: ${error}`);
+            setError(`Error during file upload: ${error}`);
         }
     };
     return (
         <div>
-        <Modal show={true} onHide={() => setEdit(false)}>
-            <Modal.Header closeButton>
-                <Modal.Title>Edit Profile</Modal.Title>
-            </Modal.Header>
-            <Modal.Body>
-                <Form onSubmit={handleSubmit}>
-                    {/* <Form.Group controlId="name">
-                        <Form.Label>Img</Form.Label>
-                        <Form.Control
-                            type="text"
-                            name="image"
-                            value={formData.image}
-                            onChange={handleChange}
-                        />
-                    </Form.Group> */}
-                    <Form.Group controlId="formImg">
-                        <Form.Label>Image </Form.Label>
-                        <Form.Control
-                            type="file"
-                            placeholder=""
-                            name="image"
-                            onChange={handleFileChange}
-                        />
-                    </Form.Group>
-                    <Form.Group controlId="name">
-                        <Form.Label>Name</Form.Label>
-                        <Form.Control
-                            type="text"
-                            name="name"
-                            value={formData.name}
-                            onChange={handleChange}
-                        />
-                    </Form.Group>
-                    <Form.Group controlId="email">
-                        <Form.Label>Email</Form.Label>
-                        <Form.Control
-                            type="email"
-                            name="email"
-                            value={formData.email}
-                            onChange={handleChange}
-                        />
-                    </Form.Group>
-                    <Form.Group controlId="college">
-                        <Form.Label>College</Form.Label>
-                        <Form.Control
-                            type="text"
-                            name="college"
-                            value={formData.college}
-                            onChange={handleChange}
-                        />
-                    </Form.Group>
-                    <Form.Group controlId="address">
-                        <Form.Label>Address</Form.Label>
-                        <Form.Control
-                            type="text"
-                            name="address"
-                            value={formData.address}
-                            onChange={handleChange}
-                        />
-                    </Form.Group>
-                    <Button variant="primary" type="submit">
-                        Save Changes
-                    </Button>
-                </Form>
-            </Modal.Body>
-        </Modal>
-        {error ? <Alert variant="danger">{error}</Alert> : ""}
+            <Modal show={true} onHide={() => setEdit(false)}>
+                <Modal.Header closeButton>
+                    <Modal.Title>Edit Profile</Modal.Title>
+                </Modal.Header>
+                <Modal.Body>
+                    <Form onSubmit={handleSubmit} className='d-flex flex-column justify-content-center align-items-center'>
+                        <Form.Group controlId="formImg" className='w-75 text-center'>
+                            <Form.Label className='lableColor'>Image </Form.Label>
+                            <Form.Control
+                                type="file"
+                                placeholder=""
+                                name="image"
+                                onChange={handleFileChange}
+                            />
+                        </Form.Group>
+                        <Form.Group controlId="name" className='w-75 text-center'> 
+                            <Form.Label className='lableColor'>Name</Form.Label>
+                            <Form.Control
+                                type="text"
+                                name="name"
+                                value={formData.name}
+                                onChange={handleChange}
+                            />
+                        </Form.Group>
+                        <Form.Group controlId="email" className='w-75 text-center'>
+                            <Form.Label className='lableColor'>Email</Form.Label>
+                            <Form.Control
+                                type="email"
+                                name="email"
+                                value={formData.email}
+                                onChange={handleChange}
+                            />
+                        </Form.Group>
+                        <Form.Group controlId="college" className='w-75 text-center'>
+                            <Form.Label className='lableColor'>College</Form.Label>
+                            <Form.Control
+                                type="text"
+                                name="college"
+                                value={formData.college}
+                                onChange={handleChange}
+                            />
+                        </Form.Group>
+                        <Form.Group controlId="address" className='w-75 text-center'>
+                            <Form.Label className='lableColor'>Address</Form.Label>
+                            <Form.Control
+                                type="text"
+                                name="address"
+                                value={formData.address}
+                                onChange={handleChange}
+                            />
+                        </Form.Group>
+                        <Button id='loginbtn' type="submit"  className='mt-3'>
+                            Save Changes
+                        </Button>
+                    </Form>
+                </Modal.Body>
+            </Modal>
+            {error ? <Alert variant="danger">{error}</Alert> : ""}
         </div>
     );
 };
