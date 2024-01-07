@@ -29,7 +29,7 @@ export default function SharedLearning(props) {
 
       <Container className={`course-detail-page ${isOpen ? 'sidebar-open' : ''} `}>
 
-        <h1 className='display-2'>People in your area:</h1>
+        <h1 className='display-2 '>People in your area:</h1>
         {
           (profileData.location) && (allusers.length === 1) &&
           <h2>There are no users in your area</h2>

@@ -13,6 +13,11 @@
     align-items: center;
     min-height: 20vh;
 }
+#img-profile{
+    border-radius:50%;
+    object-fit:cover;
+
+}
 .bord{
     /* border-radius: 30%; */
     /* border: 1px solid blue; */
