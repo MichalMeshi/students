@@ -6,6 +6,7 @@ import { Button, Container } from 'react-bootstrap';
 import { GiHamburgerMenu } from "react-icons/gi";
 import CourseContext from '../context/CourseContext';
 import '../stylesheets/coursePage.css'
+import MainNavbar from '../components/MainNavbar';
 
 export default function CourseDatialPage() {
   const { courseId, courseName } = useParams();
@@ -17,6 +18,7 @@ export default function CourseDatialPage() {
 
   return (
     <div >
+      <MainNavbar />
       <Sidebar courseId={courseId} courseName={courseName} isOpen={isOpen} setIsOpen={setIsOpen} />
       <Container className={`text-center course-detail-page ${isOpen ? 'sidebar-open' : ''}`} >
         <h1 className='display-3 '>Wellcom to {courseName} Course</h1>

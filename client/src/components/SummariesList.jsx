@@ -8,6 +8,7 @@ import MiniProfile from './MiniProfile';
 import { Button, Col, Container, Row } from 'react-bootstrap';
 import '../stylesheets/bluebutton.css'
 import Sidebar from './Sidebar';
+import MainNavbar from './MainNavbar'
 import CourseContext from '../context/CourseContext';
 
 export default function SummariesList(props) {
@@ -26,6 +27,7 @@ export default function SummariesList(props) {
   }, [courseId])
   return (
     <>
+      <MainNavbar />
       <Sidebar courseId={courseId} courseName={courseName} isOpen={isOpen} setIsOpen={setIsOpen} />
       <Container>
         <Row className='justify-content-between align-items-center w-100'>

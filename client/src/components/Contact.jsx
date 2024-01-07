@@ -4,6 +4,7 @@ import '../stylesheets/bluebutton.css'
 import '../stylesheets/login.css'
 import { useNavigate } from 'react-router';
 import contactImg from '../images/contactImage.png'
+import MainNavbar from './MainNavbar'
 
 const Contact = () => {
     const [contactData, setContactData] = useState({
@@ -54,65 +55,69 @@ const Contact = () => {
     };
 
     return (
-        <Container fluid>
-            <Row>
-                {!emailSent ?
-                    <Col className='ml-4 d-flex justify-content-center flex-column align-items-center'>
-                        <h1 style={{ color: '#2D3092' }} className='text-left'>Contact us</h1>
-                        <Form onSubmit={contactUsInEmail} className='w-75'>
-                            <Form.Group controlId="email" className="mt-4">
-                                <Form.Control
-                                    type="email"
-                                    name="email"
-                                    value={contactData.email}
-                                    onChange={handleChange}
-                                    placeholder="Email"
-                                    required
-                                />
-                            </Form.Group>
-                            <Form.Group controlId="subject" className="mt-4">
-                                <Form.Control
-                                    type="text"
-                                    name="subject"
-                                    value={contactData.subject}
-                                    onChange={handleChange}
-                                    placeholder="Subject"
-                                    required
+        <>
+            <MainNavbar />
+            <Container fluid>
+                <Row>
+                    {!emailSent ?
+                        <Col className='ml-4 d-flex justify-content-center flex-column align-items-center'>
+                            <h1 style={{ color: '#2D3092' }} className='text-left'>Contact us</h1>
+                            <Form onSubmit={contactUsInEmail} className='w-75'>
+                                <Form.Group controlId="email" className="mt-4">
+                                    <Form.Control
+                                        type="email"
+                                        name="email"
+                                        value={contactData.email}
+                                        onChange={handleChange}
+                                        placeholder="Email"
+                                        required
+                                    />
+                                </Form.Group>
+                                <Form.Group controlId="subject" className="mt-4">
+                                    <Form.Control
+                                        type="text"
+                                        name="subject"
+                                        value={contactData.subject}
+                                        onChange={handleChange}
+                                        placeholder="Subject"
+                                        required
 
-                                />
-                            </Form.Group>
-                            <Form.Group controlId="message" className="mt-4">
-                                <Form.Control
-                                    as="textarea"  // This changes the input to a textarea
-                                    name="message"
-                                    value={contactData.message}
-                                    onChange={handleChange}
-                                    placeholder="Enter your message"
-                                    required
-                                />
-                            </Form.Group>
+                                    />
+                                </Form.Group>
+                                <Form.Group controlId="message" className="mt-4">
+                                    <Form.Control
+                                        as="textarea"  // This changes the input to a textarea
+                                        name="message"
+                                        value={contactData.message}
+                                        onChange={handleChange}
+                                        placeholder="Enter your message"
+                                        required
+                                    />
+                                </Form.Group>
 
-                            <div className='d-flex justify-content-center'>
-                                <Button id='loginbtn' type="submit" className='mt-4' disabled={isLoading}>
-                                    Send Message
-                                </Button>
+                                <div className='d-flex justify-content-center'>
+                                    <Button id='loginbtn' type="submit" className='mt-4' disabled={isLoading}>
+                                        Send Message
+                                    </Button>
+                                </div>
+                            </Form>
+                            <div className='text-center mt-4'>
+                                {isLoading && <Spinner animation="border" className='blueText' />}
                             </div>
-                        </Form>
-                        <div className='text-center mt-4'>
-                            {isLoading && <Spinner animation="border" className='blueText' />}
-                        </div>
-                    </Col>
+                        </Col>
 
-                    :
-                    <Col className='m-5 d-flex justify-content-center flex-column align-items-center'>
-                        <h1 style={{ color: '#2D3092' }}>Thank you for<br/> contact us.<br/> We will answer<br/> you soon :)<br/></h1>
-                        <Button id='loginbtn' onClick={() => { navigate('/') }} className='mt-4'>Home</Button>
-                    </Col>}
-                <Col xs={12} md={6} style={{ height: '100vh' }}>
-                    <img className="w-100 h-100" src={contactImg} alt="contact" />
-                </Col>
-            </Row>
-        </Container>
+                        :
+                        <Col className='m-5 d-flex justify-content-center flex-column align-items-center'>
+                            <h1 style={{ color: '#2D3092' }}>Thank you for<br /> contact us.<br /> We will answer<br /> you soon :)<br /></h1>
+                            <Button id='loginbtn' onClick={() => { navigate('/') }} className='mt-4'>Home</Button>
+                        </Col>}
+                    <Col xs={12} md={6} style={{ height: '100vh' }}>
+                        <img className="w-100 h-100" src={contactImg} alt="contact" />
+                    </Col>
+                </Row>
+            </Container>
+        </>
+
     )
 }
 
