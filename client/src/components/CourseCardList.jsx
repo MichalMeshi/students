@@ -81,9 +81,8 @@ export default function CourseCardList() {
     <div>
       <div className='container-fluid'>
         <div className='container text-center mt-3'>
-
-          <h1>Get your course</h1>
-          <p>Scroll down and find your favorite courses</p>
+          <h1 className='headline'>Get your course</h1>
+          <p className='headline'>Scroll down and find your favorite courses</p>
           <Form onSubmit={searchByField} className='m-2'>
             <div className='input-container'>
               <Form.Control

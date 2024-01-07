@@ -5,6 +5,7 @@ import '../stylesheets/login.css'
 import { useNavigate } from 'react-router';
 import contactImg from '../images/contactImage.png'
 import MainNavbar from './MainNavbar'
+import Footer from './Footer';
 
 const Contact = () => {
     const [contactData, setContactData] = useState({
@@ -116,6 +117,7 @@ const Contact = () => {
                     </Col>
                 </Row>
             </Container>
+            <Footer/>
         </>
 
     )
