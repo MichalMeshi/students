@@ -31,6 +31,7 @@ const MainNavbar = () => {
                         <Nav className="justify-content-end flex-grow-1 pe-3">
                             <Nav.Link  href='/courses-list'><div className='nav-link'>Courses</div></Nav.Link>
                             <Nav.Link  href='/tutoring'><div className='nav-link'>Tutoring</div></Nav.Link>
+                            <Nav.Link  href='/contact'><div className='nav-link'>Contact</div></Nav.Link>
                             <Nav.Link  href='/logout'><div className='nav-link'>Log out</div></Nav.Link>
                         </Nav>
                         <Form className="d-flex">

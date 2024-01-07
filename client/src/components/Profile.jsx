@@ -36,7 +36,7 @@ const Profile = () => {
     };
 
     return (
-        <div id='profile-card' class="shadow-lg rounded">
+        <div id='profile-card' className="shadow-lg rounded">
             <Card id='card-details' className=' p-2'>
                 <Row className='w-100 profile-row-strip'>
                     <Col className='p-col bord d-flex text-align-center justify-content-center' md={2}>

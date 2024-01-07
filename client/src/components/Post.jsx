@@ -63,11 +63,11 @@ export default function Post(props) {
                     </Col>
                 </Row>
             </Card.Title>
-            <hr></hr>
-            <Card.Text className='text-center'>
+            <hr />
+            <div className='text-center'>
                 <h2>{post.title}</h2>
                 <h5>{post.info}</h5>
-            </Card.Text>
+            </div>
             <Card.Body>
                 <Row className="mt-3 mb-3">
                     <Col md={9}>
