@@ -27,13 +27,18 @@ export default function SummariesList(props) {
   return (
     <>
       <Sidebar courseId={courseId} courseName={courseName} isOpen={isOpen} setIsOpen={setIsOpen} />
-
-      <Container className={`course-detail-page ${isOpen ? 'sidebar-open' : ''} `}>
-        <h1>Summary List</h1>
-
-        <Button id='loginbtn' onClick={() => setOpenSummaryModal(true)}>
-          <FaPlus className='fs-1' />
-        </Button>
+      <Container>
+        <Row className='justify-content-between align-items-center w-100'>
+          <Col md={5}>
+            <h1 style={{ color: '#2D3092', fontWeight: 'bold' }}>Join the Discussion</h1>
+            <p> Explore and Contribute to Our Course Forums!</p>
+          </Col>
+          <Col md={2}>
+            <Button id='loginbtn' onClick={() => setOpenSummaryModal(true)}>
+              Add new Summary
+            </Button>
+          </Col>
+        </Row>
         {openSummaryModal &&
           <AddSummary courseId={courseId} openSummaryModal={openSummaryModal} setOpenSummaryModal={setOpenSummaryModal} />
         }

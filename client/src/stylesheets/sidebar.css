@@ -7,6 +7,18 @@
   color: #2d3092 !important;
 }
 
+#burgerBtn {
+  border-radius: 0 12px 12px 0;
+  background: #2d3092;
+  display: flex;
+  justify-content: center;
+}
+
+#burgerBtn:hover {
+  background: white;
+  color: #2d3092;
+}
+
 @media (max-width: 480px) {
 
   .offcanvas {
