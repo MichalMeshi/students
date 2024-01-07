@@ -15,6 +15,7 @@ import SummariesList from './SummariesList';
 import SharedLearning from './SharedLearning';
 import CourseListPage from '../pages/CourseListPage';
 import MyAccount from '../pages/MyAccount';
+import Contact from './Contact';
 
 const AppRoutes = () => {
     return (
@@ -32,6 +33,7 @@ const AppRoutes = () => {
             <Route path='/courses-list' element={<CourseListPage />} />
             <Route path='/verify' element={<CodeVerification />} />
             <Route path='/tutoring' element={<Tutoring />} />
+            <Route path='/contact' element={<Contact />} />
             <Route path='*' element={<NoPage />} />
         </Routes>
     )

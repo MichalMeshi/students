@@ -4,6 +4,7 @@ const Joi = require('joi');
 const { generateToken, decodeToken } = require('../utils/jwt');
 const asyncWrap = require('../utils/asyncWrapper');
 const AppError = require('../utils/AppError');
+const sendEmail = require('../utils/email');
 
 
 const userJoiSchema = {
@@ -22,9 +23,9 @@ const userJoiSchema = {
 }
 
 exports.register = asyncWrap(async (req, res, next) => {
-    const { password, email, name, address, college, image,location } = req.body;
-    console.log("body",req.body);
-    console.log("location",req.body.location);
+    const { password, email, name, address, college, image, location } = req.body;
+    console.log("body", req.body);
+    console.log("location", req.body.location);
 
     const validate = userJoiSchema.register.validate({ password, email, name, address, college, image });
     if (validate.error) return next(new AppError(400, validate.error));
@@ -32,8 +33,8 @@ exports.register = asyncWrap(async (req, res, next) => {
     const user = await checkIfUserExist(email);
     if (user) return next(new AppError(401, 'User already exist'));
 
-    const newUser = new User({ password, email, name, address, college, image ,location});
-    console.log({newUser});
+    const newUser = new User({ password, email, name, address, college, image, location });
+    console.log({ newUser });
     await newUser.save();
     //token
     const token = generateToken(newUser);
@@ -98,3 +99,16 @@ exports.updateUser = asyncWrap(async (req, res, next) => {
     }
 })
 
+exports.contact = asyncWrap(async (req, res, next) => {
+    const { email, subject, message } = req.body; // Assuming your frontend sends the form data as JSON in the request body
+
+    await sendEmail({
+        email: "academix@org.il", // The recipient's email
+        subject: subject || "Your default subject",
+        text: message || "Your default text",
+    }, email); // Pass the sender's email to the sendEmail function
+
+    console.log("Email sent successfully");
+    res.json({ msg: "Email sent successfully to user" });
+
+})

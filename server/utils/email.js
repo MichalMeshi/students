@@ -11,7 +11,7 @@ const sendEmail = async (options, senderEmail,htmlContent) => {
   });
 
   const mailOptions = {
-    from: `"Students" <${senderEmail}>`, // Use the sender's email as the "from" address
+    from: `${senderEmail}`, // Use the sender's email as the "from" address
     to: options.email,
     subject: options.subject,
     text: options.text,
