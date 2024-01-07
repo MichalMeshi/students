@@ -19,7 +19,7 @@ const Sidebar = ({ courseId, courseName, isOpen, setIsOpen }) => {
       </Button>
       <Offcanvas show={isOpen} onHide={toggleSidebar} placement="start" backdrop={true} scroll={false}>
         <Offcanvas.Header closeButton>
-          <a href={`/course_details/${courseId}`} style={{ textDecoration: 'none', color: 'inherit' }}> {/* Making the title clickable */}
+          <a id='linkCourse' href={`/course_details/${courseId}/${courseName}`} style={{ textDecoration: 'none', color: 'inherit' }}> {/* Making the title clickable */}
             <Offcanvas.Title>{courseName} Course</Offcanvas.Title>
           </a>
         </Offcanvas.Header>

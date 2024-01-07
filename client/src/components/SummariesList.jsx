@@ -38,15 +38,14 @@ export default function SummariesList(props) {
           <AddSummary courseId={courseId} openSummaryModal={openSummaryModal} setOpenSummaryModal={setOpenSummaryModal} />
         }
 
-        <div className='row'>
-          {console.log({ summaries })}
+        <Row>
           {summaries
             ?.slice() // create a copy of the array to avoid mutating the original
             .sort((a, b) => b.downloadsAmount - a.downloadsAmount) // sort by summary.sum
             .map((summary, index) => (
-              <SummaaryCard summary={summary} key={index} />
+              <Col xs={5} md={4} key={index} className='my-2'><SummaaryCard summary={summary} /></Col>
             ))}
-        </div>
+        </Row>
       </Container>
     </>
 
