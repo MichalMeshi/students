@@ -21,12 +21,12 @@ export default function MySummaries() {
                         {console.log({ summariesById })}
                         <Row>
 
-                            {summariesById && summariesById
+                            {summariesById ? summariesById
                                 .map((summary, index) => (
                                     <Col sm={6} md={4} key={index} className='my-3'><SummaaryCard summary={summary} /></Col>
-                                ))}
+                                )) : <p>No summeries have been uploaded yet.</p>}
                         </Row>
-                        <p>No summeries have been uploaded yet.</p>
+
                     </Card.Body>
                 </Card>
                 {/* {error ? <Alert variant="danger">{error}</Alert> : ""} */}
