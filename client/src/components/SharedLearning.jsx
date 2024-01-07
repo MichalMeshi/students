@@ -5,11 +5,13 @@ import { Card, Container } from 'react-bootstrap';
 import { useParams } from 'react-router-dom';
 import LocationCard from './LocationCard';
 import Sidebar from './Sidebar';
+import CourseContext from '../context/CourseContext';
 
 
 export default function SharedLearning(props) {
+
   const { allusers, profileData } = useContext(ProfileContext)
-  const { courseId } = useParams();
+  const { courseId, courseName } = useParams();
   const [distance, setdistance] = useState(0)
   const [isOpen, setIsOpen] = useState(false); // State to manage the sidebar's open/close state
 
@@ -23,11 +25,11 @@ export default function SharedLearning(props) {
 
   return (
     <>
-      <Sidebar courseId={courseId} isOpen={isOpen} setIsOpen={setIsOpen} />
+      <Sidebar courseId={courseId} courseName={courseName} isOpen={isOpen} setIsOpen={setIsOpen} />
 
       <Container className={`course-detail-page ${isOpen ? 'sidebar-open' : ''} `}>
 
-        <h1 className='display-2'>People in your area:</h1>
+        <h1 className='display-2 '>People in your area:</h1>
         {
           (profileData.location) && (allusers.length === 1) &&
           <h2>There are no users in your area</h2>

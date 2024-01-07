@@ -6,3 +6,14 @@
     background-color: white;
     color:#2d3092 ;
 }
+
+#summarybtn{
+    background-color: white;
+    color:#2d3092 ;
+
+}
+#summarybtn:hover{
+    background-color:#2d3092 ;
+    color:white ;
+    transition: 0.5s;
+}

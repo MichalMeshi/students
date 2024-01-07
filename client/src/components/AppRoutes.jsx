@@ -22,10 +22,10 @@ const AppRoutes = () => {
         <Routes>
             <Route path='/' element={<Home />} />
             <Route path='/personalArea' element={<MyAccount />} />
-            <Route path='/course_details/:courseId' element={<CourseDatialPage />} />
-            <Route path={`/course_details/:courseId/summeries`} element={<SummariesList />} />
-            <Route path={`/course_details/:courseId/forum`} element={<PostList />} />
-            <Route path={`/course_details/:courseId/sharedLearning`} element={<SharedLearning />} />
+            <Route path='/course_details/:courseId/:courseName' element={<CourseDatialPage />} />
+            <Route path={`/course_details/:courseId/:courseName/summeries`} element={<SummariesList />} />
+            <Route path={`/course_details/:courseId/:courseName/forum`} element={<PostList />} />
+            <Route path={`/course_details/:courseId/:courseName/sharedLearning`} element={<SharedLearning />} />
             <Route path='/register' element={<Register />} />
             <Route path='/login' element={<Login />} />
             <Route path='/logout' element={<Logout />} />

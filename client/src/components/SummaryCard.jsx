@@ -6,7 +6,7 @@ import { FaEye } from "react-icons/fa";
 import '../stylesheets/bluebutton.css'
 import { Link } from 'react-router-dom';
 import MiniProfile from './MiniProfile';
-import { Alert, Button } from 'react-bootstrap';
+import { Alert, Button, Card } from 'react-bootstrap';
 
 
 export default function SummaaryCard(props) {
@@ -20,7 +20,7 @@ export default function SummaaryCard(props) {
 
   useEffect(() => {
     setdownloads(summary.downloadsAmount);
-    console.log({summary});
+    console.log({ summary });
   }, [])
   const updateDownloadsSum = async () => {
     try {
@@ -79,47 +79,40 @@ export default function SummaaryCard(props) {
 
 
   return (
-    <>
-      <div className="card col-sm-12 col-md-4 d-flex align-items-center justify-content-center m-3 shadow p-3 mb-5 bg-white rounded" style={{ width: "18rem" }}>
-          <MiniProfile userId={summary.userId}/>
-        <embed src={summary.url} type="application/pdf" className='card-top w-100'/>
 
-        <div className="card-body">
-          <hr className="border border-info m-0" />
+    <Card className="shadow p-3 bg-white rounded" style={{height:'100%'}}>
+      <MiniProfile userId={summary.userId} />
+      <hr />
+      <embed src={summary.url} type="application/pdf" className='card-top w-100' />
 
-          <h5 className="card-title display-6 h-50">{summary.title}</h5>
+      <div className="card-body">
+        <hr className="border border-info m-0" />
 
-
-          <p className="card-text">{downloads} downloads </p>
-
-          <div className='d-flex align-items-center justify-content-around'>
-            {/* <p className="card-text">{downloads} downloads </p> */}
-            <Button id = 'loginbtn' className=' m-2' onClick={() => { onButtonClickDownload(summary.url) }}>
-              <GoDownload className='fs-2' />
-
-            </Button>
-            <Button id = 'loginbtn' className=' m-2' onClick={() => { onButtonClickPreviwo(summary.url) }}>
-              <FaEye className='fs-2' />
-            </Button>
-            {console.log({summary} ,{userConnectedId})}
-            {(( summary.userId === userConnectedId)|| (summary.userId?.id === userConnectedId  ) )&& (
-
-              <Button id = 'loginbtn' className=' m-2 ' onClick={() => { onButtonClickDelete(summary.url) }}>
-                <MdDeleteOutline className='fs-2' />
-              </Button>
-            )}
+        <h5 className="card-title display-6" >{summary.title}</h5>
 
 
-      
+        <p className="card-text">{downloads} downloads </p>
+
+        <div className='d-flex align-items-center justify-content-around'>
+          {/* <p className="card-text">{downloads} downloads </p> */}
+          <btn id='summarybtn' className=' m-2 btn' onClick={() => { onButtonClickDownload(summary.url) }}>
+            <GoDownload className='fs-2' />
+
+          </btn>
+          <btn id='summarybtn' className=' m-2 btn' onClick={() => { onButtonClickPreviwo(summary.url) }}>
+            <FaEye className='fs-2' />
+          </btn>
+          {console.log({ summary }, { userConnectedId })}
+          {((summary.userId === userConnectedId) || (summary.userId?.id === userConnectedId)) && (
+
+            <btn id='summarybtn' className=' m-2 btn' onClick={() => { onButtonClickDelete(summary.url) }}>
+              <MdDeleteOutline className='fs-2' />
+            </btn>
+          )}
         </div>
         <div className='d-flex'>
         </div>
-
       </div>
-    </div >
-
-
-
-    </>
+    </Card >
   )
 }

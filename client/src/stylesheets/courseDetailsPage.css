@@ -1,17 +1,17 @@
 .course-detail-page {
   /* margin-left: 400px; */
-  transform: translateX(0px);
+  /* transform: translateX(0px); */
   /* Move the content to the right by 400px */
-  transition: transform 0.4s ease-in-out;
+  /* transition: transform 0.4s ease-in-out; */
   /* Smooth transition for translateX */
 
 }
 
 .course-detail-page.sidebar-open {
   /* margin-left: 400px; */
-  transform: translateX(20%);
+  /* transform: translateX(20%); */
   /* Move the content to the right by 400px */
-  transition: transform 0.4s ease-in-out;
+  /* transition: transform 0.4s ease-in-out; */
   /* Smooth transition for translateX */
 }
 

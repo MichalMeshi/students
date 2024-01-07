@@ -3,6 +3,8 @@
     
 }
 .profile-image{
+  object-fit: cover;
+
     border-radius: 50%;
 }
 .bor{

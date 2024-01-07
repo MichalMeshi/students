@@ -41,7 +41,7 @@ const Profile = () => {
                 <Row className='w-100 profile-row-strip'>
                     <Col className='p-col bord d-flex text-align-center justify-content-center' md={2}>
                         <div>
-                            <Image roundedCircle src={profileData.image} alt="profileImg" width={80} />
+                            <img id='img-profile' src={profileData.image} alt="profileImg" width={80} height={80} />
 
                             {/* {profileData?.image ? (
                                 <Image roundedCircle src={profileData.image} alt="profileImg" width={80} />
