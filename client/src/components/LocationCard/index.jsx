@@ -38,18 +38,7 @@ export default function LocationCard(props) {
     return (
         <div>
 
-        {/* <div style={cardStyle}
-            onClick={() => setOpenLocationModal(true)}
-            className='w-25 rounded-5 rounded-circle d-flex flex-column justify-content-center align-items-center overflow p-4'>
-            <img className='rounded-circle w-50' src={userId.image} />
-            <h4>{userId.name}</h4>
-            <h5>{distance} KM from you</h5>
-
-        </div>
-        {openLocationModal &&
-                <ModalContactDitails openLocationModal={openLocationModal} setOpenLocationModal={setOpenLocationModal} userId={userId}/>
-            } */}
-        <div className="cardy m-3">
+        <div className="cardy col-sm-12 col-md-4 m-3">
           <div className="card-content">
             <div className="image">
               <img src={userId.image}
@@ -66,7 +55,8 @@ export default function LocationCard(props) {
             </div>
             <button style={{color:"#2D3092"}}
                         onClick={() => setOpenLocationModal(true)}
-                        >Contact Information                        </button>
+                        >more
+                        <br/> Information                        </button>
                           {openLocationModal &&
                 <ModalContactDitails openLocationModal={openLocationModal} setOpenLocationModal={setOpenLocationModal} userId={userId}/>
             }
