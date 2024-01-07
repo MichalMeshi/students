@@ -15,7 +15,7 @@ export default function MySummaries() {
             <div className='container'>
                 <Card>
                     <Card.Header>
-                        <h3>#MY SUMMARIES</h3>
+                        <h3 style={{ color: '#2d3092' }}>#MY SUMMARIES</h3>
                     </Card.Header>
                     <Card.Body>
                         {console.log({ summariesById })}

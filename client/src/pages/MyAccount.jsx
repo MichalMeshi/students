@@ -22,9 +22,9 @@ const MyAccount = () => {
         </div>
       </div>
       <MyCourses />
-      <MyForums></MyForums>
-<MySummaries/>
-<Footer/>
+      <MyForums />
+      <MySummaries />
+      <Footer />
     </>
   )
 }
