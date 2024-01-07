@@ -32,10 +32,10 @@ const TutoringPost = ({ post }) => {
                 </Row>
             </Card.Title>
             <hr style={{ border: 'dashed 1px #5055d1' }} />
-            <Card.Text className='text-center'>
+            <div className='text-center'>
                 <h2>{post.subject}</h2>
                 <h5>{post.field}</h5>
-            </Card.Text>
+            </div>
             <Card.Body>
                 <h3><AiFillMessage /> {post.message}</h3>
                 <h3><FaCity /> {post.city}</h3>
