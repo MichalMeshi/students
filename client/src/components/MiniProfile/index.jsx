@@ -17,7 +17,7 @@ export default function MiniProfile(props) {
                 <img className='profile-image'src={(userId?.image)||(profileData.image)} width={40} height={40} alt="Profile Image"  />
             </Col>
 
-            <Col xs={8} md={10} className=' p-0'>
+            <Col xs={8} md={9} className=' p-0'>
                    <div className=' p-0 mt-2'>{(userId?.name)||(profileData.name)}</div> 
             </Col>
         
