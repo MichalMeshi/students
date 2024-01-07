@@ -8,7 +8,6 @@ import Sidebar from './Sidebar';
 import CourseContext from '../context/CourseContext';
 import MainNavbar from './MainNavbar';
 
-
 export default function SharedLearning(props) {
 
   const { allusers, profileData } = useContext(ProfileContext)
@@ -24,6 +23,7 @@ export default function SharedLearning(props) {
 
   }
 
+
   return (
     <>
           <MainNavbar />
@@ -34,7 +34,7 @@ export default function SharedLearning(props) {
 
       <h1 style={{ color: '#2D3092', fontWeight: 'bold' }}>Learning Partners</h1>
               <p> Find other users in your area!</p>
-        {
+        {/* {
           (profileData.location) && (allusers.length === 1) &&
           <div>
                           <h1 style={{ color: '#2D3092', fontWeight: 'bold' }}>Learning Partners</h1>
@@ -42,8 +42,7 @@ export default function SharedLearning(props) {
 
           </div>
 
-        }
-                {/* <div className='row'> */}
+        } */}
 <Row>
         {
           (profileData.location) &&

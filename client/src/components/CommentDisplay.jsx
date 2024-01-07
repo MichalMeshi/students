@@ -55,7 +55,7 @@ export default function CommentDisplay(props) {
               </div>
               <Row>
                 <Col xs={3} md={2} className='d-flex align-items-end justify-content-end p-1'>
-                  <button id='replaybtn' className='comment-btn p-0 m-0' onClick={openCommentInput}>
+                  <button id='replaybtn' className='comment-btn' onClick={openCommentInput}>
                     replay
                   </button>
                 </Col> 
@@ -68,63 +68,12 @@ export default function CommentDisplay(props) {
             </Col>
 
           </Row>
-
-
-          {/* <Row >
-            <Col xs={4}>
-              <p>({getTimeSincePostCreation(comment?.dateCreated)} ago)</p>
-            </Col>
-            <Col>
-              <Row style={{ backgroundColor: '#e9ecef' }}>
-                <Col xs={8} md={10} className=' p-0'>
-                  <div className=' p-0 mt-2'>{(comment?.userId.name)}</div>
-                </Col>
-                <Col xs={1}>
-                  <MdOutlineComment />
-                </Col>
-                <Col>
-                  
-                </Col>
-              </Row>
-            </Col>
-          </Row> */}
-          {/* <div className='d-flex justify-content-between'>
-            <Button
-              onClick={openCommentInput}
-              style={{
-                background: 'none',
-                border: 'none',
-                color: 'inherit',
-                marginRight: '20px',
-                padding: 0,
-                margin: 0,
-              }}
-              onMouseEnter={(e) => e.currentTarget.style.backgroundColor = '#e9ecef'} // Change background on hover
-              onMouseLeave={(e) => e.currentTarget.style.backgroundColor = 'transparent'} // Reset background when not hovered
-            >
-              reply
-            </Button>
-            <Button
-              onClick={getMyComments}
-              style={{
-                background: 'none',
-                border: 'none',
-                color: 'inherit',
-                padding: 0,
-                margin: 0,
-              }}
-              onMouseEnter={(e) => e.currentTarget.style.backgroundColor = '#e9ecef'} // Change background on hover
-              onMouseLeave={(e) => e.currentTarget.style.backgroundColor = 'transparent'} // Reset background when not hovered
-            >
-              comments
-            </Button>
-          </div> */}
           {commentFlag && comments.map((comment, index) => {
             return <CommentDisplay key={index} comment={comment} />
           })}
-          {inputFlag && <div className='d-flex'>
-            <input type='text' className='form-control' placeholder='type here...' ref={inputRef}></input>
-            <IoIosSend size={25} style={{ cursor: 'pointer' }} onClick={handleAddComment} />
+          {inputFlag && <div className='d-flex m-2'>
+            <input type='text' className='form-control' placeholder='Your comment...' ref={inputRef}></input>
+            <Button id='send-btn' onClick={handleAddComment} > <IoIosSend size={20} style={{ cursor: 'pointer' }} color='black' /></Button>
           </div>}
       </div>
     </div>

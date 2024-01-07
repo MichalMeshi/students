@@ -34,17 +34,15 @@ const MainNavbar = () => {
                             <Nav.Link  href='/contact'><div className='nav-link'>Contact</div></Nav.Link>
                             <Nav.Link  href='/logout'><div className='nav-link'>Log out</div></Nav.Link>
                         </Nav>
-                        <Form className="d-flex">
+                        {/* <Form className="d-flex">
                             <Form.Control
                                 type="search"
                                 placeholder="Search"
                                 className="me-2"
                                 aria-label="Search"
                             />
-                            {/* <Button variant="outline-primary">
-                                Search
-                            </Button> */}
-                        </Form>
+                       
+                        </Form> */}
                     </Navbar.Collapse>
                 </Container>
             </Navbar>

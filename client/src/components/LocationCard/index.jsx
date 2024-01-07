@@ -1,9 +1,12 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { Button } from 'react-bootstrap';
 import { CiLocationOn } from "react-icons/ci";
 import ModalContactDitails from '../ModalContactDitails';
 import './LocationCard.css'
 import { IoStar, IoStarHalf, IoStarOutline } from "react-icons/io5";
+import AOS from 'aos';
+import 'aos/dist/aos.css';
+
 
 export default function LocationCard(props) {
     const [openLocationModal, setOpenLocationModal] = useState(false);
@@ -34,9 +37,12 @@ export default function LocationCard(props) {
 
 
     const { userId, distance } = props;
-
+    useEffect(() => {
+        AOS.init();
+      }, [])
+    
     return (
-        <div>
+        <div data-aos="zoom-in" data-aos-duration="1000">
 
         <div className="cardy col-sm-12 col-md-4 m-3">
           <div className="card-content">

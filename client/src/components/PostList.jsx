@@ -7,7 +7,9 @@ import AddPost from './AddPost';
 import Sidebar from './Sidebar';
 import MainNavbar from './MainNavbar';
 import '../stylesheets/postlist.css'
+
 import CourseContext from '../context/CourseContext';
+import Footer from './Footer';
 export default function PostList() {
   const { posts, setposts } = useContext(ForumContext);
   const { courseId, courseName } = useParams();
@@ -57,6 +59,7 @@ export default function PostList() {
           {/* </Row> */}
         </Container>
       </div>
+      <Footer/>
     </>
 
   )
