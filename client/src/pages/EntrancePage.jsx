@@ -26,6 +26,7 @@ import women3 from '../images/women3.jpg'
 import women4 from '../images/women4.jpg'
 import men1 from '../images/man1.jpg'
 import men2 from '../images/man2.jpg'
+import { GiGraduateCap } from "react-icons/gi";
 export default function EntrancePage() {
     const [expanded, setexpanded] = useState(false)
     const [isLogin,setisLogin]=useState(true)
@@ -62,13 +63,7 @@ export default function EntrancePage() {
 
         }
     ]
-    // const settings = {
-    //     dots: true,
-    //     infinite: true,
-    //     speed: 500,
-    //     slidesToShow: 3,
-    //     slidesToScroll: 1
-    // };
+  
     const md_settings = {
         dots: true,
         infinite: true,
@@ -106,6 +101,7 @@ export default function EntrancePage() {
                     <Row id="entrance-login">
                         <Col sm={12} md={6} className='wellcom-content d-flex flex-column justify-content-center align-items-center'>
                             <div className='mx-5'>
+                            {/* <GiGraduateCap size={100} color='white'/> */}
                                 <h1  id="wellcome-title" className='display-1'>Welcome To Academix</h1>
                                 <p id="wellcome-info">Free and universal platform for students</p>
                             </div>

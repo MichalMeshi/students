@@ -10,7 +10,8 @@ const courseSchema = new mongoose.Schema({
     field: {
         type: String,
         required: true,
-    }
+    },
+    img: String
 },
     { versionKey: false },
     {

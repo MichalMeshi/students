@@ -45,7 +45,7 @@ export default function Post(props) {
 
 
     return (
-        <Card className="mt-3 w-100">
+        <Card className="mt-3 w-100" >
             <Card.Title id='mini-profile' className='m-0'>
                 <Row>
                     <Col xs={7} md={9} className='pt-1 '>
@@ -54,10 +54,10 @@ export default function Post(props) {
                     <Col md={3} xs={5} >
                         <Row className='my-row' >
                             <Col id='time-col' xs={7}>
-                                <div id='time'>{getTimeSincePostCreation(post?.dateCreated)}</div>
+                                <div id='time' style={{color:"grey"}}>{getTimeSincePostCreation(post?.dateCreated)}</div>
                             </Col>
                             <Col xs={5} className=' d-flex justify-content-start align-items-center'>
-                                <PiClockCounterClockwiseLight size={20} />
+                                <PiClockCounterClockwiseLight size={20} color='grey' />
                             </Col>
                         </Row>
                     </Col>
@@ -79,15 +79,15 @@ export default function Post(props) {
                     </Col>
                     <Col md={3}>
                         {btnOpenFlag && (
-                            <button id='comments-btn' className='btn' onClick={() => { getMyComments() }}>
+                            <button className='btn comments-btn' onClick={() => { getMyComments() }}>
                                 <MdOutlineComment /> Comments
                             </button>
                         )}
 
                         {btnCloseFlag && (
-                            <Button style={{ backgroundColor: '#5055d1' }} onClick={toggleCommentFlag}>
+                            <button className='btn comments-btn' onClick={toggleCommentFlag}>
                                 Close
-                            </Button>
+                            </button>
                         )}
                     </Col>
 

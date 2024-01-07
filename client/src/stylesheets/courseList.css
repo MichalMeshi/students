@@ -13,3 +13,52 @@
     justify-content: space-around;
     align-items: center;
 }
+/* #input-search{
+border: none;
+}
+.input-container{
+    border: 1px solid yellow;
+    position: relative;
+}
+.input-container::after{
+    top: 80%;
+    height: 30px;
+    width: 100%;
+    background-color:red ;
+    border: 1px solid black;
+} */
+.input-container {
+    position: relative;
+    /* border: 1px solid yellow; */
+  }
+  
+  #input-search {
+    border: none;
+    width: 100%;
+    padding: 10px; /* Adjust padding as needed */
+  }
+  
+  .input-container::after {
+    content: "";  /* Set content to an empty string to generate the pseudo-element */
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    height: 2px; /* Adjust the thickness of the underline */
+    width: 0;
+    background-color:#2D3092;
+    /* border: 1px solid black; */
+    transition: 0.5s;
+    border-radius: 0px 0px 20px 20px;
+  }
+  .input-container:hover::after {
+    width: 100%;
+   }
+   #input-search:focus {
+    outline: none;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.2); /* Add a subtle box shadow */
+  }
+  #admin-add{
+    font-weight: bold;
+  }
+
+
