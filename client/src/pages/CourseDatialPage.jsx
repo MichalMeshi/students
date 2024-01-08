@@ -21,6 +21,8 @@ export default function CourseDatialPage() {
     <div >
       <MainNavbar />
       <Sidebar courseId={courseId} courseName={courseName} isOpen={isOpen} setIsOpen={setIsOpen} />
+      <div>
+
       <Container className={`text-center course-detail-page ${isOpen ? 'sidebar-open' : ''}`} >
         <h1 className='display-5 '>Wellcom to {courseName} Course</h1>
         <div style={{ position: 'relative', textAlign: 'center', margin: '0 auto' }}>
@@ -38,6 +40,8 @@ export default function CourseDatialPage() {
         // style={{ position: 'absolute', top: '460px', left: '400px' }} 
         >Academix wish you luck!</p>
       </Container>
+      </div>
+      {/* <Footer style={{ top: '0'}} /> */}
     </div>
   );
 }
