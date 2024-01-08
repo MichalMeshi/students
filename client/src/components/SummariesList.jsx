@@ -50,7 +50,7 @@ export default function SummariesList(props) {
             ?.slice() // create a copy of the array to avoid mutating the original
             .sort((a, b) => b.downloadsAmount - a.downloadsAmount) // sort by summary.sum
             .map((summary, index) => (
-              <Col xs={5} md={4} key={index} className='my-2'><SummaaryCard summary={summary} /></Col>
+              <Col xs={12} md={4} key={index} className='my-2'><SummaaryCard summary={summary} /></Col>
             ))}
         </Row>
       </Container>
