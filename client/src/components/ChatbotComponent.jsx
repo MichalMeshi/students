@@ -19,9 +19,7 @@ const ChatbotComponent = () => {
     return (
         <ThemeProvider theme={theme}>
             <ChatBot
-                // speechSynthesis={{ enable: false, lang: 'en', voice: null }}
                 floating='true'
-                userAvatar="https://images.pexels.com/photos/19384215/pexels-photo-19384215/free-photo-of-en-el-paraiso-frio.jpeg?auto=compress&cs=tinysrgb&w=600&lazy=load"
                 steps={[
                     {
                         id: '1',

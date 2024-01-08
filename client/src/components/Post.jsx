@@ -45,7 +45,7 @@ export default function Post(props) {
 
 
     return (
-        <Card className="mt-3 w-100" >
+        <Card id='forum-card' className="mt-3 w-100" >
             <Card.Title id='mini-profile' className='m-0'>
                 <Row>
                     <Col xs={7} md={9} className='pt-1 '>

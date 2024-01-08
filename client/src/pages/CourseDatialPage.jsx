@@ -39,8 +39,6 @@ export default function CourseDatialPage() {
         <p className='fs-3' id='lack-box'
         // style={{ position: 'absolute', top: '460px', left: '400px' }} 
         >Academix wish you luck!</p>
-
-
       </Container>
       </div>
       {/* <Footer style={{ top: '0'}} /> */}
