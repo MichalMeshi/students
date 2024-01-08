@@ -7,6 +7,7 @@ import { GiHamburgerMenu } from "react-icons/gi";
 import CourseContext from '../context/CourseContext';
 import '../stylesheets/coursePage.css'
 import MainNavbar from '../components/MainNavbar';
+import Footer from '../components/Footer';
 
 export default function CourseDatialPage() {
   const { courseId, courseName } = useParams();
@@ -20,6 +21,8 @@ export default function CourseDatialPage() {
     <div >
       <MainNavbar />
       <Sidebar courseId={courseId} courseName={courseName} isOpen={isOpen} setIsOpen={setIsOpen} />
+      <div>
+
       <Container className={`text-center course-detail-page ${isOpen ? 'sidebar-open' : ''}`} >
         <h1 className='display-5 '>Wellcom to {courseName} Course</h1>
         <div style={{ position: 'relative', textAlign: 'center', margin: '0 auto' }}>
@@ -39,6 +42,8 @@ export default function CourseDatialPage() {
 
 
       </Container>
+      </div>
+      {/* <Footer style={{ top: '0'}} /> */}
     </div>
   );
 }
