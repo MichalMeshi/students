@@ -36,7 +36,7 @@ export default function SummariesList(props) {
             <p  style={{ color: '#2D3092'}}> Where Learners Connect through Shared Course Knowledge!</p>
           </Col>
           <Col md={2}>
-          <Button className='circular-button' onClick={() => setOpenSummaryModal(true)}>Add <br /> new summary</Button>
+          <Button className='circular-button p-1' onClick={() => setOpenSummaryModal(true)}>Add <br /> new summary</Button>
             {/* <Button id='loginbtn' onClick={() => }> */}
             {/* </Button> */}
           </Col>

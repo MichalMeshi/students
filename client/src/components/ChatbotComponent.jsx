@@ -19,6 +19,7 @@ const ChatbotComponent = () => {
     return (
         <ThemeProvider theme={theme}>
             <ChatBot
+                // opened={true} 
                 floating='true'
                 steps={[
                     {

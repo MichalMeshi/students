@@ -82,20 +82,22 @@ export default function SummaaryCard(props) {
 
   return (
 
-    <Card  data-aos="fade-up" className="shadow p-3 bg-white rounded" style={{height:'100%'}}>
+    <Card data-aos="fade-up" className="shadow p-3 bg-white rounded" style={{ height: '100%' }}>
       <MiniProfile userId={summary.userId} />
       <hr />
       <embed src={summary.url} type="application/pdf" className='card-top w-100' />
 
-      <div className="card-body">
+      <Card.Title>
         <hr className="border border-info m-0" />
 
         <h5 className="card-title display-6" >{summary.title}</h5>
 
 
         <p className="card-text">{downloads} downloads </p>
-
-        <div className='d-flex align-items-center justify-content-around'>
+      </Card.Title>
+      <Card.Body>
+        <Card.Text>
+        <div className=' d-flex align-items-center justify-content-around '>
           {/* <p className="card-text">{downloads} downloads </p> */}
           <btn id='summarybtn' className=' m-2 btn' onClick={() => { onButtonClickDownload(summary.url) }}>
             <GoDownload className='fs-2' />
@@ -112,9 +114,8 @@ export default function SummaaryCard(props) {
             </btn>
           )}
         </div>
-        <div className='d-flex'>
-        </div>
-      </div>
+        </Card.Text>
+      </Card.Body>
     </Card >
   )
 }
