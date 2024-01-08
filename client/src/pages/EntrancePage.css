@@ -41,6 +41,15 @@ body {
     
 
 }
+#card-t{
+    font-weight: bold;
+}
+#person-info{
+    font-size: medium;
+}
+#review{
+    font-size: medium;
+}
 #wellcome-title{
     color: rgba(255, 255, 255);
     /* text-align: center; */
@@ -51,6 +60,10 @@ body {
 }
 #entrance-login{
     height: inherit;
+}
+.bold{
+    font-weight: bold;
+    color: black;
 }
 /* .container{
     border: 2px solid yellow;
