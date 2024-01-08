@@ -34,32 +34,32 @@ export default function EntrancePage() {
         {
             img: men1,
             name: "John Rail",
-            info: "This site helped me finish my studies successfully. I feel great."
+            info: "This site helped me finish my studies successfully. I feel great.yes!"
         },
         {
             img: women1,
             name: "Martha Hood",
-            info: "This site helped me finish my studies successfully. I feel great."
+            info: "Academix transformed my learning with vibrant forums and insightful course summaries"
         },
         {
             img: men2,
             name: "George Rice",
-            info: "This site helped me finish my studies successfully. I feel great."
+            info: "A must-have for students—Academix fuels collaborative discussions.thanks"
         },
         {
             img: women3,
             name: "Haily Ghost",
-            info: "This site helped me finish my studies successfully. I feel great."
+            info: "Navigating my coursework became seamless thanks to Academix's help."
         },
         {
             img: women2,
             name: "Sarah Tailwind",
-            info: "This site helped me finish my studies successfully. I feel great."
+            info: "Academix elevates my study game, offering a unified platform for coursework insights"
         },
         {
             img: women4,
             name: "Lily Shine",
-            info: "This site helped me finish my studies successfully. I feel great."
+            info: "Unleashing the power of shared knowledge—Academix revolutionizes.wow!"
 
         }
     ]
@@ -100,9 +100,9 @@ export default function EntrancePage() {
                 <div id="entrance-wellcome" className={`w-100  ${expanded ? 'expanded' : ''}`}>
                     <Row id="entrance-login">
                         <Col sm={12} md={6} className='wellcom-content d-flex flex-column justify-content-center align-items-center'>
-                            <div className='mx-5'>
+                            <div className=' mx-5'>
                             {/* <GiGraduateCap size={100} color='white'/> */}
-                                <h1  id="wellcome-title" className='display-1'>Welcome To Academix</h1>
+                                <h1  id="wellcome-title" className='display-1 mt-3'>Wellcome <br /> To Academix</h1>
                                 <p id="wellcome-info">Free and universal platform for students</p>
                             </div>
                         </Col>
@@ -111,8 +111,8 @@ export default function EntrancePage() {
                                 <Card id="toggle-card" style={{ width: "22em"}}>
                                 {isLogin?<Login/>:<Register/>}
                                 <Card.Text className='text-center pb-1'>
-                                {isLogin&&<h6>Need an account ? please <a onClick={toggleIsLogin} href='#'>Register</a></h6>}
-                                {!isLogin&&<h6>Alradey have an account ? please <a onClick={toggleIsLogin} href='#'>Log in</a></h6>}
+                                {isLogin&&<h6 className='bold'>Need an account ? please <a onClick={toggleIsLogin} href='#'>Register</a></h6>}
+                                {!isLogin&&<h6 className='bold'>Alradey have an account ? please <a onClick={toggleIsLogin} href='#'>Log in</a></h6>}
 
                                 </Card.Text>
                                 </Card>
@@ -163,12 +163,14 @@ export default function EntrancePage() {
                                     return <Card key={index} style={{ width: "10rem" }} className='person-card p-3 d-flex flex-column justify-content-center align-items-center shadow p-3 mb-5 rounded text-center'>
                                         {/* <Card.Img variant="top" src={item.img} roundedCircle /> */}
                                         <Image src={item.img} roundedCircle width={100} height={100}></Image>
-                                        <Card.Body>
-                                            <Card.Title>{item.name}</Card.Title>
+                                        <Card.Body id='person-info'>
+                                            <Card.Title id='card-t'>{item.name}</Card.Title>
                                             <Card.Text>
+                                                <div id='review'>
                                             <RiDoubleQuotesL size={15}/>
                                                 {item.info}
                                                 <RiDoubleQuotesR size={15}/>
+                                                </div>
                                             </Card.Text>
                                         </Card.Body>
                                     </Card>

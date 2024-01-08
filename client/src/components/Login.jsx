@@ -93,7 +93,7 @@ const Login = () => {
                     <Form.Control className='w-75' type="password" name="password" value={formData.password || ''} onChange={handleChange} />
                 </Form.Group>
                 <div className="d-flex justify-content-center w-100 mb-2">
-                    <Button id='loginbtn' type="submit" className="w-25">
+                    <Button id='loginbtn' type="submit" className="w-50">
                         Sign In
                     </Button>
                 </div>
