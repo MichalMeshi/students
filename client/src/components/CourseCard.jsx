@@ -42,7 +42,7 @@ export default function CourseCard(props) {
     //     )}
     //   </div>
     // </div>
-    <Card id="course-card" style={{ width: '20rem' }}  data-aos="fade-up" >
+    <Card id="course-card" style={{ width: '20rem',height:'100%' }}  data-aos="fade-up" >
       <Card.Img variant="top" src={course.img} />
       <Card.Body>
         <Card.Title>{course.name}</Card.Title>

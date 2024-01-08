@@ -56,7 +56,7 @@ export default function CommentDisplay(props) {
               <Row>
                 <Col xs={3} md={2} className='d-flex align-items-end justify-content-end p-1'>
                   <button id='replaybtn' className='comment-btn' onClick={openCommentInput}>
-                    replay
+                    reply
                   </button>
                 </Col> 
                 <Col xs={7} md={9} className=' d-flex align-items-start justify-content-start p-1'>

@@ -36,7 +36,7 @@ const MyCourses = () => {
     return (
         <div className='container-fluid mt-5 pt-3'>
             <div className='container'>
-                <Card>
+                <Card style={{height:'100%'}}>
                     <Card.Header>
                         <h3 style={{color:'#2d3092'}}>#MY COURSES</h3>
                     </Card.Header>
