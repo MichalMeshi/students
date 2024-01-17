@@ -1,5 +1,5 @@
 const Joi = require('joi');
-const { Course } = require('../models/Course.models');
+const { Course } = require('../models/course.models');
 const { User } = require('../models/user.models');
 const asyncWrap = require('../utils/asyncWrapper');
 const AppError = require('../utils/AppError');

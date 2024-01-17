@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import './App.css'
 import { CourseContextProvider } from './context/CourseContext'
-import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import { BrowserRouter, HashRouter ,Route, Routes } from 'react-router-dom';
 import AppRoutes from './components/AppRoutes'
 import CourseDatialPage from './pages/CourseDatialPage';
 import { ProfileContextProvider } from './context/ProfileContext';
@@ -17,10 +17,10 @@ function App() {
       <SummaryContextProvider>
         <ProfileContextProvider>
           <CourseContextProvider>
-            <BrowserRouter>
+            <HashRouter>
               <ChatbotComponent />
               <AppRoutes />
-            </BrowserRouter>
+            </HashRouter>
           </CourseContextProvider>
         </ProfileContextProvider>
       </SummaryContextProvider>
