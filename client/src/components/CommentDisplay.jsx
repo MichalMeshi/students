@@ -9,13 +9,14 @@ import { MdOutlineComment } from 'react-icons/md';
 import '../stylesheets/comment.css'
 import ProfileContext from '../context/ProfileContext';
 export default function CommentDisplay(props) {
-  const { comment } = props;
+  const { comment,numOfComments } = props;
   const {profileData} = useContext(ProfileContext)
   // console.log("comment in displayyyyyyy", comment);
   const [inputFlag, setinputFlag] = useState(false)
   const [commentFlag, setcommentFlag] = useState(false)
   const [comments, setcomments] = useState([])
   const { addCommentToComment, getCommentsOfComment, getTimeSincePostCreation } = useContext(ForumContext);
+  const [commentsbtn,setcommentsbtn]=useState('');
   const inputRef = useRef(null);
   const openCommentInput = () => {
     setinputFlag(true);
@@ -61,7 +62,7 @@ export default function CommentDisplay(props) {
                 </Col> 
                 <Col xs={7} md={9} className=' d-flex align-items-start justify-content-start p-1'>
                   <button id='commentsbtn' className='comment-btn' onClick={getMyComments}>
-                    comments
+                    comments {numOfComments? <>({numOfComments})</>:''}
                   </button>
                 </Col>
               </Row>
@@ -69,7 +70,8 @@ export default function CommentDisplay(props) {
 
           </Row>
           {commentFlag && comments.map((comment, index) => {
-            return <CommentDisplay key={index} comment={comment} />
+            // console.log(comment);
+            return <CommentDisplay key={index} comment={comment} numOfComments={comment.myComments.length} />
           })}
           {inputFlag && <div className='d-flex m-2'>
             <input type='text' className='form-control' placeholder='Your comment...' ref={inputRef}></input>

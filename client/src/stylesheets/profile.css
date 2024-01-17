@@ -45,7 +45,7 @@
     left: 60%;
     bottom: 70%
 }
-@media (max-width:400px) {
+@media (max-width:450px) {
     .col-sm{
         display: flex;
         justify-content: center;

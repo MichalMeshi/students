@@ -13,9 +13,9 @@ const Sidebar = ({ courseId, courseName, isOpen, setIsOpen }) => {
     setIsOpen(!isOpen);
   };
   return (
-    <>
-      <Button onClick={toggleSidebar} id='burgerBtn'>
-        <GiHamburgerMenu size={20} />
+    <div>
+      <Button  onClick={toggleSidebar} id='burgerBtn'>
+        <GiHamburgerMenu size={30} />
       </Button>
       <Offcanvas show={isOpen} onHide={toggleSidebar} placement="start" backdrop={true} scroll={false}>
         <Offcanvas.Header closeButton>
@@ -35,7 +35,7 @@ const Sidebar = ({ courseId, courseName, isOpen, setIsOpen }) => {
           </Navbar>
         </Offcanvas.Body>
       </Offcanvas>
-    </>
+    </div>
 
   );
 };

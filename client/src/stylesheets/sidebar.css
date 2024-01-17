@@ -10,6 +10,7 @@
 #burgerBtn {
   border-radius: 0 12px 12px 0;
   background: #2d3092;
+  border: none;
   display: flex;
   justify-content: center;
 }
@@ -22,8 +23,11 @@
 #burgerBtn:hover {
   background: white;
   color: #2d3092;
+  /* border: 1px solid #2d3092 ; */
 }
-
+#my-sidebar{
+  border: 2px solid red;
+}
 @media (max-width: 480px) {
 
   .offcanvas {

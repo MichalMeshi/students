@@ -93,7 +93,7 @@ export default function Post(props) {
 
                 </Row>
                 {commentFlag && comments.map((comment, index) => {
-                    return <CommentDisplay key={index} comment={comment} />;
+                    return <CommentDisplay key={index} comment={comment} numOfComments={comment.myComments.length} />;
                 })}
             </Card.Body>
         </Card>
